@@ -1,22 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { StackNavigator } from './src/navigator/StackNavigator';
+import { StatusBar } from 'react-native';
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>App de Rolling de React Native</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar backgroundColor="red" />
+      <NavigationContainer>
+        <StackNavigator />
+      </NavigationContainer>
+    </>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
