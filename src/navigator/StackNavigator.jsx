@@ -11,9 +11,7 @@ export const StackNavigator = () => {
       screenOptions={{
         headerShown: false,
         cardStyle: {
-          backgroundColor: '#fff',
         },
-
         headerStyle: {
           borderBottomColor: '#000',
           borderBottomWidth: 1,

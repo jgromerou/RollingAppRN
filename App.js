@@ -6,7 +6,7 @@ import { DrawerNavigator } from './src/navigator/DrawerNavigator';
 const App = () => {
   return (
     <>
-      <StatusBar backgroundColor="red" />
+      <StatusBar backgroundColor="#212B36" />
       <NavigationContainer>
         <DrawerNavigator />
       </NavigationContainer>
