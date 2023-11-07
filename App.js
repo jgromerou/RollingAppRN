@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, ThemeProvider } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
 import { DrawerNavigator } from './src/navigator/DrawerNavigator';
 
@@ -7,9 +7,11 @@ const App = () => {
   return (
     <>
       <StatusBar backgroundColor="red" />
-      <NavigationContainer>
-        <DrawerNavigator />
-      </NavigationContainer>
+      <ThemeProvider>
+        <NavigationContainer>
+          <DrawerNavigator />
+        </NavigationContainer>
+      </ThemeProvider>
     </>
   );
 };
