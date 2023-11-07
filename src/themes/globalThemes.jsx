@@ -6,4 +6,14 @@ export const globalThemes = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 10,
   },
+  menuContainer: {
+    marginVertical: 30,
+    marginHorizontal: 50,
+  },
+  menuButton: {
+    marginVertical: 15,
+  },
+  menuText: {
+    fontSize: 20,
+  },
 });
