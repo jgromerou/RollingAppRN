@@ -16,4 +16,19 @@ export const globalThemes = StyleSheet.create({
   menuText: {
     fontSize: 20,
   },
+//   defaultBtn: {
+//     backgroundColor:  '#f2058b',
+//     fontSize: 16,
+//     paddingVertical: 10,
+//     paddingHorizontal: 30,
+//     alignSelf: 'center',
+//     borderRadius: 20,
+//     marginVertical: 30,
+// },
+defaulTextBtn: {
+  fontSize: 15,
+  color: '#fff',
+  fontWeight: '500'
+},
+
 });

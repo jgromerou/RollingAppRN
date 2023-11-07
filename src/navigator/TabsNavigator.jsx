@@ -6,6 +6,7 @@ import { StackNavigator } from './StackNavigator';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { SearchProductsScreen } from '../screens/SearchProductsScreen';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { ProductScreen } from '../screens/products/ProductScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -52,7 +53,7 @@ export const TabsNavigator = () => {
     >
       <Tab.Screen
         name="StackNavigator"
-        component={StackNavigator}
+        component={ProductScreen}
         options={{
           title: 'Productos',
           tabBarIcon: () => (
