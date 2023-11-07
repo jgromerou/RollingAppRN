@@ -1,10 +1,10 @@
 import React, { useEffect, useReducer } from 'react';
 import { AppState, Appearance } from 'react-native';
-import { ThemeContext } from '../context/ThemeContext';
-import { ThemeReducer, darkTheme, lightTheme } from '../reducer/ThemeReducer';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { ThemeReducer, darkTheme, lightTheme } from '../reducers/ThemeReducer';
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, dispatch] = useReducer(
+  const [state, dispatch] = useReducer(
     ThemeReducer,
     Appearance.getColorScheme() === 'dark' ? darkTheme : lightTheme
   ); //el Appearance.getColorScheme() lee tema global del celular hacer el ternario con el darkTheme y el lightTheme..
@@ -13,11 +13,11 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     AppState.addEventListener('change', (status) => {
       if (status === 'active') {
-        Appearance.getColorScheme() === 'light' ? setLightTheme : setDarkTheme;
+        Appearance.getColorScheme() === 'dark' ? setLightTheme : setDarkTheme;
       }
     });
   }, []);
-
+  console.log(darkTheme);
   const setDarkTheme = () => {
     dispatch({ type: 'set_dark_theme' });
     console.log('setDarkTheme');
@@ -29,7 +29,7 @@ export const ThemeProvider = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, setDarkTheme, setLightTheme }}>
+    <ThemeContext.Provider value={{ state, setDarkTheme, setLightTheme }}>
       {children}
     </ThemeContext.Provider>
   );

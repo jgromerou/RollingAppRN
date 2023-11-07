@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import { ThemeProvider } from '@react-navigation/native';
 import { DrawerNavigator } from './src/navigator/DrawerNavigator';
+import { ThemeProvider } from './src/providers/ThemeProvider';
 
 const App = () => {
   return (

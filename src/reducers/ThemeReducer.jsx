@@ -3,7 +3,6 @@ import { types } from '../types/types';
 export const lightTheme = {
   currentTheme: 'light',
   dividerColor: 'rgba(0, 0, 0,0.6)',
-  dark: false,
   colors: {
     primary: '#76B0F1',
     background: 'white',
@@ -17,7 +16,6 @@ export const lightTheme = {
 export const darkTheme = {
   currentTheme: 'dark',
   dividerColor: 'rgba(255, 255, 255,0.8)',
-  dark: true,
   colors: {
     primary: '#89db75',
     background: 'black',
