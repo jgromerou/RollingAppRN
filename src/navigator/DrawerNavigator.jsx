@@ -12,8 +12,6 @@ import { globalThemes } from '../themes/globalThemes';
 import { TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { Theme } from '@react-navigation/native';
-import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 
@@ -23,12 +21,16 @@ export const DrawerNavigator = () => {
   return (
     <>
       <StatusBar backgroundColor={state.colors.primary} />
-      <View style={{ backgroundColor: 'red', flex: 1 }}>
+      <View style={{ backgroundColor: state.colors.primary, flex: 1 }}>
         <NavigationContainer theme={state}>
           <Drawer.Navigator
             screenOptions={{
               drawerPosition: 'left',
               drawerType: width >= 768 ? 'permanent' : 'front',
+              headerTintColor: state.colors.background,
+              headerStyle: {
+                backgroundColor: state.colors.primary,
+              },
             }}
             drawerContent={(props) => <Menu {...props} />}
           >
