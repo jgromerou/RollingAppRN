@@ -1,17 +1,21 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import React, { useContext } from 'react';
 import { HomeScreen } from '../screens/HomeScreen';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const Stack = createStackNavigator();
 
 export const StackNavigator = () => {
+  const {
+    state: { colors },
+  } = useContext(ThemeContext);
   return (
     <Stack.Navigator
       // initialRouteName='ProductsScreen'
       screenOptions={{
         headerShown: false,
         cardStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: colors.background,
         },
 
         headerStyle: {
