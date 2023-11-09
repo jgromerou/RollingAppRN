@@ -12,6 +12,8 @@ import { globalThemes } from '../themes/globalThemes';
 import { TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
 import { ThemeContext } from '../contexts/ThemeContext';
+import CategoriesScreen from '../screens/categoriesScreen';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -35,6 +37,7 @@ export const DrawerNavigator = () => {
             drawerContent={(props) => <Menu {...props} />}
           >
             <Drawer.Screen name="TabsNavigator" component={TabsNavigator} />
+            <Drawer.Screen name="CategoriesScreen" component={CategoriesScreen} />
           </Drawer.Navigator>
         </NavigationContainer>
       </View>
