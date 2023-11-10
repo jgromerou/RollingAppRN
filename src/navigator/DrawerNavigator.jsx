@@ -12,7 +12,7 @@ import { globalThemes } from '../themes/globalThemes';
 import { TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
 import { ThemeContext } from '../contexts/ThemeContext';
-import CategoriesScreen from '../screens/categoriesScreen';
+import CategoriesScreen from '../screens/CategoriesScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -102,6 +102,14 @@ const Menu = ({ navigation }) => {
         >
           <Text style={{ ...globalThemes.menuText, color: colors.primary }}>
             Navegación Tabs
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+          onPress={() => navigation.navigate('CategoriesScreen')}
+        >
+          <Text style={{ ...globalThemes.menuText, color: colors.primary }}>
+          Categorias
           </Text>
         </TouchableOpacity>
       </View>

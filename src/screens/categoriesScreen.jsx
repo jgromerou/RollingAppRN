@@ -36,7 +36,6 @@ const CategoriesScreen = ({navigation}) => {
             />
             <Text>{item.nombre}</Text>
 
-
           
           </Card>
           </TouchableWithoutFeedback>
