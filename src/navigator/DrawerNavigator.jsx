@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { useWindowDimensions } from 'react-native';
 import {
@@ -18,6 +18,10 @@ const Drawer = createDrawerNavigator();
 export const DrawerNavigator = () => {
   const { state } = useContext(ThemeContext);
   const { width } = useWindowDimensions();
+const [isLogin, setIsLogin] = useState(false); 
+
+if(!isLogin){
+
   return (
     <>
       <StatusBar backgroundColor={state.colors.primary} />
@@ -40,6 +44,14 @@ export const DrawerNavigator = () => {
       </View>
     </>
   );
+}
+if(!isLogin){
+  return (
+    <Drawer.Navigator >
+    <Drawer.Screen name="Home" options={{title: 'LOGIN', headerShown: false}} component={LoginScreen} />
+  </Drawer.Navigator>
+  )
+}
 };
 
 const Menu = ({ navigation }) => {
@@ -65,11 +77,12 @@ const Menu = ({ navigation }) => {
             width: 80,
             height: 50,
             borderRadius: 20,
-            backgroundColor: colors.primary,
             justifyContent: 'center',
+            borderColor: colors.primary,
+            borderWidth: 2,
           }}
         >
-          <Text style={{ color: 'white', textAlign: 'center', fontSize: 22 }}>
+          <Text style={{ color: colors.text, textAlign: 'center', fontSize: 22 }}>
             Light
           </Text>
         </TouchableOpacity>
@@ -81,11 +94,12 @@ const Menu = ({ navigation }) => {
             width: 80,
             height: 50,
             borderRadius: 20,
-            backgroundColor: colors.primary,
             justifyContent: 'center',
+            borderColor: colors.primary,
+            borderWidth: 2,
           }}
         >
-          <Text style={{ color: 'white', textAlign: 'center', fontSize: 22 }}>
+          <Text style={{ color: colors.text, textAlign: 'center', fontSize: 22 }}>
             Dark
           </Text>
         </TouchableOpacity>
