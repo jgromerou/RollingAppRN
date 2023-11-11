@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {
   Image,
   StyleSheet,
@@ -8,9 +8,12 @@ import {
   View,
 } from "react-native";
 import { globalThemes } from "../themes/globalThemes";
+import { ThemeContext } from "../contexts/ThemeContext";
 //import { CustomModal } from "../../components/CustomModal";
 
 export const LoginScreen = () => {
+  const { state } = useContext(ThemeContext);
+
   // const showAlert = ()=>{
   //   Alert.alert(
   //     'Error Acceso',
@@ -41,7 +44,10 @@ export const LoginScreen = () => {
 
   return (
     <>
-      <View style={globalThemes.container}>
+    <View>
+      <Text style={[globalThemes.title, {color:state.colors.titleColor}]}>Bienvenidos</Text>
+    </View>
+      <View style={state.container}>
         <View>
           <Image
             style={styles.logo}
@@ -51,26 +57,27 @@ export const LoginScreen = () => {
 
         <View>
           <TextInput
-            style={globalThemes.defaultInputText}
+            style={[globalThemes.defaultInputText, {color: state.colors.text, borderColor:state.colors.border}]}
             placeholder="Email"
-            placeholderTextColor={"#637381"}
+            placeholderTextColor={state.colors.notification}
           />
             <TextInput
-            style={globalThemes.defaultInputText}
+            style={[globalThemes.defaultInputText, {color: state.colors.text, borderColor:state.colors.border}]}
             placeholder="Pass"
-            placeholderTextColor={"#637381"}
+            placeholderTextColor={state.colors.notification}
+            secureTextEntry={true}
           />
         </View>
         <View>
           <TouchableOpacity
-            style={globalThemes.defaultBtn}
+            style={[globalThemes.defaultBtn, {backgroundColor:state.colors.primary, borderColor:state.colors.border}]}
             //onPress={showAlert} //para usar con el alert
           >
-            <Text style={globalThemes.defaulTextBtn}> INGRESAR </Text>
+            <Text style={[globalThemes.defaulTextBtn, {color: state.colors.notification}]}> INGRESAR </Text>
           </TouchableOpacity>
         </View>
         <View>
-          <Text style={globalThemes.footer}>RollingAppRN</Text>
+          <Text style={[globalThemes.footer, {color: state.colors.text}]}>RollingAppRN</Text>
         </View>
       </View>
       {/* <CustomModal/> */}
