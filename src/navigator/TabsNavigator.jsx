@@ -18,7 +18,7 @@ export const TabsNavigator = () => {
       <Tab.Navigator
         initialRouteName="Home"
         activeColor={colors.titleColor}
-        inactiveColor={colors.notification}
+        inactiveColor={colors.text}
         barStyle={{ backgroundColor: colors.primary }}
         screenOptions={{
           headerShown: false,

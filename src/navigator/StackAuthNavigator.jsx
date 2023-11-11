@@ -6,14 +6,15 @@ import { RegisterScreen } from '../screens/RegisterScreen';
 
 const Stack = createStackNavigator();
 
-export const StackNavigator = () => {
+export const StackAuthNavigator = () => {
   const {
     state: { colors },
   } = useContext(ThemeContext);
   return (
     <Stack.Navigator
-      // initialRouteName='ProductsScreen'
+      initialRouteName='LoginScreen'
       screenOptions={{
+        title: 'Inicio de sesión',
         headerShown: false,
         cardStyle: {
           backgroundColor: colors.background,
@@ -27,8 +28,8 @@ export const StackNavigator = () => {
         },
       }}
     >
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
     </Stack.Navigator>
   );
 };

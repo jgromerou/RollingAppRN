@@ -3,8 +3,6 @@ import { StyleSheet } from "react-native";
 export const globalThemes = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#F9FAFB',
-    // color: '#212B36',
     padding: 10,
   },
   title: {
@@ -13,16 +11,20 @@ export const globalThemes = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 15,
   },
+  text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    alignSelf: "center",
+    marginVertical: 10,
+  },
   defaultInputText: {
     borderWidth: 2,
-    // borderColor: '#919EAB',
     borderRadius: 5,
     paddingVertical: 5,
     marginHorizontal: 15,
     marginVertical: 15,
     paddingHorizontal: 12,
-    // color: '#fff'
-  },
+ },
   defaultBtn: {
     fontSize: 16,
     paddingVertical: 10,
@@ -39,7 +41,6 @@ export const globalThemes = StyleSheet.create({
   footer: {
     fontSize: 13,
     position: "absolute",
-    // color: '#212B36',
     alignSelf: "center",
     marginVertical: 20,
     bottom: -20,

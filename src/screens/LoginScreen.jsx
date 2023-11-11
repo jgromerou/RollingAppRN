@@ -11,7 +11,8 @@ import { globalThemes } from "../themes/globalThemes";
 import { ThemeContext } from "../contexts/ThemeContext";
 //import { CustomModal } from "../../components/CustomModal";
 
-export const LoginScreen = () => {
+export const LoginScreen = ({navigation}) => {
+  console.log(navigation)
   const { state } = useContext(ThemeContext);
 
   // const showAlert = ()=>{
@@ -45,7 +46,7 @@ export const LoginScreen = () => {
   return (
     <>
     <View>
-      <Text style={[globalThemes.title, {color:state.colors.titleColor}]}>Bienvenidos</Text>
+      <Text style={[globalThemes.title, {color:state.colors.titleColor}]}>Bienvenid@s</Text>
     </View>
       <View style={state.container}>
         <View>
@@ -58,12 +59,12 @@ export const LoginScreen = () => {
         <View>
           <TextInput
             style={[globalThemes.defaultInputText, {color: state.colors.text, borderColor:state.colors.border}]}
-            placeholder="Email"
+            placeholder="Correo"
             placeholderTextColor={state.colors.notification}
           />
             <TextInput
             style={[globalThemes.defaultInputText, {color: state.colors.text, borderColor:state.colors.border}]}
-            placeholder="Pass"
+            placeholder="Contraseña"
             placeholderTextColor={state.colors.notification}
             secureTextEntry={true}
           />
@@ -73,7 +74,16 @@ export const LoginScreen = () => {
             style={[globalThemes.defaultBtn, {backgroundColor:state.colors.primary, borderColor:state.colors.border}]}
             //onPress={showAlert} //para usar con el alert
           >
-            <Text style={[globalThemes.defaulTextBtn, {color: state.colors.notification}]}> INGRESAR </Text>
+            <Text style={[globalThemes.defaulTextBtn, {color: '#000'}]}> INGRESAR </Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+          onPress={()=>navigation.navigate('RegisterScreen')}
+            style={[globalThemes.defaultBtn, {backgroundColor:state.colors.primary, borderColor:state.colors.border}]}
+            //onPress={showAlert} //para usar con el alert
+          >
+            <Text style={[globalThemes.defaulTextBtn, {color: '#000'}]}> REGISTRARSE </Text>
           </TouchableOpacity>
         </View>
         <View>
@@ -90,30 +100,6 @@ const styles = StyleSheet.create({
     height: 150,
     alignSelf: "center",
     borderRadius: 100,
-    marginVertical: 30
-  },
-  inputText: {
-    borderWidth: 2,
-    borderColor: "#f2058b",
-    borderRadius: 40,
-    paddingVertical: 5,
-    marginHorizontal: 15,
-    marginVertical: 12,
-    paddingHorizontal: 12,
-    color: "#fff",
-  },
-  touchableBtn: {
-    backgroundColor: "#f2058b",
-    fontSize: 16,
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    alignSelf: "center",
-    borderRadius: 20,
-    marginVertical: 12,
-  },
-  textBtn: {
-    fontSize: 14,
-    color: "#fff",
-    fontWeight: "bold",
+    marginVertical: 10
   },
 });
