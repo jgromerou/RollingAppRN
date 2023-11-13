@@ -1,10 +1,50 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const globalThemes = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
     padding: 10,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    alignSelf: "center",
+    marginVertical: 15,
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    alignSelf: "center",
+    marginVertical: 10,
+  },
+  defaultInputText: {
+    borderWidth: 2,
+    borderRadius: 5,
+    paddingVertical: 5,
+    marginHorizontal: 15,
+    marginVertical: 15,
+    paddingHorizontal: 12,
+ },
+  defaultBtn: {
+    fontSize: 16,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    alignSelf: "center",
+    borderRadius: 5,
+    marginVertical: 30,
+    borderWidth: 2,
+  },
+  defaulTextBtn: {
+    fontSize: 15,
+    fontWeight: "500",
+  },
+  footer: {
+    fontSize: 13,
+    position: "absolute",
+    alignSelf: "center",
+    marginVertical: 20,
+    bottom: -20,
   },
   footer: {
       fontSize: 13,
@@ -13,67 +53,67 @@ export const globalThemes = StyleSheet.create({
       marginVertical: 20,
   },
 
-  defaultBtn: {
-      backgroundColor:  '#f2058b',
-      fontSize: 16,
-      paddingVertical: 10,
-      paddingHorizontal: 30,
-      alignSelf: 'center',
-      borderRadius: 20,
-      marginVertical: 30,
-  },
+  // defaultBtn: {
+  //     backgroundColor:  '#f2058b',
+  //     fontSize: 16,
+  //     paddingVertical: 10,
+  //     paddingHorizontal: 30,
+  //     alignSelf: 'center',
+  //     borderRadius: 20,
+  //     marginVertical: 30,
+  // // },
 
-  defaulTextBtn: {
-      fontSize: 15,
-      color: '#fff',
-      fontWeight: '500'
-  },
+  // defaulTextBtn: {
+  //     fontSize: 15,
+  //     color: '#fff',
+  //     fontWeight: '500'
+  // },
 
-  defaultBtnOutline: {
-      fontSize: 16,
-      paddingVertical: 10,
-      paddingHorizontal: 30,
-      alignSelf: 'center',
-      borderRadius: 20,
-      marginVertical: 20,
-      borderColor:'#f2058b',
-      borderWidth: 2,
-  },
+  // defaultBtnOutline: {
+  //     fontSize: 16,
+  //     paddingVertical: 10,
+  //     paddingHorizontal: 30,
+  //     alignSelf: 'center',
+  //     borderRadius: 20,
+  //     marginVertical: 20,
+  //     borderColor:'#f2058b',
+  //     borderWidth: 2,
+  // },
 
-  defaultBtnQuantity: {
-      fontSize: 16,
-      paddingVertical: 10,
-      paddingHorizontal: 30,
-      alignSelf: 'center',
-      borderRadius: 10,
-      marginVertical: 20,
-      borderColor:'#f2058b',
-      borderWidth: 2,
-  },
+  // defaultBtnQuantity: {
+  //     fontSize: 16,
+  //     paddingVertical: 10,
+  //     paddingHorizontal: 30,
+  //     alignSelf: 'center',
+  //     borderRadius: 10,
+  //     marginVertical: 20,
+  //     borderColor:'#f2058b',
+  //     borderWidth: 2,
+  // },
 
-  defaultInputText:  {
-      borderWidth:2,
-      borderColor: '#f2058b',
-      borderRadius: 40,
-      paddingVertical: 5,
-      marginHorizontal: 15,
-      marginVertical: 15,
-      paddingHorizontal: 12,
-      color: '#fff'
-  },
+  // defaultInputText:  {
+  //     borderWidth:2,
+  //     borderColor: '#f2058b',
+  //     borderRadius: 40,
+  //     paddingVertical: 5,
+  //     marginHorizontal: 15,
+  //     marginVertical: 15,
+  //     paddingHorizontal: 12,
+  //     color: '#fff'
+  // },
 
-  defaultDividrTitile: {
-      flex:1,
-      backgroundColor: 'rgba(255,255,255, 0.1)',
-      justifyContent: 'center',
-      alignItems:'center',
-      borderRadius:5,
-      marginBottom: 20
-  },
+  // defaultDividrTitile: {
+  //     flex:1,
+  //     backgroundColor: 'rgba(255,255,255, 0.1)',
+  //     justifyContent: 'center',
+  //     alignItems:'center',
+  //     borderRadius:5,
+  //     marginBottom: 20
+  // },
 
-  defaultDivideTitleText: {
-      color: 'rgba(255,255,255, 0.6)',
-      fontSize: 18,
-      fontWeight: '600'
-  }
+  // defaultDivideTitleText: {
+  //     color: 'rgba(255,255,255, 0.6)',
+  //     fontSize: 18,
+  //     fontWeight: '600'
+  // }
 });

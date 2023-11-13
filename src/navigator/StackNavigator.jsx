@@ -1,6 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import React, { useContext } from 'react';
 import { HomeScreen } from '../screens/HomeScreen';
+import { ThemeContext } from '../contexts/ThemeContext';
 import { ProductsScreen } from '../screens/products/ProductsScreen'
 import { CheckoutScreen } from '../screens/carts/CheckoutScreen';
 import { ConfirmCart } from '../components/products/ConfirmCart';
@@ -9,13 +10,16 @@ import { ConfirmPay } from '../components/products/ConfirmPay';
 const Stack = createStackNavigator();
 
 export const StackNavigator = () => {
+  const {
+    state: { colors },
+  } = useContext(ThemeContext);
   return (
     <Stack.Navigator
       // initialRouteName='ProductsScreen'
       screenOptions={{
         headerShown: false,
         cardStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: colors.background,
         },
 
         headerStyle: {
