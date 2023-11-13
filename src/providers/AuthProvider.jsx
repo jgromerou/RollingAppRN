@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
         email, 
         password
       })
-      localStorage.setItem("tokenAuth", data.token);
+      AsyncStorage.setItem("tokenAuth", data.token);
       dispatch({
         type: types.auth.login,
         payload: {
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuthToken = async () => {
     try {
-      const token = localStorage.getItem('tokenAuth');
+      const token = AsyncStorage.getItem('tokenAuth');
       if (!token) {
         return dispatch({
           type: types.auth.logout,
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
         });
       }
       const { data } = await dashAxios.get(`auth/revalidatetoken`);
-      localStorage.setItem('tokenAuth', data.res.token);
+      AsyncStorage.setItem('tokenAuth', data.res.token);
       //console.log(data,'data')
       dispatch({
         type: types.auth.login,
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      localStorage.removeItem('tokenAuth')
+      AsyncStorage.removeItem('tokenAuth')
       dispatch({
         type: types.auth.logout,
         payload: {
@@ -81,13 +81,13 @@ export const AuthProvider = ({ children }) => {
  
   };
 
-  const login = async (email, password) => {
+  const login = async (values) => {
     try {
       const { data } = await dashAxios.post("auth/login", {
-        email,
-        password,
+        email: values.email,
+        password: values.password,
       });
-      localStorage.setItem("tokenAuth", data.token);
+      await AsyncStorage.setItem("tokenAuth", data.token);
       dispatch({
         type: types.auth.login,
         payload: {
@@ -106,8 +106,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('tokenAuth')
+  const logout = async () => {
+    await AsyncStorage.removeItem('tokenAuth')
     dispatch({
       type: types.auth.logout,
       payload: { errorMessage: "" },

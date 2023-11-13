@@ -53,7 +53,7 @@ const Menu = ({ navigation }) => {
     setDarkTheme,
     setLightTheme,
   } = useContext(ThemeContext);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <DrawerContentScrollView>
       {/* Contenedor de los botones de cambiar tema */}
