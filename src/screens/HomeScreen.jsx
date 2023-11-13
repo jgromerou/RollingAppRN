@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { Ionicons } from 'react-native-vector-icons';
 import { bannersData } from '../data/bannersData';
@@ -7,7 +6,6 @@ import { globalThemes } from '../themes/globalThemes';
 import { searchData } from '../data/searchData'
 import { CustomCardProducts } from '../components/products/CustomCardProducts'
 import { CartShop } from '../components/products/CartShop';
-import { ThemeContext } from '../contexts/ThemeContext';
 
 export const HomeScreen = () => {
   const renderBanners = (item) => {
@@ -78,12 +76,6 @@ return (
           keyExtractor={item => item.id}
           horizontal={true}
         />
-  const {
-    state: { colors },
-  } = useContext(ThemeContext);
-  return (
-    <View>
-      <Text style={{ color: colors.primary, fontSize: 20 }}>HomeScreen</Text>
     </View>
 
 
