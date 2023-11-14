@@ -6,15 +6,27 @@ import { Badge } from 'react-native-paper';
 import { Ionicons } from 'react-native-vector-icons';
 import {AntDesign} from 'react-native-vector-icons';
 import { CartContext } from '../../contexts/CartContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 import { CheckoutScreen } from '../../screens/carts/CheckoutScreen';
 import { useNavigation } from '@react-navigation/native';
 
 export const CartShop = () => {
-    const { state } = useContext(CartContext);
-    const { navigate } =  useNavigation();
+  const {
+    state: { colors },
+  } = useContext(ThemeContext);
+  const { state } = useContext(CartContext);
+  const { navigate } =  useNavigation();
   return (
     <View>
-        <View style={styles.menuContainer}>
+        <View style={{ 
+          backgroundColor: colors.primary,
+          marginHorizontal: 10,
+          borderRadius: 10,
+          padding: 10,
+          zIndex:999,
+          alignSelf:'center',
+          marginTop: 30        
+        }}>
         <TouchableOpacity 
             onPress={() => navigate('CheckoutScreen')}
         >
@@ -64,7 +76,7 @@ const styles  =  StyleSheet.create({
       },
     
     menuContainer: {
-      backgroundColor: '#f2058b',
+      //backgroundColor: '#f2058b',
       marginHorizontal: 10,
       borderRadius: 10,
       padding: 10,

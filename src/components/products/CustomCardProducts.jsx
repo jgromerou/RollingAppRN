@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
-
+import { ThemeContext } from '../../contexts/ThemeContext';
 import { ProductsScreen } from '../../screens/products/ProductsScreen';
 import { AntDesign } from 'react-native-vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 export const CustomCardProducts = ({itemData}) => {
+    const {
+      state: { colors },
+    } = useContext(ThemeContext);
 
     //console.log(itemData)
 
@@ -21,7 +24,8 @@ export const CustomCardProducts = ({itemData}) => {
       <Pressable
         style={{
           marginHorizontal:5,
-          backgroundColor: 'rgba(255,255,255,0.1)',
+          backgroundColor: colors.primary,
+          //backgroundColor: 'rgba(255,255,255,0.1)',
           // borderColor: 'rgba(255,255,255,0.1)',
           // borderWidth:2,
           borderRadius: 15

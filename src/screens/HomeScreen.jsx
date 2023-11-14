@@ -1,4 +1,6 @@
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import { useContext } from 'react';
+import { ThemeContext } from '../contexts/ThemeContext';
 import { Ionicons } from 'react-native-vector-icons';
 import { bannersData } from '../data/bannersData';
 import { StyleSheet } from 'react-native';
@@ -8,6 +10,10 @@ import { CustomCardProducts } from '../components/products/CustomCardProducts'
 import { CartShop } from '../components/products/CartShop';
 
 export const HomeScreen = () => {
+  const {
+    state: { colors },
+  } = useContext(ThemeContext);
+
   const renderBanners = (item) => {
     return (
       <View style={{

@@ -6,6 +6,7 @@ import { Pressable } from "react-native";
 import { CustomQuantity } from "../../components/products/CustomQuantity";
 import { useQuantity } from "../../hooks/useQuantity";
 import { CartContext } from "../../contexts/CartContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import { CartShop } from "../../components/products/CartShop";
 
 export const ProductsScreen = ({ route }) => {
@@ -14,6 +15,9 @@ export const ProductsScreen = ({ route }) => {
   const [talle, setTalle] = useState(0);
   const { quantity, restQuantity, sumQuantity } = useQuantity();
   const { addCart, state, calculateCart } = useContext(CartContext);
+  const {
+    state: { colors },
+  } = useContext(ThemeContext);
 
   //console.log(itemData,'productscreen')
 
@@ -38,7 +42,11 @@ export const ProductsScreen = ({ route }) => {
 
 
   return (
-    <View style={globalThemes.container}>
+    <View style={{
+      flex: 1,
+      backgroundColor: colors.primary,
+      padding: 10,
+    }}>
       <View style={styles.head}>
         {/* <View>
                 <View style={styles.menuContainer}>

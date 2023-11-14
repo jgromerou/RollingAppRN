@@ -11,12 +11,16 @@ import { CartItem } from '../../components/products/CartItem';
 import { TouchableOpacity } from 'react-native'
 import { ConfirmCart } from '../../components/products/ConfirmCart'
 import { useNavigation } from '@react-navigation/native';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 export const CheckoutScreen = ({ navigation }) => {
 
     const { state } = useContext(CartContext);
     const [cantidad, setCantidad] = useState(10)
     const { navigate } =  useNavigation();
+    const {
+      state: { colors },
+    } = useContext(ThemeContext);
     //const { quantity, sumQuantity, restQuantity} = useQuantity(item.qty);
 
     const cartRender = (item, index) => {
@@ -73,7 +77,12 @@ export const CheckoutScreen = ({ navigation }) => {
     }
 
   return (
-    <View style={ globalThemes.container }>
+    <View style={{ 
+      //globalThemes.container 
+      flex: 1,
+      backgroundColor: colors.primary,
+      padding: 10,
+    }}>
         <View style={{
             flex: 4,
             // justifyContent: "center",
