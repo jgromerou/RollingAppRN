@@ -10,7 +10,8 @@ export const lightTheme = {
     notification: "#A0A7AC",
     background: "#FBFBFE",
     border: "#EFF3F5",
-    card: "#FFFFFF"
+    card: "#FFFFFF",
+    active: "#6a9951"
   },
 };
 

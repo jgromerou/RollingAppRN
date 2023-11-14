@@ -40,7 +40,7 @@ export const TabsNavigator = () => {
         />
 
 <Tab.Screen
-        name="StackNavigator"
+        name="ProductsScreen"
         component={ProductScreen}
         options={{
           title: 'Productos',
