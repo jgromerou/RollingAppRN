@@ -16,17 +16,17 @@ export const CustomQuantity = ({quantity, addOne, removeOne}) => {
         <Pressable  
             style={{ alignItems: "center", borderColor: state.colors.notification }}
             onPress={ removeOne }>
-                <Entypo name="squared-minus" size={35} color={state.colors.primary} />
+                <Entypo name="squared-minus" size={35} color={state.colors.background} />
         </Pressable>
 
         <View  style={{
-            marginHorizontal: 6
+            marginHorizontal: 5, paddingTop: 3
         }}
         >
             <Text  style={{
-                color: state.colors.titleColor,
-                fontSize: 22,
-                fontWeight: 500,
+                color: state.colors.background,
+                fontSize: 23,
+                fontWeight: 800,
                 }} >
                     {quantity}
                 </Text>
@@ -34,7 +34,7 @@ export const CustomQuantity = ({quantity, addOne, removeOne}) => {
         
         <Pressable  style={{ alignItems: "center", borderColor: state.colors.notification, }}
             onPress={ addOne }>
-                 <Entypo name="squared-plus" size={35} color={state.colors.primary} />
+                 <Entypo name="squared-plus" size={35} color={state.colors.background} />
         </Pressable>
     </View>
   )
