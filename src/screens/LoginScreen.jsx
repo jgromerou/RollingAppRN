@@ -32,7 +32,7 @@ export const LoginScreen = ({ navigation }) => {
         .min(8, "La contraseña debe tener al menos 8 caracteres"),
     }),
     onSubmit: (values) => {
-      console.log(values)
+      console.log(values);
       login(formik.values);
     },
   });
@@ -79,7 +79,7 @@ export const LoginScreen = ({ navigation }) => {
             source={require("../../assets/avatar_2.jpg")}
           />
         </View>
-        {formik.touched.email && formik.errors.email && <Text>{formik.errors.email}</Text>}
+
         <View>
           <TextInput
             style={[
@@ -91,6 +91,18 @@ export const LoginScreen = ({ navigation }) => {
             name="email"
             onChangeText={(value) => formik.setFieldValue("email", value)}
           />
+          {formik.errors.email && (
+            <Text
+              style={[
+                globalThemes.text,
+                {
+                  color: state.colors.contrastColor,
+                },
+              ]}
+            >
+              {formik.errors.email}
+            </Text>
+          )}
           <TextInput
             style={[
               globalThemes.defaultInputText,
@@ -102,6 +114,18 @@ export const LoginScreen = ({ navigation }) => {
             name="password"
             onChangeText={(value) => formik.setFieldValue("password", value)}
           />
+          {formik.errors.email && (
+            <Text
+            style={[
+              globalThemes.text,
+              {
+                color: state.colors.contrastColor,
+              },
+            ]}
+            >
+              {formik.errors.email}
+            </Text>
+          )}
         </View>
         <View>
           <TouchableOpacity
