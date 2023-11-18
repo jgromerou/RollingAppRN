@@ -17,6 +17,11 @@ export const globalThemes = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 10,
   },
+  errorText: {
+    fontSize: 15,
+    fontWeight: 200,
+    alignSelf: "center",
+  },
   defaultInputText: {
     borderWidth: 2,
     borderRadius: 5,
@@ -31,7 +36,7 @@ export const globalThemes = StyleSheet.create({
     paddingHorizontal: 30,
     alignSelf: "center",
     borderRadius: 5,
-    marginVertical: 30,
+    marginVertical: 10,
     borderWidth: 2,
   },
   defaulTextBtn: {
@@ -43,6 +48,6 @@ export const globalThemes = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     marginVertical: 20,
-    bottom: -20,
+    bottom: -40,
   },
 });

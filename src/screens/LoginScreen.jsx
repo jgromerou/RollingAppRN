@@ -12,7 +12,8 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "../contexts/AuthContext";
-//import { CustomModal } from "../../components/CustomModal";
+import { ErrorMessage } from "../components/ErrorMessage";
+
 
 export const LoginScreen = ({ navigation }) => {
   const { state } = useContext(ThemeContext);
@@ -37,34 +38,6 @@ export const LoginScreen = ({ navigation }) => {
     },
   });
 
-  // const showAlert = ()=>{
-  //   Alert.alert(
-  //     'Error Acceso',
-  //     'Los datos ingresados son incorrectos',
-  //     [
-  //       {
-  //         text: 'Camcelar',
-  //         onPress: ()=>Alert.alert(
-  //           'Usuario Bloqueado',
-  //           'Los datos ingresados son incorrectos',
-  //           [
-  //             {
-  //               text: 'Cerrar',
-  //               style: 'cancel'
-  //             }
-  //           ]
-  //         ),
-  //         style: 'cancel'
-  //       },
-  //       {
-  //         text: 'Ok',
-  //         onPress: ()=>{console.log('ok')},
-  //         style: 'default'
-  //       }
-  //     ]
-  //   )
-  // }
-
   return (
     <>
       <View>
@@ -88,20 +61,12 @@ export const LoginScreen = ({ navigation }) => {
             ]}
             placeholder="Correo"
             placeholderTextColor={state.colors.notification}
+            keyboardType="email-address"
             name="email"
             onChangeText={(value) => formik.setFieldValue("email", value)}
           />
           {formik.errors.email && (
-            <Text
-              style={[
-                globalThemes.text,
-                {
-                  color: state.colors.contrastColor,
-                },
-              ]}
-            >
-              {formik.errors.email}
-            </Text>
+            <ErrorMessage message={formik.errors.email} />
           )}
           <TextInput
             style={[
@@ -114,17 +79,8 @@ export const LoginScreen = ({ navigation }) => {
             name="password"
             onChangeText={(value) => formik.setFieldValue("password", value)}
           />
-          {formik.errors.email && (
-            <Text
-            style={[
-              globalThemes.text,
-              {
-                color: state.colors.contrastColor,
-              },
-            ]}
-            >
-              {formik.errors.email}
-            </Text>
+          {formik.errors.password && (
+            <ErrorMessage message={formik.errors.password} />
           )}
         </View>
         <View>
@@ -137,11 +93,10 @@ export const LoginScreen = ({ navigation }) => {
               },
             ]}
             onPress={formik.handleSubmit}
-            //onPress={showAlert} //para usar con el alert
           >
-            <Text style={[globalThemes.defaulTextBtn, { color: "#000" }]}>
-              {" "}
-              INGRESAR{" "}
+            <Text style={[globalThemes.defaulTextBtn, { color: state.colors.contrastColor }]}>
+              
+              INGRESAR
             </Text>
           </TouchableOpacity>
         </View>
@@ -155,11 +110,10 @@ export const LoginScreen = ({ navigation }) => {
                 borderColor: state.colors.border,
               },
             ]}
-            //onPress={showAlert} //para usar con el alert
           >
-            <Text style={[globalThemes.defaulTextBtn, { color: "#000" }]}>
-              {" "}
-              REGISTRARSE{" "}
+            <Text style={[globalThemes.defaulTextBtn, { color: state.colors.contrastColor }]}>
+              
+              REGISTRARSE
             </Text>
           </TouchableOpacity>
         </View>
@@ -169,7 +123,6 @@ export const LoginScreen = ({ navigation }) => {
           </Text>
         </View>
       </View>
-      {/* <CustomModal/> */}
     </>
   );
 };

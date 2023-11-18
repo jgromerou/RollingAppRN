@@ -2,44 +2,49 @@ import React, { useContext } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { globalThemes } from "../themes/globalThemes";
 import { ThemeContext } from "../contexts/ThemeContext";
-//import { CustomModal } from "../../components/CustomModal";
+import { AuthContext } from "../contexts/AuthContext";
+import { ErrorMessage } from "../components/ErrorMessage";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 
 export const RegisterScreen = () => {
-  const { state } = useContext(ThemeContext);
 
-  // const showAlert = ()=>{
-  //   Alert.alert(
-  //     'Error Acceso',
-  //     'Los datos ingresados son incorrectos',
-  //     [
-  //       {
-  //         text: 'Camcelar',
-  //         onPress: ()=>Alert.alert(
-  //           'Usuario Bloqueado',
-  //           'Los datos ingresados son incorrectos',
-  //           [
-  //             {
-  //               text: 'Cerrar',
-  //               style: 'cancel'
-  //             }
-  //           ]
-  //         ),
-  //         style: 'cancel'
-  //       },
-  //       {
-  //         text: 'Ok',
-  //         onPress: ()=>{console.log('ok')},
-  //         style: 'default'
-  //       }
-  //     ]
-  //   )
-  // }
+  const { state } = useContext(ThemeContext);
+  const { registerUser } = useContext(AuthContext);
+
+  const formik = useFormik({
+    initialValues: {
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+    },
+    validateOnChange: false,
+    validationSchema: Yup.object({
+      firstname: Yup.string()
+      .required("Este campo es obligatorio"),
+      lastname: Yup.string()
+      .required("Este campo es obligatorio"),
+      email: Yup.string()
+        .email("Formato de email es incorrecto")
+        .required("Este campo es obligatorio"),
+      password: Yup.string()
+        .required("Este campo es obligatorio")
+        .min(8, "La contraseña debe tener al menos 8 caracteres"),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+      registerUser(formik.values);
+    },
+  });
+
 
   return (
     <>
       <View>
         <Text style={[globalThemes.title, { color: state.colors.titleColor }]}>
-          Bienvenidos
+          Bienvenid@s
         </Text>
       </View>
       <View>
@@ -56,7 +61,12 @@ export const RegisterScreen = () => {
             ]}
             placeholder="Nombre"
             placeholderTextColor={state.colors.notification}
+            name="firstname"
+            onChangeText={(value) => formik.setFieldValue("firstname", value)}
           />
+          {formik.errors.firstname && (
+            <ErrorMessage message={formik.errors.firstname} />
+          )}
           <TextInput
             style={[
               globalThemes.defaultInputText,
@@ -64,7 +74,12 @@ export const RegisterScreen = () => {
             ]}
             placeholder="Apellido"
             placeholderTextColor={state.colors.notification}
+            name="lastname"
+            onChangeText={(value) => formik.setFieldValue("lastname", value)}
           />
+          {formik.errors.lastname && (
+            <ErrorMessage message={formik.errors.lastname} />
+          )}
           <TextInput
             style={[
               globalThemes.defaultInputText,
@@ -72,7 +87,13 @@ export const RegisterScreen = () => {
             ]}
             placeholder="Correo"
             placeholderTextColor={state.colors.notification}
+            keyboardType="email-address"
+            name="email"
+            onChangeText={(value) => formik.setFieldValue("email", value)}
           />
+          {formik.errors.email && (
+            <ErrorMessage message={formik.errors.email} />
+          )}
 
           <TextInput
             style={[
@@ -82,7 +103,13 @@ export const RegisterScreen = () => {
             placeholder="Contraseña"
             placeholderTextColor={state.colors.notification}
             secureTextEntry={true}
+            name="password"
+            onChangeText={(value) => formik.setFieldValue("password", value)}
           />
+          {formik.errors.password && (
+            <ErrorMessage message={formik.errors.password} />
+          )}
+
         </View>
         <View>
           <TouchableOpacity
@@ -93,9 +120,9 @@ export const RegisterScreen = () => {
                 borderColor: state.colors.border,
               },
             ]}
-            //onPress={showAlert} //para usar con el alert
+            onPress={formik.handleSubmit}
           >
-            <Text style={[globalThemes.defaulTextBtn, { color: "#000" }]}>
+            <Text style={[globalThemes.defaulTextBtn, { color: state.colors.contrastColor }]}>
               GUARDAR
             </Text>
           </TouchableOpacity>
@@ -106,7 +133,6 @@ export const RegisterScreen = () => {
           </Text>
         </View>
       </View>
-      {/* <CustomModal/> */}
     </>
   );
 };
