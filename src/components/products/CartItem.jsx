@@ -9,7 +9,7 @@ import { CartContext } from '../../contexts/CartContext';
 export const CartItem = ({item, index}) => {
 //console.log(index, 'cartItem')
 const { quantity, sumQuantity, restQuantity} = useQuantity(item.qty);
-const { deleteCart, calculateCart, state, initLoading } = useContext(CartContext);
+const { deleteCart, calculateCart, state, initLoading, isLoading } = useContext(CartContext);
 
 const deleCart = (index) => {
     //console.log(index,'ELIMINAR');
@@ -19,7 +19,7 @@ const deleCart = (index) => {
 }
 useEffect(() => {
     calculateCart();
-}, [state.isLoading])
+}, [isLoading])
 
 
 return (

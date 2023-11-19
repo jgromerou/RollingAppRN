@@ -9,14 +9,14 @@ import { CustomQuantity } from '../../components/products/CustomQuantity';
 import { useQuantity } from '../../hooks/useQuantity';
 import { CartItem } from '../../components/products/CartItem';
 import { TouchableOpacity } from 'react-native'
-import { ConfirmCart } from '../../components/products/ConfirmCart'
 import { useNavigation } from '@react-navigation/native';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import { GoBack } from '../../components/products/GoBack';
 
 export const CheckoutScreen = ({ navigation }) => {
 
-    const { state } = useContext(CartContext);
-    const [cantidad, setCantidad] = useState(10)
+    const { state, isLoading, calculateCart } = useContext(CartContext);
+    const [cantidad, setCantidad] = useState(state.cart)
     const { navigate } =  useNavigation();
     const {
       state: { colors },
@@ -27,54 +27,11 @@ export const CheckoutScreen = ({ navigation }) => {
         return (
             <CartItem item={ item } index={index}/>
         )      
-    //     return (
-    //         <View style={{
-    //             backgroundColor: '#ccc',
-    //             flexDirection:  'row',
-    //             borderWidth: 3,
-    //             justifyContent: 'center',
-    //             alignItems:  'center',
-    //             backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    //             borderTopEndRadius: 10,
-    //             borderBottomEndRadius: 10,
-    //             padding:10
-    //         }}>
-    //             <View style={{
-    //                 flex: 1,
-    //                 marginRight: 10
-    //             }}>
-    //                 <Image 
-    //                     source={require('../../assets/thoto/banners/shoes-color.jpg')}
-    //                     style={{
-    //                         width:50,
-    //                         height: 50,
-    //                         borderRadius: 5
-    //                     }} 
-    //                 />
-    //             </View>
-    //             <View 
-    //                 style={{ 
-    //                     flex:3, 
-    //                     alignItems: 'flex-start',
-    //                     justifyContent: 'center'
-    //                 }}>
-    //                 <View>
-    //                     <Text style={{ fontSize: 12, color: 'rgba(255,255,255, 0.5)',  }}>{item.category}</Text>
-    //                     <Text style={{ fontSize: 13, color: '#fff' }}>{ item.product}</Text>
-    //                     <Text style={{ fontSize: 14, color: '#f2058b', fontWeight: 'bold'}}>${item.price}</Text>
-    //                 </View>
-    //             </View>
-    //             <View style={{ flex:2, alignItems: 'center'}}>
-    //                 <CustomQuantity 
-    //                     quantity={quantity}
-    //                     sumQuantity={sumQuantity}
-    //                     restQuantity={restQuantity}
-    //                 />
-    //             </View>
-
-    //         </View>
-    //     )
     }
+
+    useEffect(() => {
+      calculateCart();
+    }, [isLoading])
 
   return (
     <View style={{ 
@@ -83,6 +40,7 @@ export const CheckoutScreen = ({ navigation }) => {
       backgroundColor: colors.primary,
       padding: 10,
     }}>
+        <GoBack navigation={navigation}/>
         <View style={{
             flex: 4,
             // justifyContent: "center",
@@ -90,6 +48,7 @@ export const CheckoutScreen = ({ navigation }) => {
             // marginBottom: 30,
         }}>
             <FlatList 
+            //data={state.cart}
             data={state.cart}
             renderItem={ ({item, index}) => cartRender(item, index) }
             keyExtractor={(item, index) => index}

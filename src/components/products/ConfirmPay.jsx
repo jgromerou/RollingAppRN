@@ -1,26 +1,34 @@
 import React, { useContext } from 'react';
-import { Text } from 'react-native';
-import { View } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { globalThemes } from '../../themes/globalThemes';
-import { TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import { GoBack } from './GoBack';
+import { useIsFocused } from '@react-navigation/native';
 
-export const ConfirmPay = () => {
-    const { navigate } =  useNavigation();
+export const ConfirmPay = ({navigation}) => {
+    //console.log(props)
+    const isFocused =  useIsFocused();
     const {
         state: { colors },
       } = useContext(ThemeContext);
+
+    if (isFocused){
+        
+    }
+    
   return (
     <View style={{ 
             //globalThemes.container
             flex: 1,
             backgroundColor: colors.primary,
-            padding: 10,
+            //padding: 10,
         }}>
+
+        <GoBack navigation={navigation}/>
+
         <View>
-            <Text style={{color: 'white'}}>
-            ConfirmPay
+            <Text style={{color: 'white', marginTop: 30}}>
+                ConfirmPay
             </Text>
         </View>
         <View

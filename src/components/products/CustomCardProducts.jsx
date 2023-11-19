@@ -36,7 +36,7 @@ export const CustomCardProducts = ({itemData}) => {
       >
 
         <View style={{
-          height: 200,
+          height: 180,
           width: 160,
           padding: 10
         }}>
@@ -66,8 +66,8 @@ export const CustomCardProducts = ({itemData}) => {
           >
             <View style={{
               backgroundColor: 'rgba(255,255,255, 0.1)',
-              paddingHorizontal: 15,
-              paddingVertical:10,
+              paddingHorizontal: 10,
+              paddingVertical:20,
               justifyContent: 'center',
               alignItems: 'center',
               borderTopLeftRadius: 25,

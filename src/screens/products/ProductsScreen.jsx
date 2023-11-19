@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { globalThemes } from "../../themes/globalThemes";
 import { MaterialIcons } from "react-native-vector-icons";
@@ -8,38 +8,79 @@ import { useQuantity } from "../../hooks/useQuantity";
 import { CartContext } from "../../contexts/CartContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { CartShop } from "../../components/products/CartShop";
+import { GoBack } from "../../components/products/GoBack";
+import { CustomModal } from "../../components/products/CustomModal";
 
-export const ProductsScreen = ({ route }) => {
+export const ProductsScreen = ({ route, navigation }) => {
 
   const { itemData } = route.params;
   const [talle, setTalle] = useState(0);
   const { quantity, restQuantity, sumQuantity } = useQuantity();
-  const { addCart, state, calculateCart } = useContext(CartContext);
+  const { addCart, state, calculateCart, editCart, isLoading } = useContext(CartContext);
   const {
     state: { colors },
   } = useContext(ThemeContext);
+  const [visible, setVisible] = useState(false);
 
   //console.log(itemData,'productscreen')
 
 
-  const obtenerTalle = (dataTalle) => {
+  const obtenerTalle = (dataTalle) => 
+  {
     if (dataTalle == talle) {
       return setTalle(0);
     }
     setTalle(dataTalle);
   };
 
-  const addToCart = () => {
+  const closeAlert = () => 
+  {
+    setVisible(false);  
+  }
+
+  const addToCart = () => 
+  {
+      // valido cantidad > 0
+      if (quantity < 1) {
+        setVisible(true);
+        return ;
+      }
+      // busco si ya esta en el carrito el producto
+      let cartExist = ""
+      cartExist = state.cart.find((cart) => cart.id === itemData.id )
+      if ( cartExist !== undefined ) {
+        let numindex = state.cart.findIndex((cart) => cart.id === itemData.id)
+        ActCart(cartExist, numindex);
+        return;
+      }
       const data = {
         product: itemData,
         waist: talle,
         qty: quantity
       }
-
       addCart(data);
       calculateCart();
   }
 
+  // funcion para modificar solo cantidad cuando ingresa el mismo product
+  const ActCart = (cartExist, numindex) => {
+    const CartModificada = {
+        id: cartExist.id,
+        product: cartExist.product,
+        price: cartExist.price,
+        waist: cartExist.waist,
+        qty: cartExist.qty + quantity,
+        category: cartExist.category
+    }
+    //modifica la cantidades de cada item
+    editCart(CartModificada, numindex);
+    calculateCart();
+}
+  // useEffect(() => {
+  //   calculateCart();
+  // }, [isLoading])
+
+  
 
   return (
     <View style={{
@@ -47,27 +88,18 @@ export const ProductsScreen = ({ route }) => {
       backgroundColor: colors.primary,
       padding: 10,
     }}>
+      <GoBack navigation={navigation}/>
       <View style={styles.head}>
-        {/* <View>
-                <View style={styles.menuContainer}>
-                  <TouchableOpacity 
-                    //onPress={onFilter}
-                  >
-                    <Ionicons name='filter-sharp'  size={28} color='#ccc'/>
-                  </TouchableOpacity>
-                </View>
-        </View> */}
         <CartShop/>
       </View>
-
-
       <View
         style={{
-          flex: 5,
+          flex: 6,
           justifyContent: "center",
           alignItems: "center",
         }}
       >
+        {visible ? <CustomModal closeAlert={ closeAlert } visible={ visible }/> : null}
         <Image
           source={require("../../assets/thoto/banners/shoes-color.jpg")}
           style={{
@@ -80,16 +112,16 @@ export const ProductsScreen = ({ route }) => {
 
       <View
         style={{
-          flex: 2,
+          flex: 1.8,
           marginVertical: 20,
           justifyContent: "center",
           alignItems: 'center'
         }}
       >
-        <Text style={{ fontSize: 16, color: "rgba(255,255,255, 0.5)" }}>
+        <Text style={{ fontSize: 14, color: "rgba(255,255,255, 0.5)" }}>
           {itemData.category}
         </Text>
-        <Text style={{ fontSize: 19, color: "#fff", fontWeight: "bold" }}>
+        <Text style={{ fontSize: 16, color: "#fff", fontWeight: "bold" }}>
           {itemData.name}{" "}
         </Text>
         <Text style={{ fontSize: 22, color: "#f2058b", fontWeight: "bold" }}>
@@ -99,7 +131,7 @@ export const ProductsScreen = ({ route }) => {
 
       <View
         style={{
-          flex: 1,
+          flex: 1.8,
           flexDirection: "row",
           justifyContent: "center",
           alignItems: "center",
@@ -229,7 +261,7 @@ const styles  =  StyleSheet.create({
     flex: 1,
     position: 'absolute',
     width: '100%',
-    top:0,
+    top:25,
     alignItems:'flex-end'
   },
   

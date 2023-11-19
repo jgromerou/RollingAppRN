@@ -56,6 +56,7 @@ const ActCart = () => {
     }
     //console.log(CartModificada, 'cardmodificada')
     //modifica la cantidades de cada item
+    initLoading();
     editCart(CartModificada, index);
     //calcula el valor total del carrito
     //calculateCart();
