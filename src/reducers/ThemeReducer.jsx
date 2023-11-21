@@ -4,13 +4,12 @@ export const lightTheme = {
   currentTheme: "light",
   dividerColor: "rgba(0, 0, 0,0.6)",
   colors: {
-    primary: "#7aae5e",
-    titleColor: "#2A3B47",
-    text: "#697477",
-    notification: "#A0A7AC",
-    background: "#FBFBFE",
-    border: "#EFF3F5",
-    card: "#FFFFFF",
+    primary: "#76B0F1",
+    background: "white",
+    card: "white",
+    text: "black",
+    border: "black",
+    notification: "teal",
   },
 };
 
@@ -20,7 +19,6 @@ export const darkTheme = {
   colors: {
     primary: "#89db75",
     background: "black",
-    titleColor: "#EFF3F5",
     card: "black",
     text: "white",
     border: "black",
