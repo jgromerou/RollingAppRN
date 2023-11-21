@@ -52,7 +52,7 @@ const CategoriesScreen = ({ navigation }) => {
 
           <TouchableOpacity
             style={{ ...globalThemes.menuButton}}
-            onPress={() => navigation.navigate('CategoriesScreen')}
+            onPress={() => navigation.navigate('ProductsByCategory')}
           >
             <Card elevation={4} style={{position:"relative", margin:"auto", }}>
               <Image
