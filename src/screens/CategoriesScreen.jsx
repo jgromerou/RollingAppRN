@@ -2,31 +2,36 @@ import React from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { globalThemes } from '../themes/globalThemes';
 import { Card } from 'react-native-paper';
+import { useContext } from 'react';
+
+import { ThemeContext } from '../contexts/ThemeContext';
+
 
 const CategoriesScreen = ({ navigation }) => {
-  const categories = [
-    {
-      nombre: 'Zapatillas',
-      imagen:
-        'https://res.cloudinary.com/dvcq6vatc/image/upload/v1699545410/react-avanzado/uio0g9ppfjrdl9lbyk5c.jpg',
-    },
-    {
-      nombre: 'Buzo',
-      imagen:
-        'https://res.cloudinary.com/dvcq6vatc/image/upload/v1699550793/react-avanzado/bgv3dadkc2zoma8mucgl.jpg',
-    },
-    {
-      nombre: 'Shorts',
-      imagen:
-        'https://res.cloudinary.com/dvcq6vatc/image/upload/v1699552814/react-avanzado/bi6li8dy1solckh2jxoz.jpg',
-    },
-    {
-      nombre: 'Remera',
-      imagen:
-        'https://res.cloudinary.com/dvcq6vatc/image/upload/v1699545979/react-avanzado/cfgwh5bwx5e11u9wfmni.jpg',
-    },
-    // ... más categorías
-  ];
+ const categories = [
+  {
+    id: 1,
+    nombre: 'Zapatillas',
+    imagen: 'https://res.cloudinary.com/dvcq6vatc/image/upload/v1699545410/react-avanzado/uio0g9ppfjrdl9lbyk5c.jpg',
+  },
+  {
+    id: 2,
+    nombre: 'Buzo',
+    imagen: 'https://res.cloudinary.com/dvcq6vatc/image/upload/v1699550793/react-avanzado/bgv3dadkc2zoma8mucgl.jpg',
+  },
+  {
+    id: 3,
+    nombre: 'Shorts',
+    imagen: 'https://res.cloudinary.com/dvcq6vatc/image/upload/v1699552814/react-avanzado/bi6li8dy1solckh2jxoz.jpg',
+  },
+  {
+    id: 4,
+    nombre: 'Remera',
+    imagen: 'https://res.cloudinary.com/dvcq6vatc/image/upload/v1699545979/react-avanzado/cfgwh5bwx5e11u9wfmni.jpg',
+  },
+  // ... más categorías
+];
+
 
   const navigatetoProductos = (categoriaNombre) => {
     navigation.navigate('CategoriesScreen', { categoriaNombre });
@@ -61,7 +66,7 @@ const CategoriesScreen = ({ navigation }) => {
                 style={{ width: '100%', height: 500, objectFit:"cover" }} // Ajusta el estilo según tus necesidades
               />
               <Text  style={{
-          fontSize: 24,
+          fontSize: 64,
           fontWeight: 'bold',
           textAlign: 'center',
           position:"absolute",
