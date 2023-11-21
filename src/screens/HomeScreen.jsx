@@ -35,6 +35,8 @@ export const HomeScreen = () => {
                     fontWeight: "bold",
                     textAlign: "center",
                     textTransform: "uppercase",
+                    color:
+                      colors.background === "black" ? colors.primary : "black",
                   }}
                 >
                   Siente el poder del deporte
@@ -49,6 +51,8 @@ export const HomeScreen = () => {
                     fontWeight: "bold",
                     textAlign: "center",
                     textTransform: "uppercase",
+                    color:
+                      colors.background === "black" ? colors.primary : "black",
                   }}
                 >
                   Rinde al máximo con estilo
@@ -333,7 +337,7 @@ function Index() {
         height={width / 2}
         autoPlay={true}
         data={carouselImages}
-        scrollAnimationDuration={3000}
+        scrollAnimationDuration={2500}
         renderItem={({ index }) => (
           <View style={{ padding: 10 }}>
             <Image
