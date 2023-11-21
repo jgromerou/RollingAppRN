@@ -37,20 +37,14 @@ const CategoriesScreen = ({ navigation }) => {
     navigation.navigate('CategoriesScreen', { categoriaNombre });
     // Aquí 'ProductosPorCategoria' es el nombre de la pantalla a la que deseas navegar.(Debe ser la pantalla en donde se muestren las categorias, tienen una imagen ya puesta )
   };
+  const {
+    state: { colors },
+  } = useContext(ThemeContext);
 
   return (
     // Titulo del View
     <View>
-      <Text
-        style={{
-          fontSize: 24,
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginVertical: 20,
-        }}
-      >
-        Selecciona tu categoria favorita
-      </Text>
+       <Text style={{ color: colors.primary, fontSize: 20 }}>Selecciona una Categoría</Text>
       <FlatList
         data={categories}
         renderItem={({ item }) => (
@@ -60,18 +54,23 @@ const CategoriesScreen = ({ navigation }) => {
             style={{ ...globalThemes.menuButton}}
             onPress={() => navigation.navigate('CategoriesScreen')}
           >
-            <Card elevation={4} style={{position:"relative"}}>
+            <Card elevation={4} style={{position:"relative", margin:"auto", }}>
               <Image
                 source={{ uri: item.imagen }}
-                style={{ width: '100%', height: 500, objectFit:"cover" }} // Ajusta el estilo según tus necesidades
+                style={{ width: '100%', height: 200, objectFit:"cover" }} // Ajusta el estilo según tus necesidades
               />
               <Text  style={{
-          fontSize: 64,
+          fontSize: 55,
+          color: "white",
           fontWeight: 'bold',
           textAlign: 'center',
           position:"absolute",
-          left:"45%",
-          top:"40%"
+          left:"30%",
+          top:"40%",
+          
+          textShadowColor: 'rgba(0, 0, 0, 0.75)',
+          textShadowOffset: { width: 2, height: 2 },
+          textShadowRadius: 10
           
         }}>{item.nombre}</Text>
             </Card>
