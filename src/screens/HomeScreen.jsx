@@ -14,6 +14,7 @@ import {
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import Carousel from "react-native-reanimated-carousel";
 
 export const HomeScreen = () => {
   const {
@@ -39,15 +40,8 @@ export const HomeScreen = () => {
                   Siente el poder del deporte
                 </Text>
               </View>
-              <View style={{ padding: 10 }}>
-                <Image
-                  source={{
-                    uri: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
-                  }}
-                  style={[styles.image]}
-                  resizeMode="cover"
-                />
-              </View>
+              {/* Carousel */}
+              <Index />
               <View>
                 <Text
                   style={{
@@ -322,7 +316,39 @@ const SlidingText = () => {
   );
 };
 
-export default SlidingText;
+const carouselImages = [
+  "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
+  "https://images.pexels.com/photos/248547/pexels-photo-248547.jpeg",
+  "https://images.pexels.com/photos/1618269/pexels-photo-1618269.jpeg",
+  "https://images.pexels.com/photos/848618/pexels-photo-848618.jpeg",
+];
+
+function Index() {
+  const width = Dimensions.get("window").width;
+  return (
+    <View style={{ flex: 1 }}>
+      <Carousel
+        loop
+        width={width}
+        height={width / 2}
+        autoPlay={true}
+        data={carouselImages}
+        scrollAnimationDuration={3000}
+        renderItem={({ index }) => (
+          <View style={{ padding: 10 }}>
+            <Image
+              source={{
+                uri: carouselImages[index],
+              }}
+              style={[styles.image]}
+              resizeMode="cover"
+            />
+          </View>
+        )}
+      />
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
