@@ -22,7 +22,7 @@ export const GoBack = ({navigation}) => {
         marginBottom: 5       
       }}>
         <TouchableOpacity 
-              onPress={() => {calculateCart(); initLoading(); navigation.goBack();}}
+              onPress={() => {calculateCart(); navigation.goBack();}}
           >
             <AntDesign 
                   name="left" 

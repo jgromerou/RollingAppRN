@@ -90,8 +90,8 @@ export const ConfirmCart = ({navigation}) => {
       backgroundColor: colors.primary,
       padding: 10,
     }}>
-        {/* <GoBack navigation={navigation}/> */}
-        <View style={{ 
+        <GoBack navigation={navigation}/>
+        {/* <View style={{ 
             backgroundColor: colors.primary,
             marginHorizontal: 10,
             borderRadius: 10,
@@ -110,7 +110,7 @@ export const ConfirmCart = ({navigation}) => {
                       size={28}
                 />
             </TouchableOpacity>
-        </View>
+        </View> */}
 
 
         <View>

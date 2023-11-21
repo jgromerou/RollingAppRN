@@ -8,6 +8,7 @@ import { CartContext } from '../../contexts/CartContext';
 
 export const CartItem = ({item, index}) => {
 //console.log(index, 'cartItem')
+//console.log(item.qty, 'caritem qty arriba')
 const { quantity, sumQuantity, restQuantity} = useQuantity(item.qty);
 const { deleteCart, calculateCart, state, initLoading, isLoading } = useContext(CartContext);
 
@@ -19,7 +20,9 @@ const deleCart = (index) => {
 }
 useEffect(() => {
     calculateCart();
-}, [isLoading])
+    //console.log(item.qty, 'caritem qty')
+    //console.log(quantity, 'quantity cartItem')
+}, [item.qty])
 
 
 return (

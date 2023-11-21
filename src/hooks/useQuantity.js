@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export const useQuantity = (item = 0) => {
 
     const [quantity, setQuantity] = useState(item);
 
-
+    useEffect(() => {
+      setQuantity(item);
+    }, [item])
+    
     const sumQuantity = () => {
         setQuantity((prev) => prev + 1);
     }
