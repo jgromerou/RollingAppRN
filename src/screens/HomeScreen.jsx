@@ -7,9 +7,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-  Pressable,
   SafeAreaView,
-  Button,
 } from "react-native";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Image } from "react-native";
@@ -73,7 +71,7 @@ export const HomeScreen = () => {
                   style={{
                     fontWeight: "bold",
                     fontSize: 18,
-                    color: colors.text,
+                    color: colors.titleColor,
                   }}
                 >
                   Categorias
@@ -117,54 +115,113 @@ export const HomeScreen = () => {
               </View>
             </View>
             {/* Brands */}
-            <View
-              style={{
-                paddingVertical: 10,
-                backgroundColor: colors.primary,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 25,
-                  textAlign: "center",
-                  marginBottom: 5,
-                  textTransform: "uppercase",
-                  fontWeight: "bold",
-                }}
-              >
-                ¡Suscríbete y consigue un 10% de descuento extra!
-              </Text>
+            <ScrollView horizontal={true}>
               <View
                 style={{
-                  flex: 1,
-                  width: "60%",
-                  justifyContent: "center",
+                  paddingVertical: 20,
+                  justifyContent: "space-between",
+                  flexDirection: "row",
                   alignItems: "center",
+                  borderTop: 1,
+                  borderBottom: 1,
+                  borderWidth: 1,
+                  borderColor: colors.primary,
+                  gap: 8,
+                  paddingLeft: 20,
                 }}
               >
-                <TouchableOpacity
+                <Image
                   style={{
-                    borderRadius: 15,
-                    backgroundColor: "black",
-                    padding: 10,
+                    height: 80,
+                    width: 80,
+                    opacity: 0.8,
+                    resizeMode: "contain",
                   }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      textAlign: "center",
-                      fontSize: 20,
-                      textTransform: "uppercase",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Regístrate Gratis
-                  </Text>
-                </TouchableOpacity>
+                  source={require("../../assets/brand-logos/brand0.png")}
+                />
+                <Image
+                  style={{
+                    height: 80,
+                    width: 80,
+                    opacity: 0.8,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../assets/brand-logos/brand1.png")}
+                />
+                <Image
+                  style={{
+                    height: 80,
+                    width: 80,
+                    opacity: 0.8,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../assets/brand-logos/brand2.png")}
+                />
+                <Image
+                  style={{
+                    height: 80,
+                    width: 80,
+                    opacity: 0.8,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../assets/brand-logos/brand3.png")}
+                />
+                <Image
+                  style={{
+                    height: 80,
+                    width: 80,
+                    opacity: 0.8,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../assets/brand-logos/brand4.png")}
+                />
+                <Image
+                  style={{
+                    height: 80,
+                    width: 80,
+                    opacity: 0.8,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../assets/brand-logos/brand5.png")}
+                />
+                <Image
+                  style={{
+                    height: 80,
+                    width: 80,
+                    opacity: 0.8,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../assets/brand-logos/brand6.png")}
+                />
+                <Image
+                  style={{
+                    height: 80,
+                    width: 80,
+                    opacity: 0.8,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../assets/brand-logos/brand7.png")}
+                />
+                <Image
+                  style={{
+                    height: 80,
+                    width: 80,
+                    opacity: 0.8,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../assets/brand-logos/brand8.png")}
+                />
+                <Image
+                  style={{
+                    height: 80,
+                    width: 80,
+                    opacity: 0.8,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../assets/brand-logos/brand9.png")}
+                />
               </View>
-            </View>
+            </ScrollView>
             {/* Most sold */}
             <View style={{ padding: 10, marginBottom: 10 }}>
               <View
@@ -179,7 +236,7 @@ export const HomeScreen = () => {
                   style={{
                     fontWeight: "bold",
                     fontSize: 18,
-                    color: colors.text,
+                    color: colors.titleColor,
                   }}
                 >
                   Destacados
@@ -232,7 +289,7 @@ export const HomeScreen = () => {
             >
               <Text
                 style={{
-                  fontSize: 25,
+                  fontSize: 24,
                   textAlign: "center",
                   marginBottom: 5,
                   textTransform: "uppercase",
