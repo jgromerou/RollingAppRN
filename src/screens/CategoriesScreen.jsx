@@ -39,7 +39,7 @@ const CategoriesScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text style={{ color: colors.primary, fontSize: 55 }}>Selecciona una Categoría</Text>
+      <Text style={{ color: colors.primary, fontSize: 35 }}>Selecciona una Categoría</Text>
       <FlatList
         data={categories}
         renderItem={({ item }) => (
