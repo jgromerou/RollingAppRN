@@ -11,7 +11,7 @@ const ProductsByCategory = () => {
   //   navigation.navigate('ProductDescription', { productId });
   // };
 
-  const itemData = [
+  const productos = [
     {
       id: 1,
       productName: 'Zapatillas Nike Air Max',
