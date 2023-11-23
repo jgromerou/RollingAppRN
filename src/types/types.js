@@ -7,6 +7,6 @@ export const types = {
     login: '[AUTH] - LOGIN',
     error: '[AUTH] - ERROR',
     logout: '[AUTH] - LOGOUT',
-    //registerUser: '[AUTH] - REGISTERUSER'
+    registerUser: '[AUTH] - REGISTERUSER'
   },
 };

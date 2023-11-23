@@ -174,7 +174,8 @@ const handleBiometricAuth = async()=>{
           <>
           <TouchableOpacity
             style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-            onPress={() => navigation.navigate("CartScreen")}
+            onPress={() =>handleBiometricAuth() }
+            // navigation.navigate("CartScreen")
           >
             <Text style={{ ...globalThemes.text, color: colors.primary }}>
               - Mi carrito

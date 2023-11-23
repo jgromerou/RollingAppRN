@@ -33,12 +33,10 @@ export const AuthProvider = ({ children }) => {
         email: values.email,
         password: values.password,
       });
-      AsyncStorage.setItem('tokenAuth', data.token);
+      console.log(data);
+
       dispatch({
-        type: types.auth.login,
-        payload: {
-          user: data,
-        },
+        type: types.auth.registerUser,
       });
     } catch (error) {
       const { msg } = error.response.data.errores[0];

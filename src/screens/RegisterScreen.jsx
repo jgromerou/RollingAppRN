@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { globalThemes } from "../themes/globalThemes";
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -7,11 +7,11 @@ import { ErrorMessage } from "../components/ErrorMessage";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+export const RegisterScreen = ({ navigation }) => {
 
-export const RegisterScreen = () => {
-
+  const [redirect, setRedirect] = useState(false);
   const { state } = useContext(ThemeContext);
-  const { registerUser } = useContext(AuthContext);
+  const { state: stateAuth, registerUser } = useContext(AuthContext);
 
   const formik = useFormik({
     initialValues: {
@@ -22,10 +22,8 @@ export const RegisterScreen = () => {
     },
     validateOnChange: false,
     validationSchema: Yup.object({
-      firstname: Yup.string()
-      .required("Este campo es obligatorio"),
-      lastname: Yup.string()
-      .required("Este campo es obligatorio"),
+      firstname: Yup.string().required("Este campo es obligatorio"),
+      lastname: Yup.string().required("Este campo es obligatorio"),
       email: Yup.string()
         .email("Formato de email es incorrecto")
         .required("Este campo es obligatorio"),
@@ -33,15 +31,16 @@ export const RegisterScreen = () => {
         .required("Este campo es obligatorio")
         .min(8, "La contraseña debe tener al menos 8 caracteres"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: ({ resetForm }) => {
+      resetForm();
       registerUser(formik.values);
+      setRedirect(true);
     },
   });
 
-
   return (
     <>
+      {redirect && navigation.goBack()}
       <View>
         <Text style={[globalThemes.title, { color: state.colors.titleColor }]}>
           Bienvenid@s
@@ -109,8 +108,12 @@ export const RegisterScreen = () => {
           {formik.errors.password && (
             <ErrorMessage message={formik.errors.password} />
           )}
-
         </View>
+
+        {stateAuth.errorMessage  && (
+            <ErrorMessage message={stateAuth.errorMessage} />
+          )}
+
         <View>
           <TouchableOpacity
             style={[
@@ -122,7 +125,12 @@ export const RegisterScreen = () => {
             ]}
             onPress={formik.handleSubmit}
           >
-            <Text style={[globalThemes.defaulTextBtn, { color: state.colors.contrastColor }]}>
+            <Text
+              style={[
+                globalThemes.defaulTextBtn,
+                { color: state.colors.contrastColor },
+              ]}
+            >
               GUARDAR
             </Text>
           </TouchableOpacity>

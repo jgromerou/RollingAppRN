@@ -19,6 +19,10 @@ export const AuthReducer = (state = {}, action) => {
         errorMessage: action.payload.errorMessage,
         isLoading: false,
       };
+      case types.auth.registerUser:
+        return{
+          ...state,
+        }
 
     case types.auth.error:
       return {

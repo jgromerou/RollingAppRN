@@ -25,7 +25,6 @@ export const LoginScreen = ({ navigation }) => {
       email: '',
       password: '',
     },
-    validateOnChange: false,
     validationSchema: Yup.object({
       email: Yup.string()
         .email('Formato de email es incorrecto')
@@ -39,10 +38,6 @@ export const LoginScreen = ({ navigation }) => {
       resetForm();
     },
   });
-
-  useEffect(() => {
-    console.log(state);
-  }, []);
 
   return (
     <>
