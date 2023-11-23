@@ -1,50 +1,88 @@
-import React, { useContext, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { useWindowDimensions } from "react-native";
+import React, { useContext } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { useWindowDimensions } from 'react-native';
 import {
   DrawerContentScrollView,
   createDrawerNavigator,
-} from "@react-navigation/drawer";
-import { TabsNavigator } from "./TabsNavigator";
-import { StackAuthNavigator } from "./StackAuthNavigator";
-import { StatusBar } from "react-native";
-import { View } from "react-native";
-import { globalThemes } from "../themes/globalThemes";
-import { TouchableOpacity } from "react-native";
-import { Text } from "react-native";
-import { ThemeContext } from "../contexts/ThemeContext";
-import { CartScreen } from "../screens/CartScreen";
+} from '@react-navigation/drawer';
+import { TabsNavigator } from './TabsNavigator';
+import { StackAuthNavigator } from './StackAuthNavigator';
+import { StatusBar } from 'react-native';
+import { View } from 'react-native';
+import { globalThemes } from '../themes/globalThemes';
+import { TouchableOpacity } from 'react-native';
+import { Text } from 'react-native';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { CartScreen } from '../screens/CartScreen';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => {
   const { state } = useContext(ThemeContext);
+  const { state: stateAuth } = useContext(AuthContext);
   const { width } = useWindowDimensions();
 
-  return (
-    <>
-      <StatusBar backgroundColor={state.colors.primary} />
-      <View style={{ backgroundColor: state.colors.primary, flex: 1 }}>
-        <NavigationContainer theme={state}>
-          <Drawer.Navigator
-            screenOptions={{
-              drawerPosition: "left",
-              drawerType: width >= 768 ? "permanent" : "front",
-              headerTintColor: state.colors.background,
-              headerStyle: {
-                backgroundColor: state.colors.primary,
-              },
-            }}
-            drawerContent={(props) => <Menu {...props} />}
-          >
-            <Drawer.Screen name="TabsNavigator" component={TabsNavigator} />
-            <Drawer.Screen name="StackAuthNavigator" component={StackAuthNavigator} options={{title:'Inicio de Sesión'}} />
-            <Drawer.Screen name="CartScreen" component={CartScreen} options={{title:'Mi Carrito'}} />
-          </Drawer.Navigator>
-        </NavigationContainer>
-      </View>
-    </>
-  );
+  if (stateAuth.isLogged) {
+    return (
+      <>
+        <StatusBar backgroundColor={state.colors.primary} />
+        <View style={{ backgroundColor: state.colors.primary, flex: 1 }}>
+          <NavigationContainer theme={state}>
+            <Drawer.Navigator
+              screenOptions={{
+                drawerPosition: 'left',
+                drawerType: width >= 768 ? 'permanent' : 'front',
+                headerTintColor: state.colors.background,
+                headerStyle: {
+                  backgroundColor: state.colors.primary,
+                },
+              }}
+              drawerContent={(props) => <Menu {...props} />}
+            >
+              <Drawer.Screen
+                name="TabsNavigator"
+                options={{ title: 'Página de Inicio' }}
+                component={TabsNavigator}
+              />
+              <Drawer.Screen
+                name="CartScreen"
+                component={CartScreen}
+                options={{ title: 'Mi Carrito' }}
+              />
+            </Drawer.Navigator>
+          </NavigationContainer>
+        </View>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <StatusBar backgroundColor={state.colors.primary} />
+        <View style={{ backgroundColor: state.colors.primary, flex: 1 }}>
+          <NavigationContainer theme={state}>
+            <Drawer.Navigator
+              screenOptions={{
+                drawerPosition: 'left',
+                drawerType: width >= 768 ? 'permanent' : 'front',
+                headerTintColor: state.colors.background,
+                headerStyle: {
+                  backgroundColor: state.colors.primary,
+                },
+              }}
+              drawerContent={(props) => <Menu {...props} />}
+            >
+              <Drawer.Screen
+                name="StackAuthNavigator"
+                options={{ title: 'Inicio de Sesión' }}
+                component={StackAuthNavigator}
+              />
+            </Drawer.Navigator>
+          </NavigationContainer>
+        </View>
+      </>
+    );
+  }
 };
 
 const Menu = ({ navigation }) => {
@@ -53,14 +91,16 @@ const Menu = ({ navigation }) => {
     setDarkTheme,
     setLightTheme,
   } = useContext(ThemeContext);
-  const [isLogin, setIsLogin] = useState(false);
+
+  const { state, logout } = useContext(AuthContext);
+
   return (
     <DrawerContentScrollView>
       {/* Contenedor de los botones de cambiar tema */}
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
+          flexDirection: 'row',
+          justifyContent: 'space-around',
           marginTop: 30,
         }}
       >
@@ -89,8 +129,8 @@ const Menu = ({ navigation }) => {
       <View style={globalThemes.container}>
         {/* Link a Productos */}
         <TouchableOpacity
-          style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-          onPress={() => console.log("productos")}
+          style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+          onPress={() => console.log('productos')}
         >
           <Text style={{ ...globalThemes.text, color: colors.primary }}>
             - Productos
@@ -98,45 +138,48 @@ const Menu = ({ navigation }) => {
         </TouchableOpacity>
         {/* Link a Categorías */}
         <TouchableOpacity
-          style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-          onPress={() => console.log("categorías")}
+          style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+          onPress={() => console.log('categorías')}
         >
           <Text style={{ ...globalThemes.text, color: colors.primary }}>
             - Categorías
           </Text>
         </TouchableOpacity>
-        {isLogin && (
+        {state.isLogged && (
           <>
-          <TouchableOpacity
-            style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-            onPress={() => navigation.navigate("CartScreen")}
-          >
-            <Text style={{ ...globalThemes.text, color: colors.primary }}>
-              - Mi carrito
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-          style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-          onPress={() => setIsLogin(false)}
-        >
-          <Text style={{ ...globalThemes.text, color: colors.primary }}>
-            - Logout
-          </Text>
-        </TouchableOpacity>
-        </>
+            <TouchableOpacity
+              style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+              onPress={() => navigation.navigate('CartScreen')}
+            >
+              <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                - Mi carrito
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+              onPress={() => logout()}
+            >
+              <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                - Logout
+              </Text>
+            </TouchableOpacity>
+          </>
         )}
-        {!isLogin && (
+        {!state.isLogged && (
           <>
-          <TouchableOpacity
-            style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-            onPress={() => navigation.navigate("StackAuthNavigator",{screen:'StackAuthNavigator'})}
-          >
-            <Text style={{ ...globalThemes.text, color: colors.primary }}>
-              - Login
-            </Text>
-          </TouchableOpacity>
-          
-        </>
+            <TouchableOpacity
+              style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+              onPress={() =>
+                navigation.navigate('StackAuthNavigator', {
+                  screen: 'StackAuthNavigator',
+                })
+              }
+            >
+              <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                - Login
+              </Text>
+            </TouchableOpacity>
+          </>
         )}
       </View>
     </DrawerContentScrollView>
