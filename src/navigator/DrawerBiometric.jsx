@@ -73,6 +73,7 @@ useEffect(()=>{
 },[]);
 
 const fallBackToDefaultAuth = ()=>{
+  //tendría que redireccionar a la pantalla de inicio de sesión
   console.log("volver a autenticación por defecto");
 }
 
