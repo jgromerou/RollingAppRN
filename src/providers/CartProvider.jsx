@@ -10,6 +10,7 @@ const initialState = {
     isLoading: true,
     cart: [],
     cartValue: 0.00,
+    paymentType: '',
     msg: ''
 }
 
@@ -58,6 +59,13 @@ export const CartProvider = ({ children }) => {
             //payload: index
         })
     }
+    //agregar tipo de pago
+    const addTypePay = async (typepay) => {
+        dispatch({
+            type: types.cart.paymentType,
+            payload: {typepay}
+        })
+    }
 
     //eliminar item del carrito
     const deleteCart = async(index) => {
@@ -86,6 +94,12 @@ export const CartProvider = ({ children }) => {
             })
         }
     }
+    // init cartShopping
+    const initCartShoping = () => {
+        dispatch({
+            type: types.cart.removeCart
+        });
+    }
     //CAMBIAR LOADINGCART
     const initLoading = () => {
         //console.log('ingresa initloading')
@@ -101,7 +115,9 @@ export const CartProvider = ({ children }) => {
             editCart,
             deleteCart,
             calculateCart,
-            initLoading
+            initLoading,
+            addTypePay,
+            initCartShoping
         }}>
             { children }
         </CartContext.Provider>

@@ -5,8 +5,9 @@ import { Modal } from 'react-native'
 import { View } from 'react-native'
 import { Feather } from 'react-native-vector-icons';
 
-export const CustomModal = ({closeAlert, visible}) => {
+export const CustomModal = ({closeAlert, visible, messageModal}) => {
     //const [visible, setVisible] = useState(true);
+    //console.log(messageModal)
   return (
     <View>
         <Modal 
@@ -40,21 +41,11 @@ export const CustomModal = ({closeAlert, visible}) => {
                         fontWeight: 'bold',
                         marginVertical: 10
                         //color: 'white'
-                    }}>Error Cart Shopping</Text>
+                    }}>Message Cart Shopping</Text>
                     <Text style={{ fontSize: 15, textAlign: 'center'}}>
-                        No puede agregar un producto en 0
+                        {messageModal}
                     </Text>
                     <View>
-{/*                         <Pressable style={{
-                            backgroundColor: '#f2058b',
-                            fontSize: 16,
-                            fontWeight: 'bold',
-                            borderRadius: 5,
-                            paddingVertical: 5,
-                            paddingHorizontal:15,
-                            marginVertical: 10
-                        }}
-                        > */}
                         <Pressable style={styles.touchableBtn} onPress= { () => closeAlert(!visible)} > 
                             <Text style={styles.textBtn}> Cerrar </Text>
                         </Pressable>

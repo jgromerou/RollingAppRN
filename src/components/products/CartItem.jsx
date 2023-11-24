@@ -5,10 +5,14 @@ import { View, Text, Pressable } from 'react-native';
 import { Image } from 'react-native';
 import { AntDesign } from 'react-native-vector-icons';
 import { CartContext } from '../../contexts/CartContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 export const CartItem = ({item, index}) => {
 //console.log(index, 'cartItem')
 //console.log(item.qty, 'caritem qty arriba')
+const {
+    state: { colors },
+  } = useContext(ThemeContext);
 const { quantity, sumQuantity, restQuantity} = useQuantity(item.qty);
 const { deleteCart, calculateCart, state, initLoading, isLoading } = useContext(CartContext);
 
@@ -27,12 +31,15 @@ useEffect(() => {
 
 return (
     <View style={{
-        backgroundColor: '#ccc',
+        backgroundColor: colors.primary,
+        borderColor: colors.text,
+        borderWidth: 3,
+        //backgroundColor: '#ccc',
         flexDirection:  'row',
-        borderWidth: 1,
+        //borderWidth: 1,
         justifyContent: 'center',
         alignItems:  'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        //backgroundColor: 'rgba(255, 255, 255, 0.1)',
         borderTopEndRadius: 10,
         borderBottomEndRadius: 10,
         padding:5
@@ -57,9 +64,9 @@ return (
                 justifyContent: 'center'
             }}>
             <View>
-                <Text style={{ fontSize: 12, color: 'rgba(255,255,255, 0.5)',  }}>{item.category}</Text>
+                <Text style={{ fontSize: 12, color: colors.titleColor,  }}>{item.category}</Text>
                 <Text style={{ fontSize: 13, color: '#fff' }}>{ item.product}</Text>
-                <Text style={{ fontSize: 14, color: '#f2058b', fontWeight: 'bold'}}>${item.price}</Text>
+                <Text style={{ fontSize: 14, color: colors.titleColor, fontWeight: 'bold'}}>${item.price}</Text>
             </View>
         </View>
         <View style={{ flex:2, alignItems: 'center'}}>

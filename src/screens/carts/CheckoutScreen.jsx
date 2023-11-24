@@ -34,12 +34,12 @@ export const CheckoutScreen = ({ navigation }) => {
     }, [isLoading])
 
   return (
-    <View style={{ 
+    <View style={[colors.container,{ 
       //globalThemes.container 
       flex: 1,
-      backgroundColor: colors.primary,
+      //backgroundColor: colors.primary,
       padding: 10,
-    }}>
+    }]}>
         <GoBack navigation={navigation}/>
         <View style={{
             flex: 4,
@@ -71,7 +71,8 @@ export const CheckoutScreen = ({ navigation }) => {
             <Text
                 style={{
                     fontSize: 25,
-                    color: '#f2058b',
+                    //color: '#f2058b',
+                    color: colors.text,
                     fontWeight: '500'
                 }}
             >Price $ {state.cartValue} 
@@ -79,7 +80,10 @@ export const CheckoutScreen = ({ navigation }) => {
 
             <TouchableOpacity
               style={{
-                backgroundColor: "#f2058b",
+                backgroundColor: colors.primary,
+                borderColor: colors.text,
+                borderWidth: 3,
+                //backgroundColor: "#f2058b",
                 alignItems: "center",
                 fontSize: "17",
                 fontWeight: "600",

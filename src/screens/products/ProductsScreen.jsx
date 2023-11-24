@@ -23,6 +23,7 @@ export const ProductsScreen = ({ route, navigation }) => {
   const [visible, setVisible] = useState(false);
 
   //console.log(itemData,'productscreen')
+  const messageModal = "No puede agregar un producto en 0";
 
 
   const obtenerTalle = (dataTalle) => 
@@ -83,11 +84,11 @@ export const ProductsScreen = ({ route, navigation }) => {
   
 
   return (
-    <View style={{
+    <View style={ [colors.container,{
       flex: 1,
-      backgroundColor: colors.primary,
+      //backgroundColor: colors.primary,
       padding: 10,
-    }}>
+    }]}>
       <GoBack navigation={navigation}/>
       <View style={styles.head}>
         <CartShop/>
@@ -96,10 +97,15 @@ export const ProductsScreen = ({ route, navigation }) => {
         style={{
           flex: 6,
           justifyContent: "center",
+          backgroundColor: colors.primary,
           alignItems: "center",
         }}
       >
-        {visible ? <CustomModal closeAlert={ closeAlert } visible={ visible }/> : null}
+        {visible ? <CustomModal 
+          closeAlert={ closeAlert } 
+          visible={ visible }
+          messageModal={ messageModal }
+          /> : null}
         <Image
           source={require("../../assets/thoto/banners/shoes-color.jpg")}
           style={{
@@ -113,18 +119,19 @@ export const ProductsScreen = ({ route, navigation }) => {
       <View
         style={{
           flex: 1.8,
+          //backgroundColor: colors.primary,
           marginVertical: 20,
           justifyContent: "center",
           alignItems: 'center'
         }}
       >
-        <Text style={{ fontSize: 14, color: "rgba(255,255,255, 0.5)" }}>
+        <Text style={{ fontSize: 14, color: colors.titleColor }}>
           {itemData.category}
         </Text>
-        <Text style={{ fontSize: 16, color: "#fff", fontWeight: "bold" }}>
+        <Text style={{ fontSize: 16, color: colors.titleColor, fontWeight: "bold" }}>
           {itemData.name}{" "}
         </Text>
-        <Text style={{ fontSize: 22, color: "#f2058b", fontWeight: "bold" }}>
+        <Text style={{ fontSize: 22, color: colors.titleColor, fontWeight: "bold" }}>
           ${itemData.price}
         </Text>
       </View>
@@ -132,6 +139,7 @@ export const ProductsScreen = ({ route, navigation }) => {
       <View
         style={{
           flex: 1.8,
+          //backgroundColor: colors.primary,
           flexDirection: "row",
           justifyContent: "center",
           alignItems: "center",

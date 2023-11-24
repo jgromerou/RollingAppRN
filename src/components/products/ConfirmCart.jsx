@@ -10,7 +10,6 @@ import { CartContext } from '../../contexts/CartContext';
 import { searchData } from '../../data/searchData';
 import { CustomCardProducts } from './CustomCardProducts';
 import { AntDesign } from 'react-native-vector-icons';
-//import { useIsFocused } from '@react-navigation/native';
 
 export const ConfirmCart = ({navigation}) => {
     const { navigate } =  useNavigation();
@@ -18,26 +17,24 @@ export const ConfirmCart = ({navigation}) => {
       state: { colors },
     } = useContext(ThemeContext);
     const { state, isLoading, calculateCart } = useContext(CartContext);
-    //const isFocused =  useIsFocused();
 
     useEffect(() => {
       calculateCart();
     }, [isLoading])
 
-    // const isfocus = () => {
-    //   calculateCart();
-    // }
-
     const cartRender = (item, index) => {
       return (
         <View style={{
           flex: 1,
-          backgroundColor: '#ccc',
+          backgroundColor: colors.primary,
+          borderColor: colors.text,
+          borderWidth: 3,
+          //backgroundColor: '#ccc',
           flexDirection:  'row',
           borderWidth: 1,
           justifyContent: 'center',
           alignItems:  'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          //backgroundColor: 'rgba(255, 255, 255, 0.1)',
           borderTopEndRadius: 10,
           borderBottomEndRadius: 10,
           padding:5
@@ -62,9 +59,9 @@ export const ConfirmCart = ({navigation}) => {
                   justifyContent: 'center'
               }}>
               <View>
-                  <Text style={{ fontSize: 12, color: 'rgba(255,255,255, 0.5)',  }}>{item.category}</Text>
+                  <Text style={{ fontSize: 12, color: colors.titleColor,  }}>{item.category}</Text>
                   <Text style={{ fontSize: 13, color: '#fff' }}>{ item.product}</Text>
-                  <Text style={{ fontSize: 14, color: '#f2058b', fontWeight: 'bold'}}>${item.price}</Text>
+                  <Text style={{ fontSize: 14, color: colors.titleColor, fontWeight: 'bold'}}>${item.price}</Text>
               </View>
           </View>
 
@@ -75,7 +72,7 @@ export const ConfirmCart = ({navigation}) => {
                   justifyContent: 'center'
               }}>
               <View>
-                  <Text style={{ fontSize: 14, color: '#fff',  }}>{item.qty}</Text>
+                  <Text style={{ fontSize: 14, color: colors.text,  }}>{item.qty}</Text>
               </View>
           </View>
       </View>
@@ -84,37 +81,21 @@ export const ConfirmCart = ({navigation}) => {
 
 
   return (
-    <View style={{ 
+    <View style={[colors.container,{
+      //globalThemes.container
+      //flex: 1,
+      //backgroundColor: colors.primary,
+     
+      //backgroundColor: "yellow",
+      padding: 10,
       //globalThemes.container
       flex: 1,
-      backgroundColor: colors.primary,
+      //backgroundColor: colors.primary,
       padding: 10,
-    }}>
+    }]}>
         <GoBack navigation={navigation}/>
-        {/* <View style={{ 
-            backgroundColor: colors.primary,
-            marginHorizontal: 10,
-            borderRadius: 10,
-            padding: 1,
-            zIndex:999,
-            marginTop: 2,
-            marginBottom: 5       
-          }}>
-            <TouchableOpacity 
-                  // onPress={() => {navigation.goBack(); calculateCart()}}
-                  onPress={() => {calculateCart(); navigate('CheckoutScreen'); }}
-              >
-                <AntDesign 
-                      name="left" 
-                      color={'rgba(255,255,255,1)'}  
-                      size={28}
-                />
-            </TouchableOpacity>
-        </View> */}
-
-
         <View>
-            <Text style={{color: 'white'}}>
+            <Text style={{color: colors.text}}>
             you will buy
             </Text>
         </View>
@@ -133,7 +114,7 @@ export const ConfirmCart = ({navigation}) => {
             />
         </View>
         <View>
-            <Text style={{color: 'white'}}>
+            <Text style={{color: colors.text}}>
             continue shopping
             </Text>
         </View>
@@ -162,7 +143,8 @@ export const ConfirmCart = ({navigation}) => {
         <Text
           style={{
               fontSize: 25,
-              color: '#f2058b',
+              //color: '#f2058b',
+              color: colors.text,
               fontWeight: '500',
               //borderColor:'blue',
               //borderWidth:2
@@ -171,7 +153,9 @@ export const ConfirmCart = ({navigation}) => {
         </Text>
         <TouchableOpacity
               style={{
-                backgroundColor: "#f2058b",
+                backgroundColor: colors.primary,
+                borderColor: colors.text,
+                borderWidth: 3,
                 alignItems: "center",
                 fontSize: "17",
                 fontWeight: "600",

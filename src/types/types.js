@@ -18,7 +18,8 @@ export const types = {
         calculateCart: 'CALCULATECART',
         removeCart: 'REMOVECART',
         msgCart: 'MSGCART',
-        loadingCart: 'LOADINGCART'
+        loadingCart: 'LOADINGCART',
+        paymentType: 'PAYMENTTYPE'
     }
 ,
   theme: {
