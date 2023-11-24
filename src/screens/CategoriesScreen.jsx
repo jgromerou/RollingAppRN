@@ -29,9 +29,11 @@ const CategoriesScreen = ({ navigation }) => {
     // ... más categorías
   ];
 
-  const navigatetoProductos = (categoryId) => {
-    navigation.navigate('ProductsByCategory', { categoryId });
+  const navigatetoProductos = (categoryId, categoryName) => {
+    navigation.navigate('ProductsByCategory', { categoryId, categoryName });
   };
+
+ 
 
   const {
     state: { colors },
@@ -45,7 +47,7 @@ const CategoriesScreen = ({ navigation }) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={globalThemes.menuButton}
-            onPress={() => navigatetoProductos(item.id)}
+            onPress={() => navigatetoProductos(item.id, item.nombre)}
           >
             <Card elevation={4} style={{ position: "relative", margin: "auto" }}>
               <Image
