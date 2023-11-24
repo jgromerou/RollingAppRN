@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import { ProductsScreen } from '../../screens/products/ProductsScreen';
 import { AntDesign } from 'react-native-vector-icons';
 import { useNavigation } from '@react-navigation/native';
 

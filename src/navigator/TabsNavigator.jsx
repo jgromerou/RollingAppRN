@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
 import { StackNavigator } from './StackNavigator';
-import { ProfileScreen } from '../screens/ProfileScreen';
 import { SearchProductsScreen } from '../screens/SearchProductsScreen';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { ProductsScreen } from '../screens/ProductsScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -28,7 +27,7 @@ export const TabsNavigator = () => {
           name="StackNavigator"
           component={StackNavigator}
           options={{
-            title: "Productos",
+            title: "Inicio",
             tabBarIcon: () => (
               <MaterialCommunityIcons
                 name="home-circle"
@@ -39,14 +38,14 @@ export const TabsNavigator = () => {
         />
   
         <Tab.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
+          name="ProductsScreen"
+          component={ProductsScreen}
           options={{
-            title: "Mi Perfil",
+            title: "Productos",
             tabBarIcon: () => (
               <MaterialCommunityIcons
-                name="face-man-profile"
-                size={28}
+                name="shoe-sneaker"
+                size={30}
               />
             ),
           }}
