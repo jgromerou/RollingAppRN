@@ -14,10 +14,15 @@ import { Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Carousel from "react-native-reanimated-carousel";
 
-export const HomeScreen = () => {
+
+export const HomeScreen = ({navigation}) => {
   const {
     state: { colors },
   } = useContext(ThemeContext);
+
+  const navigatetoCategories = () => {
+    navigation.navigate('CategoriesScreen');}
+
   return (
     <ScrollView>
       <SafeAreaView>
@@ -34,7 +39,7 @@ export const HomeScreen = () => {
                     textAlign: "center",
                     textTransform: "uppercase",
                     color:
-                      colors.background === "black" ? colors.primary : "black",
+                      colors.background === "#192229" ? colors.primary : "black",
                   }}
                 >
                   Siente el poder del deporte
@@ -50,7 +55,7 @@ export const HomeScreen = () => {
                     textAlign: "center",
                     textTransform: "uppercase",
                     color:
-                      colors.background === "black" ? colors.primary : "black",
+                      colors.background === "#192229" ? colors.primary : "black",
                   }}
                 >
                   Rinde al máximo con estilo
@@ -76,7 +81,7 @@ export const HomeScreen = () => {
                 >
                   Categorias
                 </Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigatetoCategories()}>
                   <Text style={{ color: colors.primary }}>Ver todo</Text>
                 </TouchableOpacity>
               </View>
@@ -252,7 +257,7 @@ export const HomeScreen = () => {
                   Destacados
                 </Text>
                 <TouchableOpacity>
-                  <Text style={{ color: colors.primary }}>Ver todo</Text>
+                  <Text style={{ color: colors.primary  }}>Ver todo</Text>
                 </TouchableOpacity>
               </View>
               <View

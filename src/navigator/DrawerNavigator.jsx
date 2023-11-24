@@ -14,6 +14,8 @@ import { TouchableOpacity } from "react-native";
 import { Text } from "react-native";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { CartScreen } from "../screens/CartScreen";
+import CategoriesScreen from "../screens/CategoriesScreen";
+import ProductsByCategory from "../screens/ProductsByCategory";
 
 const Drawer = createDrawerNavigator();
 
@@ -40,6 +42,8 @@ export const DrawerNavigator = () => {
             <Drawer.Screen name="TabsNavigator" component={TabsNavigator} />
             <Drawer.Screen name="StackAuthNavigator" component={StackAuthNavigator} options={{title:'Inicio de Sesión'}} />
             <Drawer.Screen name="CartScreen" component={CartScreen} options={{title:'Mi Carrito'}} />
+            <Drawer.Screen name="CategoriesScreen" component={CategoriesScreen} options={{title:'Categorías'}} />
+            <Drawer.Screen name="ProductsByCategory" component={ProductsByCategory} options={{title:'Productos por categoría'}} />
           </Drawer.Navigator>
         </NavigationContainer>
       </View>
@@ -99,7 +103,7 @@ const Menu = ({ navigation }) => {
         {/* Link a Categorías */}
         <TouchableOpacity
           style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-          onPress={() => console.log("categorías")}
+          onPress={() => navigation.navigate("CategoriesScreen")}
         >
           <Text style={{ ...globalThemes.text, color: colors.primary }}>
             - Categorías
