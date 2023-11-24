@@ -6,6 +6,7 @@ import { StackNavigator } from './StackNavigator';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { SearchProductsScreen } from '../screens/SearchProductsScreen';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { ProductScreen } from '../screens/products/ProductScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -28,7 +29,7 @@ export const TabsNavigator = () => {
           name="StackNavigator"
           component={StackNavigator}
           options={{
-            title: "Productos",
+            title: "Stack",
             tabBarIcon: () => (
               <MaterialCommunityIcons
                 name="home-circle"
@@ -37,7 +38,21 @@ export const TabsNavigator = () => {
             ),
           }}
         />
-  
+
+<Tab.Screen
+        name="ProductsScreen"
+        component={ProductScreen}
+        options={{
+          title: 'Productos',
+          tabBarIcon: () => (
+            <MaterialCommunityIcons
+              name="home-circle"
+              size={28}
+            />
+          ),
+        }}
+      />
+
         <Tab.Screen
           name="ProfileScreen"
           component={ProfileScreen}

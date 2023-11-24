@@ -45,4 +45,10 @@ export const globalThemes = StyleSheet.create({
     marginVertical: 20,
     bottom: -20,
   },
+btnText: {
+  fontSize: 15,
+  color: '#fff',
+  fontWeight: '500'
+},
+
 });
