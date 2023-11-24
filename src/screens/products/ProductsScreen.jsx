@@ -16,7 +16,7 @@ export const ProductsScreen = ({ route, navigation }) => {
   const { itemData } = route.params;
   const [talle, setTalle] = useState(0);
   const { quantity, restQuantity, sumQuantity } = useQuantity();
-  const { addCart, state, calculateCart, editCart, isLoading } = useContext(CartContext);
+  const { addCart, state, calculateCart, editCart, isLoading, addUserDate } = useContext(CartContext);
   const {
     state: { colors },
   } = useContext(ThemeContext);
@@ -61,6 +61,9 @@ export const ProductsScreen = ({ route, navigation }) => {
       }
       addCart(data);
       calculateCart();
+      //borrar solo para agregar user y date al contextcart
+      let user = 'jekfefhjeekkdkwd4dd14f1f4f';
+      addUserDate(user);
   }
 
   // funcion para modificar solo cantidad cuando ingresa el mismo product

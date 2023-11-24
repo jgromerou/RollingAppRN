@@ -19,7 +19,8 @@ export const types = {
         removeCart: 'REMOVECART',
         msgCart: 'MSGCART',
         loadingCart: 'LOADINGCART',
-        paymentType: 'PAYMENTTYPE'
+        paymentType: 'PAYMENTTYPE',
+        addUserDate: 'ADDUSERDATE'
     }
 ,
   theme: {

@@ -7,6 +7,8 @@ import { types } from '../types/types';
 
 
 const initialState = {
+    user: '',
+    saleDate: null,
     isLoading: true,
     cart: [],
     cartValue: 0.00,
@@ -108,6 +110,15 @@ export const CartProvider = ({ children }) => {
             type: types.cart.loadingCart
         })
     }
+    //GUARDAR USER Y DATE
+    const addUserDate = (user) => {
+        let saleDate = getDate();
+        dispatch({
+            type: types.cart.addUserDate,
+            payload: {user, saleDate}
+        })
+
+    }
   
     return (
         <CartContext.Provider value={{
@@ -118,10 +129,18 @@ export const CartProvider = ({ children }) => {
             calculateCart,
             initLoading,
             addTypePay,
-            initCartShoping
+            initCartShoping, 
+            addUserDate
         }}>
             { children }
         </CartContext.Provider>
 
   )
 }
+function getDate() {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    const date = today.getDate();
+    return `${year}-${month}-${date}`;
+  }

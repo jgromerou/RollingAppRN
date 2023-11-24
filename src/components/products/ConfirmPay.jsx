@@ -67,6 +67,12 @@ export const ConfirmPay = ({navigation}) => {
         setVisible(true);
         return;
       }
+      //valido q este logueado
+      if (state.user === ""){
+        setMessageModal("Tiene que registrarse para realizar la Compra!");
+        setVisible(true);
+        return;
+      }
       //Aqui guardo en la base de datos y si es ok
       setSale(true);
       setMessageModal("Felicitaciones, su compra se genero con exito!");
