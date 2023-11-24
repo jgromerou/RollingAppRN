@@ -55,16 +55,23 @@ const CategoriesScreen = ({ navigation }) => {
                 style={{ width: '100%', height: 200, objectFit: "cover" }}
               />
               <Text style={{
-                fontSize: 55,
-                color: "white",
+                fontSize: 45,
+                color: colors.primary,
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 fontWeight: 'bold',
                 textAlign: 'center',
                 position: "absolute",
+                padding: 13,
                 left: "30%",
                 top: "40%",
+                borderWidth: 0.5,
+                borderRadius: 25,
+                borderColor: colors.primary,
                 textShadowColor: 'rgba(0, 0, 0, 0.75)',
                 textShadowOffset: { width: 2, height: 2 },
-                textShadowRadius: 10
+                textShadowRadius: 10,
+                
+                
               }}>{item.nombre}</Text>
             </Card>
           </TouchableOpacity>

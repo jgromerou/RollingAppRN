@@ -78,7 +78,6 @@ const ProductsByCategory = ({ navigation, route }) => {
 
   const { categoryId, categoryName } = route.params;
   console.log(route.params);
-  
 
   const navigatetoProductos = (productId) => {
     console.log(productId);
@@ -94,9 +93,10 @@ const ProductsByCategory = ({ navigation, route }) => {
   //console.log(itemData)
   return (
     <View>
-      <Text style={{ fontSize: 35, color: colors.titleColor }}>
-        {' '}
-        {categoryName}{' '}
+      <Text
+        style={{ fontSize: 35, color: colors.titleColor, paddingHorizontal: 5 }}
+      >
+        {categoryName}
       </Text>
       <FlatList
         data={productos}
@@ -104,16 +104,20 @@ const ProductsByCategory = ({ navigation, route }) => {
           <TouchableOpacity
             // style={globalThemes.menuButton}
             // onPress={() => navigatetoProductos(item)}
-            style={{ justifyContent: 'center', alignItems: 'center' }}
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 25,
+              borderRadius: 25,
+            }}
           >
-            <Card>
+            <Card style={{ borderRadius: 25 }}>
               <Image
                 source={{ uri: item.image }}
                 style={{
-                  width: 250,
-                  height: 250,
-                  objectFit: 'cover',
-                  borderWidth: 1,
+                  width: 350,
+                  height: 310,
+                  borderRadius: 25,
                 }}
               />
             </Card>
@@ -121,6 +125,7 @@ const ProductsByCategory = ({ navigation, route }) => {
               <Text
                 style={{
                   fontSize: 25,
+                  marginTop: 10,
 
                   color: colors.primary,
                 }}
@@ -130,6 +135,8 @@ const ProductsByCategory = ({ navigation, route }) => {
               <Text
                 style={{
                   fontSize: 25,
+                  marginVertical: 11,
+                  fontWeight: '800',
 
                   color: colors.primary,
                 }}
@@ -137,8 +144,23 @@ const ProductsByCategory = ({ navigation, route }) => {
                 ${item.price}
               </Text>
 
-              <TouchableOpacity onPress={() =>   navigation.navigate('ProductsScreen', item.id)}>
-                <Text>Comprar</Text>
+              <TouchableOpacity
+                style={{
+                  borderWidth: 2,
+                  borderColor: colors.primary,
+                  marginBottom: 35,
+                }}
+                onPress={() => navigation.navigate('ProductsScreen', item.id)}
+              >
+                <Text
+                  style={{
+                    padding: 10,
+                    textAlign: 'center',
+                    color: colors.primary,
+                  }}
+                >
+                  Ver
+                </Text>
               </TouchableOpacity>
             </View>
           </TouchableOpacity>
