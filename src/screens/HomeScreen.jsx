@@ -71,7 +71,7 @@ export const HomeScreen = () => {
                   style={{
                     fontWeight: "bold",
                     fontSize: 18,
-                    color: colors.titleColor,
+                    color: colors.text,
                   }}
                 >
                   Categorias
@@ -136,6 +136,7 @@ export const HomeScreen = () => {
                     width: 80,
                     opacity: 0.8,
                     resizeMode: "contain",
+                    tintColor: "green",
                   }}
                   source={require("../../assets/brand-logos/brand0.png")}
                 />
@@ -145,6 +146,7 @@ export const HomeScreen = () => {
                     width: 80,
                     opacity: 0.8,
                     resizeMode: "contain",
+                    tintColor: "green",
                   }}
                   source={require("../../assets/brand-logos/brand1.png")}
                 />
@@ -154,6 +156,7 @@ export const HomeScreen = () => {
                     width: 80,
                     opacity: 0.8,
                     resizeMode: "contain",
+                    tintColor: "green",
                   }}
                   source={require("../../assets/brand-logos/brand2.png")}
                 />
@@ -163,6 +166,7 @@ export const HomeScreen = () => {
                     width: 80,
                     opacity: 0.8,
                     resizeMode: "contain",
+                    tintColor: "green",
                   }}
                   source={require("../../assets/brand-logos/brand3.png")}
                 />
@@ -172,6 +176,7 @@ export const HomeScreen = () => {
                     width: 80,
                     opacity: 0.8,
                     resizeMode: "contain",
+                    tintColor: "green",
                   }}
                   source={require("../../assets/brand-logos/brand4.png")}
                 />
@@ -181,6 +186,7 @@ export const HomeScreen = () => {
                     width: 80,
                     opacity: 0.8,
                     resizeMode: "contain",
+                    tintColor: "green",
                   }}
                   source={require("../../assets/brand-logos/brand5.png")}
                 />
@@ -190,6 +196,7 @@ export const HomeScreen = () => {
                     width: 80,
                     opacity: 0.8,
                     resizeMode: "contain",
+                    tintColor: "green",
                   }}
                   source={require("../../assets/brand-logos/brand6.png")}
                 />
@@ -199,6 +206,7 @@ export const HomeScreen = () => {
                     width: 80,
                     opacity: 0.8,
                     resizeMode: "contain",
+                    tintColor: "green",
                   }}
                   source={require("../../assets/brand-logos/brand7.png")}
                 />
@@ -208,6 +216,7 @@ export const HomeScreen = () => {
                     width: 80,
                     opacity: 0.8,
                     resizeMode: "contain",
+                    tintColor: "green",
                   }}
                   source={require("../../assets/brand-logos/brand8.png")}
                 />
@@ -217,6 +226,7 @@ export const HomeScreen = () => {
                     width: 80,
                     opacity: 0.8,
                     resizeMode: "contain",
+                    tintColor: "green",
                   }}
                   source={require("../../assets/brand-logos/brand9.png")}
                 />
@@ -236,7 +246,7 @@ export const HomeScreen = () => {
                   style={{
                     fontWeight: "bold",
                     fontSize: 18,
-                    color: colors.titleColor,
+                    color: colors.text,
                   }}
                 >
                   Destacados
