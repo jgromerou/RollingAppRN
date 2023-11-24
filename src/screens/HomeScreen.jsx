@@ -71,7 +71,7 @@ export const HomeScreen = () => {
                   style={{
                     fontWeight: "bold",
                     fontSize: 18,
-                    color: colors.titleColor,
+                    color: colors.text,
                   }}
                 >
                   Categorias
@@ -246,7 +246,7 @@ export const HomeScreen = () => {
                   style={{
                     fontWeight: "bold",
                     fontSize: 18,
-                    color: colors.titleColor,
+                    color: colors.text,
                   }}
                 >
                   Destacados
