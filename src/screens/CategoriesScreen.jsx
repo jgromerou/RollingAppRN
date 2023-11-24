@@ -49,21 +49,21 @@ const CategoriesScreen = ({ navigation }) => {
             style={globalThemes.menuButton}
             onPress={() => navigatetoProductos(item.id, item.nombre)}
           >
-            <Card elevation={4} style={{ position: "relative", margin: "auto" }}>
+            <Card elevation={4} style={{ position: "relative", margin: "auto", justifyContent:"center", alignItems:"center" }}>
               <Image
                 source={{ uri: item.imagen }}
-                style={{ width: '100%', height: 200, objectFit: "cover" }}
+                style={{ width: 350, height: 300, marginVertical:23, objectFit: "cover",   borderRadius: 25,  }}
               />
               <Text style={{
                 fontSize: 45,
                 color: colors.primary,
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                backgroundColor: colors.background,
                 fontWeight: 'bold',
                 textAlign: 'center',
-                position: "absolute",
+                marginTop: -70,
                 padding: 13,
-                left: "30%",
-                top: "40%",
+               
+                
                 borderWidth: 0.5,
                 borderRadius: 25,
                 borderColor: colors.primary,
