@@ -11,6 +11,7 @@ const initialState = {
     cart: [],
     cartValue: 0.00,
     paymentType: '',
+    totalPrice: 0.00,
     msg: ''
 }
 
@@ -22,16 +23,16 @@ export const CartProvider = ({ children }) => {
 
 
     const addCart = async(productData) =>  {
-        //console.log(productData, 'productdata providers')
+        console.log(productData.product.productName, 'productdata providers')
         
         const addProduct = [
             ...state.cart,
             {
-                id: productData.product.id,
-                product: productData.product.name,
+                _id: productData.product._id,
+                productName: productData.product.productName,
                 price: productData.product.price,
                 waist: productData.waist,
-                qty: productData.qty,
+                quantity: productData.quantity,
                 category: productData.product.category
             }
         ]
@@ -87,7 +88,7 @@ export const CartProvider = ({ children }) => {
         } else {
             //console.log('cart > 0')
             //fn calcula el total de cant*precio del todos los prod del carrito
-            let totalprecio = state.cart.reduce((acc, num) => acc + num.qty * num.price, 0.0);
+            let totalprecio = state.cart.reduce((acc, num) => acc + num.quantity * num.price, 0.0);
             dispatch({
                 type: types.cart.calculateCart,
                 payload: {totalprecio}

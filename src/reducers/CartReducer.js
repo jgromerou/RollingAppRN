@@ -36,7 +36,7 @@ export const CartReducer =  (state={}, action) => {
             return{
                 ...state,
                 isLoading: false,
-                cartValue: action.payload.totalprecio
+                totalPrice: action.payload.totalprecio
             }
         case types.cart.paymentType:
             return{
@@ -51,6 +51,7 @@ export const CartReducer =  (state={}, action) => {
                 isLoading:  false,
                 cart: [],
                 cartValue: 0.00,
+                totalPrice: 0.00,
                 paymentType: '',
                 msg: ''
             }

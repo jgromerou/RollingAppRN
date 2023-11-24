@@ -5,12 +5,17 @@ import { Pressable } from 'react-native';
 import { AntDesign } from "react-native-vector-icons";
 import { useQuantity } from '../../hooks/useQuantity';
 import { CartContext } from '../../contexts/CartContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 export const CustomQuantity = ({ quantity,  restQuantity, sumQuantity, item, index }) => {
 const { editCart, calculateCart, state, initLoading } = useContext(CartContext);
+const {
+    state: { colors },
+  } = useContext(ThemeContext);
 
 //const [editCart, setEditCart] = useState([])
 //console.log(quantity, 'customquantity')
+console.log(item,'item customQuantity')
 const RestContext = () => {
    initLoading();
    restQuantity();
@@ -31,7 +36,7 @@ useEffect(() => {
     if (index !== null && index !== undefined) {
     //console.log(state.isLoading,'isloading')
     ActCart();
-    //console.log(state.cart, 'cart')
+    console.log(state.cart, 'cart')
 }
 //console.log(state.cart, 'cart')
 //calculateCart();
@@ -47,11 +52,11 @@ useEffect(() => {
 const ActCart = () => {
     //console.log('ingresa actcart2')
     const CartModificada = {
-        id: item.id,
-        product: item.product,
+        _id: item._id,
+        productName: item.productName,
         price: item.price,
         waist: item.waist,
-        qty: quantity,
+        quantity: quantity,
         category: item.category
     }
     //console.log(CartModificada, 'cardmodificada')
@@ -70,6 +75,7 @@ const ActCalculateCart = () => {
         flexDirection: "row",
         // borderWidth: 1.2,
         borderColor: "#fff",
+        //borderColor:colors.primary,
         borderRadius: 5
         }}
     >
@@ -79,7 +85,12 @@ const ActCalculateCart = () => {
             onPress={ () => RestContext() }
 
         >
-            <AntDesign name="minuscircle" size={25} color="rgba(255, 255, 255, 0.5)" />
+            <AntDesign 
+                name="minuscircle" 
+                size={25} 
+                //color="rgba(255, 255, 255, 0.5)"
+                color= {colors.titleColor}
+            />
             {/* <AntDesign name="minussquare" size={25} color="rgba(255, 255, 255, 0.5)" /> */}
         </Pressable>
 
@@ -91,10 +102,11 @@ const ActCalculateCart = () => {
         >
             <Text
                 style={{
-                color: "#fff",
-                fontSize: 19,
-                fontWeight: "bold",
-                // marginHorizontal: 12,
+                    color: colors.titleColor,
+                    //color: "#fff",
+                    fontSize: 19,
+                    fontWeight: "bold",
+                    // marginHorizontal: 12,
                 }}
             >
                 { quantity }
@@ -107,7 +119,12 @@ const ActCalculateCart = () => {
             onPress={() => SumContext() }
         >
             {/* <AntDesign name="plussquare" size={25} color="rgba(255, 255, 255, 0.5)" /> */}
-            <AntDesign name="pluscircle" size={25} color="rgba(255, 255, 255, 0.5)" />
+            <AntDesign 
+                name="pluscircle" 
+                size={25} 
+                //color="rgba(255, 255, 255, 0.5)" 
+                color= {colors.titleColor}
+            />
         </Pressable>
     </View>
     

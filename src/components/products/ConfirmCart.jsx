@@ -60,7 +60,7 @@ export const ConfirmCart = ({navigation}) => {
               }}>
               <View>
                   <Text style={{ fontSize: 12, color: colors.titleColor,  }}>{item.category}</Text>
-                  <Text style={{ fontSize: 13, color: '#fff' }}>{ item.product}</Text>
+                  <Text style={{ fontSize: 13, color: '#fff' }}>{ item.productName}</Text>
                   <Text style={{ fontSize: 14, color: colors.titleColor, fontWeight: 'bold'}}>${item.price}</Text>
               </View>
           </View>
@@ -72,7 +72,7 @@ export const ConfirmCart = ({navigation}) => {
                   justifyContent: 'center'
               }}>
               <View>
-                  <Text style={{ fontSize: 14, color: colors.text,  }}>{item.qty}</Text>
+                  <Text style={{ fontSize: 14, color: colors.text,  }}>{item.quantity}</Text>
               </View>
           </View>
       </View>
@@ -122,7 +122,7 @@ export const ConfirmCart = ({navigation}) => {
               <FlatList  
                 data={searchData}
                 renderItem={({item}) => <CustomCardProducts itemData={item}/>}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item._id}
                 horizontal={true}
               />
         </View>
@@ -149,7 +149,7 @@ export const ConfirmCart = ({navigation}) => {
               //borderColor:'blue',
               //borderWidth:2
           }}
-        >$ {state.cartValue} 
+        >$ {state.totalPrice} 
         </Text>
         <TouchableOpacity
               style={{

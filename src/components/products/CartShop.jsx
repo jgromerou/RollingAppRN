@@ -19,7 +19,8 @@ export const CartShop = () => {
   return (
     <View>
         <View style={{ 
-          backgroundColor: colors.primary,
+          //backgroundColor: colors.primary,
+          backgroundColor: colors.container,
           marginHorizontal: 10,
           borderRadius: 10,
           padding: 10,
@@ -33,13 +34,14 @@ export const CartShop = () => {
             {/* <Ionicons name='filter-sharp'  size={28} color='#ccc'/> */}
             <AntDesign 
                         name="shoppingcart" 
-                        color={'rgba(255,255,255,1)'}  
+                        //color={'rgba(255,255,255,1)'}  
+                        color={colors.text}
                         size={28}
                     />
             <View style={styles.BadgeCS}>
                 <Badge 
                     backgroundColor='#fff'
-                    style={{color: '#f2058b'}}
+                    style={{color: colors.text}}
                 >
                     {state.cart.length ? state.cart.length:  0}
                 </Badge>

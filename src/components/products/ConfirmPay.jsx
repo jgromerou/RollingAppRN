@@ -56,7 +56,7 @@ export const ConfirmPay = ({navigation}) => {
     };
     const addShopping = ()=> {
       //valido que hay productos en cart
-      if (state.cartValue < 1){
+      if (state.totalPrice < 1){
         setMessageModal("Tiene que seleccionar al menos un Producto!");
         setVisible(true);
         return;
@@ -259,7 +259,7 @@ export const ConfirmPay = ({navigation}) => {
               //color: 'white',
               color: colors.text,
               marginLeft: 10}}>
-              {'$ ' + state.cartValue}
+              {'$ ' + state.totalPrice}
             </Text>
         </View>
         <View style={{ 

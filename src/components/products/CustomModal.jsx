@@ -4,8 +4,16 @@ import { Pressable, StyleSheet, Text } from 'react-native'
 import { Modal } from 'react-native'
 import { View } from 'react-native'
 import { Feather } from 'react-native-vector-icons';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { useContext } from 'react';
+import { globalThemes } from '../../themes/globalThemes';
+
 
 export const CustomModal = ({closeAlert, visible, messageModal}) => {
+    const {
+        state: { colors },
+      } = useContext(ThemeContext);
+    
     //const [visible, setVisible] = useState(true);
     //console.log(messageModal)
   return (
@@ -25,6 +33,7 @@ export const CustomModal = ({closeAlert, visible, messageModal}) => {
             >
                 <View style={{
                     backgroundColor:'#fff',
+                    //backgroundColor: colors.container,
                     alignItems: 'center',
                     margin: 30,
                     padding: 40,
@@ -35,7 +44,7 @@ export const CustomModal = ({closeAlert, visible, messageModal}) => {
                         height: 2
                     }
                 }}> 
-                    <Feather name='x-octagon' size={35} color={'#f2058b'} />
+                    <Feather name='x-octagon' size={35} color={colors.primary} />
                     <Text style={{ 
                         fontSize: 20,
                         fontWeight: 'bold',
@@ -46,8 +55,13 @@ export const CustomModal = ({closeAlert, visible, messageModal}) => {
                         {messageModal}
                     </Text>
                     <View>
-                        <Pressable style={styles.touchableBtn} onPress= { () => closeAlert(!visible)} > 
-                            <Text style={styles.textBtn}> Cerrar </Text>
+                        <Pressable style={[
+                            styles.touchableBtn,{
+                                backgroundColor: colors.primary,
+                                borderColor: colors.text,
+                                borderWidth: 3,
+                                }]} onPress= { () => closeAlert(!visible)} > 
+                            <Text style={globalThemes.defaulTextBtn}> Cerrar </Text>
                         </Pressable>
                     </View>
                 </View>
@@ -61,7 +75,8 @@ export const CustomModal = ({closeAlert, visible, messageModal}) => {
 
 const styles = StyleSheet.create({
     touchableBtn: {
-        backgroundColor: '#f2058b',
+        //backgroundColor: '#f2058b',
+        
         fontSize: 16,
         paddingVertical: 10,
         paddingHorizontal: 30,

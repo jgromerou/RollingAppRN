@@ -10,7 +10,7 @@ export const CustomCardProducts = ({itemData}) => {
       state: { colors },
     } = useContext(ThemeContext);
 
-    //console.log(itemData)
+    console.log(itemData)
 
     const { navigate } =  useNavigation();
     //const photo = `../../assets/photo/products/${itemData.photo}`;
@@ -57,12 +57,12 @@ export const CustomCardProducts = ({itemData}) => {
             marginTop: 3,
           }}>
             <Text style={{ fontSize: 10, color: 'rgba(255,255,255, 0.5)',  }}>{ itemData.category}</Text>
-            <Text style={{ fontSize: 10, color: '#fff'}}>{ itemData.name }</Text>
+            <Text style={{ fontSize: 10, color: '#fff'}}>{ itemData.productName }</Text>
             <Text style={{ fontSize: 12, color: '#f2058b'}}>${ itemData.price }.00</Text>
           </View>
 
           <Pressable 
-            onPress={() => onPresFavorite(itemData.id)}
+            onPress={() => onPresFavorite(itemData._id)}
           >
             <View style={{
               backgroundColor: 'rgba(255,255,255, 0.1)',
@@ -77,7 +77,7 @@ export const CustomCardProducts = ({itemData}) => {
               right: -11
             }}>
               <Text style={{ fontSize: 20}}>
-                <AntDesign name={favorite == itemData.id ? 'heart' : 'hearto'} size={18} color={favorite == itemData.id ? '#f2058b' : '#fff'} />
+                <AntDesign name={favorite == itemData._id ? 'heart' : 'hearto'} size={18} color={favorite == itemData.id ? '#f2058b' : '#fff'} />
               </Text>
             </View>
           </Pressable>

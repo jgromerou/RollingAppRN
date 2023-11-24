@@ -48,16 +48,16 @@ export const ProductsScreen = ({ route, navigation }) => {
       }
       // busco si ya esta en el carrito el producto
       let cartExist = ""
-      cartExist = state.cart.find((cart) => cart.id === itemData.id )
+      cartExist = state.cart.find((cart) => cart._id === itemData._id )
       if ( cartExist !== undefined ) {
-        let numindex = state.cart.findIndex((cart) => cart.id === itemData.id)
+        let numindex = state.cart.findIndex((cart) => cart._id === itemData._id)
         ActCart(cartExist, numindex);
         return;
       }
       const data = {
         product: itemData,
         waist: talle,
-        qty: quantity
+        quantity: quantity
       }
       addCart(data);
       calculateCart();
@@ -66,11 +66,11 @@ export const ProductsScreen = ({ route, navigation }) => {
   // funcion para modificar solo cantidad cuando ingresa el mismo product
   const ActCart = (cartExist, numindex) => {
     const CartModificada = {
-        id: cartExist.id,
+        id: cartExist._id,
         product: cartExist.product,
         price: cartExist.price,
         waist: cartExist.waist,
-        qty: cartExist.qty + quantity,
+        quantity: cartExist.quantity + quantity,
         category: cartExist.category
     }
     //modifica la cantidades de cada item
@@ -97,7 +97,7 @@ export const ProductsScreen = ({ route, navigation }) => {
         style={{
           flex: 6,
           justifyContent: "center",
-          backgroundColor: colors.primary,
+          //backgroundColor: colors.primary,
           alignItems: "center",
         }}
       >
@@ -129,7 +129,7 @@ export const ProductsScreen = ({ route, navigation }) => {
           {itemData.category}
         </Text>
         <Text style={{ fontSize: 16, color: colors.titleColor, fontWeight: "bold" }}>
-          {itemData.name}{" "}
+          {itemData.productName}{" "}
         </Text>
         <Text style={{ fontSize: 22, color: colors.titleColor, fontWeight: "bold" }}>
           ${itemData.price}
@@ -188,7 +188,8 @@ export const ProductsScreen = ({ route, navigation }) => {
           <Text
             style={{
               fontSize: 15,
-              color: "rgba(255,255,255, 0.5)",
+              //color: "rgba(255,255,255, 0.5)",
+              color: colors.titleColor,
               marginBottom: 5,
             }}
           >
@@ -218,7 +219,10 @@ export const ProductsScreen = ({ route, navigation }) => {
         >
           <TouchableOpacity
             style={{
-              backgroundColor: "#f2058b",
+              backgroundColor: colors.primary,
+              borderColor: colors.text,
+              borderWidth: 3,
+              //backgroundColor: "#f2058b",
               alignItems: "center",
               fontSize: "17",
               fontWeight: "600",
@@ -246,7 +250,8 @@ export const ProductsScreen = ({ route, navigation }) => {
           style={{
             fontSize: 30,
             fontWeight: "bold",
-            color: "rgba(255,255,255,0.5)",
+            //color: "rgba(255,255,255,0.5)",
+            color: colors.titleColor,
           }}
         >
           4.8

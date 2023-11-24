@@ -9,11 +9,11 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 
 export const CartItem = ({item, index}) => {
 //console.log(index, 'cartItem')
-//console.log(item.qty, 'caritem qty arriba')
+console.log(item, 'caritem qty arriba')
 const {
     state: { colors },
   } = useContext(ThemeContext);
-const { quantity, sumQuantity, restQuantity} = useQuantity(item.qty);
+const { quantity, sumQuantity, restQuantity} = useQuantity(item.quantity);
 const { deleteCart, calculateCart, state, initLoading, isLoading } = useContext(CartContext);
 
 const deleCart = (index) => {
@@ -26,7 +26,7 @@ useEffect(() => {
     calculateCart();
     //console.log(item.qty, 'caritem qty')
     //console.log(quantity, 'quantity cartItem')
-}, [item.qty])
+}, [item.quantity])
 
 
 return (
@@ -65,7 +65,7 @@ return (
             }}>
             <View>
                 <Text style={{ fontSize: 12, color: colors.titleColor,  }}>{item.category}</Text>
-                <Text style={{ fontSize: 13, color: '#fff' }}>{ item.product}</Text>
+                <Text style={{ fontSize: 13, color: '#fff' }}>{ item.productName}</Text>
                 <Text style={{ fontSize: 14, color: colors.titleColor, fontWeight: 'bold'}}>${item.price}</Text>
             </View>
         </View>

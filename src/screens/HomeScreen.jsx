@@ -79,7 +79,7 @@ return (
         <FlatList  
           data={searchData}
           renderItem={({item}) => <CustomCardProducts itemData={item}/>}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item._id}
           horizontal={true}
         />
     </View>
