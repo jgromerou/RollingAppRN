@@ -31,16 +31,16 @@ export const RegisterScreen = ({ navigation }) => {
         .required("Este campo es obligatorio")
         .min(8, "La contraseña debe tener al menos 8 caracteres"),
     }),
-    onSubmit: ({ resetForm }) => {
-      resetForm();
+    onSubmit: ({ resetForm }) => {  
       registerUser(formik.values);
-      setRedirect(true);
-    },
+      // resetForm();
+      navigation.navigate('StackAuthNavigator')
+       },
   });
 
   return (
     <>
-      {redirect && navigation.goBack()}
+      
       <View>
         <Text style={[globalThemes.title, { color: state.colors.titleColor }]}>
           Bienvenid@s

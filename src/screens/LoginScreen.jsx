@@ -98,7 +98,7 @@ export const LoginScreen = ({ navigation }) => {
             <Text
               style={[
                 globalThemes.defaulTextBtn,
-                { color: colors.contrastColor },
+                { color: colors.title },
               ]}
             >
               INGRESAR
@@ -119,7 +119,7 @@ export const LoginScreen = ({ navigation }) => {
             <Text
               style={[
                 globalThemes.defaulTextBtn,
-                { color: colors.contrastColor },
+                { color: colors.title },
               ]}
             >
               REGISTRARSE
