@@ -40,6 +40,8 @@ export const TabsNavigator = () => {
         />
 
 <Tab.Screen
+
+
         name="ProductsScreen"
         component={ProductScreen}
         options={{

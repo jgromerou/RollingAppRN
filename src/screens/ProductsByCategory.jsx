@@ -76,11 +76,13 @@ const ProductsByCategory = ({ navigation, route }) => {
     },
   ];
 
-  const {categoryId, categoryName} = route.params
-  console.log (route.params)
+  const { categoryId, categoryName } = route.params;
+  console.log(route.params);
+  
 
   const navigatetoProductos = (productId) => {
-    navigation.navigate('ProductScreen', { productId });
+    console.log(productId);
+    navigation.navigate('ProductsScreen', { productId });
 
     console.log(productId);
   };
@@ -92,7 +94,10 @@ const ProductsByCategory = ({ navigation, route }) => {
   //console.log(itemData)
   return (
     <View>
-      <Text style={{ fontSize: 35 }}> {categoryName} </Text>
+      <Text style={{ fontSize: 35, color: colors.titleColor }}>
+        {' '}
+        {categoryName}{' '}
+      </Text>
       <FlatList
         data={productos}
         renderItem={({ item }) => (
@@ -109,7 +114,6 @@ const ProductsByCategory = ({ navigation, route }) => {
                   height: 250,
                   objectFit: 'cover',
                   borderWidth: 1,
-                  borderColor: '#00ff22',
                 }}
               />
             </Card>
@@ -133,7 +137,7 @@ const ProductsByCategory = ({ navigation, route }) => {
                 ${item.price}
               </Text>
 
-              <TouchableOpacity onPress={() => navigatetoProductos(item.id)}>
+              <TouchableOpacity onPress={() =>   navigation.navigate('ProductsScreen', item.id)}>
                 <Text>Comprar</Text>
               </TouchableOpacity>
             </View>
