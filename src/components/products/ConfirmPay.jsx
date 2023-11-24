@@ -26,7 +26,7 @@ export const ConfirmPay = ({navigation}) => {
     {
       setVisible(false);
       if (sale){
-        navigate('ProductsScreen');
+        navigate('HomeScreen');
         setSale(false);
       }
     }
