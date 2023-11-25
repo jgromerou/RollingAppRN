@@ -8,7 +8,8 @@ export const types = {
     products: {
         getProducts:  'PRODUCTS',
         getProduct:   'PRODUCT BY ID',
-        error:        'ERROR PRODUCT'
+        error:        'ERROR PRODUCT',
+        // getCategories: 'CATEGORIES'
     },
 
     cart: {

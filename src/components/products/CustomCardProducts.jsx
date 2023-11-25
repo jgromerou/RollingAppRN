@@ -7,7 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 export const CustomCardProducts = ({itemData}) => {
     const {
       state: { colors },
-    } = useContext(ThemeContext);
+  } = useContext(ThemeContext);
+
 
     console.log(itemData)
 
@@ -30,7 +31,7 @@ export const CustomCardProducts = ({itemData}) => {
           borderRadius: 15
         }}
           onPress={() => navigate('ProductsScreen', {
-          itemData,
+          productId: itemData._id,
         })}
       >
 
@@ -41,7 +42,7 @@ export const CustomCardProducts = ({itemData}) => {
         }}>
           <View>
             <Image
-              source={require('../../assets/thoto/banners/shoes-color.jpg')}
+              source={{uri: `${itemData.image.secure_url}`}}
               style={{
                 width:'100%',
                 height: 130,

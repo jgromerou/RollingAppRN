@@ -9,7 +9,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 
 export const CartItem = ({item, index}) => {
 //console.log(index, 'cartItem')
-console.log(item, 'caritem qty arriba')
+// console.log(item, 'caritem qty arriba')
 const {
     state: { colors },
   } = useContext(ThemeContext);

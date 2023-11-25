@@ -313,34 +313,6 @@ export const HomeScreen = ({navigation}) => {
               >
                 ¡Suscríbete y consigue un 10% de descuento extra!
               </Text>
-              <View
-                style={{
-                  flex: 1,
-                  width: "60%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <TouchableOpacity
-                  style={{
-                    borderRadius: 15,
-                    backgroundColor: "black",
-                    padding: 10,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      textAlign: "center",
-                      fontSize: 20,
-                      textTransform: "uppercase",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Regístrate Gratis
-                  </Text>
-                </TouchableOpacity>
-              </View>
             </View>
           </View>
         </View>

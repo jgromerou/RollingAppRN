@@ -1,5 +1,5 @@
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
-import { useContext } from 'react';
+import { View, Text, Image, TouchableOpacity, FlatList, Pressable, TextInput } from 'react-native';
+import { useContext, useEffect } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { Ionicons } from 'react-native-vector-icons';
 import { bannersData } from '../data/bannersData';
@@ -8,12 +8,21 @@ import { globalThemes } from '../themes/globalThemes';
 import { searchData } from '../data/searchData'
 import { CustomCardProducts } from '../components/products/CustomCardProducts'
 import { CartShop } from '../components/products/CartShop';
+import { ProductsContext } from '../contexts/ProductsContext';
+import { AntDesign } from 'react-native-vector-icons';
 
 export const ProductsList = () => {
   const {
     state: { colors },
   } = useContext(ThemeContext);
+  const { state: stateProducts , getProducts, isLoading } = useContext(ProductsContext)
 
+  useEffect(()=>{
+    getProducts()
+    // console.log('PRODUCT LIST', stateProducts)
+  },[isLoading])
+
+  
   const renderBanners = (item) => {
     return (
       <View style={{
@@ -63,7 +72,7 @@ return (
       </View> */}
       <CartShop />
     </View>
-    <View style={{ flex:3}}> 
+    {/* <View style={{ flex:3}}> 
     <FlatList
         data={bannersData}
         renderItem={ ({item}) => renderBanners(item)}
@@ -73,14 +82,21 @@ return (
     >
 
     </FlatList>
-    </View>
+    </View> */}
 
-    <View style={{ flex:2}}>
+    <View>
+      <Text style={{ fontSize: 24, fontWeight: "bold", color: colors.primary, textAlign: "center", textTransform: "uppercase" }}>Productos</Text>
+      <View style={{justifyContent: "flex-start", alignItems: "center", flexDirection: "row"}}>
+        <TextInput placeholder='Buscar producto' style={{borderRadius: 25, height: 50, borderColor: "black", borderWidth: 2, padding: 10, marginBottom: 5, width: "100%", fontSize: 20 }} />
+        <Pressable style={{marginStart: -50}}>
+          <AntDesign name='search1' size={26} color={'black'} />
+        </Pressable>
+      </View>
         <FlatList  
-          data={searchData}
-          renderItem={({item}) => <CustomCardProducts itemData={item}/>}
+          data={stateProducts.products}
+          renderItem={({item}) => <View style={{flex: 1, justifyContent: 'space-between', alignItems: "center", marginVertical: 3}}><CustomCardProducts itemData={item}/></View>}
           keyExtractor={item => item._id}
-          horizontal={true}
+          numColumns={2}
         />
     </View>
 
@@ -106,7 +122,7 @@ head: {
 },
 
 menuContainer: {
-  backgroundColor: '#f2058b',
+  backgroundColor: '##00ff00',
   marginHorizontal: 10,
   borderRadius: 10,
   padding: 10,
