@@ -36,7 +36,7 @@ export const CustomCardProducts = ({itemData}) => {
       >
 
         <View style={{
-          height: 180,
+          height: 220,
           width: 160,
           padding: 10
         }}>
@@ -56,12 +56,12 @@ export const CustomCardProducts = ({itemData}) => {
             paddingHorizontal:3,
             marginTop: 3,
           }}>
-            <Text style={{ fontSize: 10, color: 'rgba(255,255,255, 0.5)',  }}>{ itemData.category}</Text>
-            <Text style={{ fontSize: 10, color: '#fff'}}>{ itemData.productName }</Text>
-            <Text style={{ fontSize: 12, color: '#f2058b'}}>${ itemData.price }.00</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'black'}}>{ itemData.productName }</Text>
+            <Text style={{ fontSize: 13, color: colors.text,  }}>{ itemData.category}</Text>
+            <Text style={{ fontSize: 10, color: colors.title}}>${ itemData.price }.00</Text>
           </View>
 
-          <Pressable 
+          <Pressable
             onPress={() => onPresFavorite(itemData._id)}
           >
             <View style={{

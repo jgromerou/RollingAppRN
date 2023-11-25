@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,8 @@ import { Button, Card } from 'react-native-paper';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { globalThemes } from '../themes/globalThemes';
 import { AntDesign } from 'react-native-vector-icons';
+import { CustomCardProducts } from '../components/products/CustomCardProducts';
+import { ProductsContext } from '../contexts/ProductsContext';
 
 const ProductsByCategory = ({ navigation, route }) => {
   // Agregar navegacion hacia pagina de descripcion de producto
@@ -18,7 +20,19 @@ const ProductsByCategory = ({ navigation, route }) => {
   //   navigation.navigate('ProductDescription', { productId });
   // };
 
-  const productos = [
+  const {
+    state: stateProducts,
+    getProducts,
+    isLoading,
+    getProductByCategory
+  } = useContext(ProductsContext);
+
+  useEffect(() => {
+    getProducts();
+    // console.log('PRODUCT LIST', stateProducts)
+  }, [isLoading]);
+  
+const productos = [
     {
       id: 1,
       productName: 'Zapatillas Nike Air Max',
@@ -77,11 +91,10 @@ const ProductsByCategory = ({ navigation, route }) => {
   ];
 
   const { categoryId, categoryName } = route.params;
-  console.log(route.params);
-  
+  // console.log(route.params);
 
   const navigatetoProductos = (productId) => {
-    console.log(productId);
+    // console.log(productId);
     navigation.navigate('ProductsScreen', { productId });
 
     console.log(productId);
@@ -99,51 +112,21 @@ const ProductsByCategory = ({ navigation, route }) => {
         {categoryName}{' '}
       </Text>
       <FlatList
-        data={productos}
+        data={stateProducts.products}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            // style={globalThemes.menuButton}
-            // onPress={() => navigatetoProductos(item)}
-            style={{ justifyContent: 'center', alignItems: 'center' }}
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginVertical: 3,
+            }}
           >
-            <Card>
-              <Image
-                source={{ uri: item.image }}
-                style={{
-                  width: 250,
-                  height: 250,
-                  objectFit: 'cover',
-                  borderWidth: 1,
-                }}
-              />
-            </Card>
-            <View>
-              <Text
-                style={{
-                  fontSize: 25,
-
-                  color: colors.primary,
-                }}
-              >
-                {item.productName}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 25,
-
-                  color: colors.primary,
-                }}
-              >
-                ${item.price}
-              </Text>
-
-              <TouchableOpacity
-               >
-                <Text>Comprar</Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableOpacity>
+            <CustomCardProducts itemData={item} />
+          </View>
         )}
+        keyExtractor={(item) => item._id}
+        numColumns={2}
       />
     </View>
   );

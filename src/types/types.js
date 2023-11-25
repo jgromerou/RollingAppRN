@@ -9,7 +9,8 @@ export const types = {
         getProducts:  'PRODUCTS',
         getProduct:   'PRODUCT BY ID',
         error:        'ERROR PRODUCT',
-        // getCategories: 'CATEGORIES'
+        getProductsByCategory: 'CATEGORY',
+        getCategories: 'CATEGORIES'
     },
 
     cart: {

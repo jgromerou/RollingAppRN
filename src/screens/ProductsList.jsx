@@ -94,7 +94,7 @@ return (
       </View>
         <FlatList  
           data={stateProducts.products}
-          renderItem={({item}) => <View style={{flex: 1, justifyContent: 'space-between', alignItems: "center", marginVertical: 3}}><CustomCardProducts itemData={item}/></View>}
+          renderItem={({item}) => <View style={{flex: 1, justifyContent: 'center', alignItems: "center", marginVertical: 3}}><CustomCardProducts itemData={item}/></View>}
           keyExtractor={item => item._id}
           numColumns={2}
         />
@@ -122,7 +122,6 @@ head: {
 },
 
 menuContainer: {
-  backgroundColor: '##00ff00',
   marginHorizontal: 10,
   borderRadius: 10,
   padding: 10,
@@ -135,18 +134,4 @@ menuBtn: {
     flex:1,
     justifyContent: 'center',
     alignItems: 'center',
-},
-
-menuBtnText: { 
-  fontSize: 17, 
-  fontWeight: '500', 
-  color: '#ccc'
-},
-
-headImage: { 
-  width: 380,
-  borderRadius: 15,
-  opacity: 0.8,
-  marginBottom: 15
-}
-})
+}})

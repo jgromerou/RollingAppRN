@@ -19,8 +19,22 @@ export const ProductReducer = (state={}, action) => {
                 errorMessage: '',
                 productSelected: action.payload.productSelected,
             }
-            
-        // agregar getCategories 
+
+        case types.products.getProductsByCategory:
+            return {
+                ...state,
+                isLoading: false,
+                errorMessage: '',
+                products: action.payload.products
+            }  
+
+        case types.products.getCategories:
+            return {
+                ...state,
+                isLoading: false,
+                errorMessage: '',
+                products: action.payload.products
+            }    
         case types.products.error:
             return {
                 ...state,
