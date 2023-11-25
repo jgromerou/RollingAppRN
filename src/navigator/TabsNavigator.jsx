@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { StackNavigator } from './StackNavigator';
 import { SearchProductsScreen } from '../screens/SearchProductsScreen';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { ProductsScreen } from '../screens/ProductsScreen';
+import { ProductsList } from '../screens/ProductsList';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -38,8 +38,8 @@ export const TabsNavigator = () => {
         />
   
         <Tab.Screen
-          name="ProductsScreen"
-          component={ProductsScreen}
+          name="ProductsList"
+          component={ProductsList}
           options={{
             title: "Productos",
             tabBarIcon: () => (

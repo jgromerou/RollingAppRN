@@ -9,7 +9,7 @@ import { searchData } from '../data/searchData'
 import { CustomCardProducts } from '../components/products/CustomCardProducts'
 import { CartShop } from '../components/products/CartShop';
 
-export const ProductsScreen = () => {
+export const ProductsList = () => {
   const {
     state: { colors },
   } = useContext(ThemeContext);
