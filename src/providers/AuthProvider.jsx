@@ -25,12 +25,12 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
   const registerUser = async (values) => {
-    console.log(values);
     try {
+      let emailMinusculas = values.email.toLowerCase();
       const { data } = await dashAxios.post('auth/registerclient', {
         firstname: values.firstname,
         lastname: values.lastname,
-        email: values.email,
+        email: emailMinusculas,
         password: values.password,
       });
       console.log(data);
@@ -62,7 +62,6 @@ export const AuthProvider = ({ children }) => {
       }
       const { data } = await dashAxios.get(`auth/revalidatetoken`);
       AsyncStorage.setItem('tokenAuth', data.res.token);
-      //console.log(data,'data')
       dispatch({
         type: types.auth.login,
         payload: {
@@ -87,7 +86,6 @@ export const AuthProvider = ({ children }) => {
         email: emailMinusculas,
         password,
       });
-      console.log(data);
       await AsyncStorage.setItem('tokenAuth', data.token);
       dispatch({
         type: types.auth.login,
