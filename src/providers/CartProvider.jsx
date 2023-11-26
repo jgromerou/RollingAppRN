@@ -26,7 +26,7 @@ export const CartProvider = ({ children }) => {
 
 
     const addCart = async(productData) =>  {
-        console.log(productData.product.productName, 'productdata providers')
+        // console.log(productData.product.productName, 'productdata providers')
         
         const addProduct = [
             ...state.cart,

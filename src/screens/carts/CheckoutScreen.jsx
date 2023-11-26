@@ -24,7 +24,6 @@ export const CheckoutScreen = ({ navigation }) => {
     //const { quantity, sumQuantity, restQuantity} = useQuantity(item.qty);
 
     const cartRender = (item, index) => {
-      //console.log(item, 'item01')
         return (
             <CartItem item={ item } index={index}/>
         )      

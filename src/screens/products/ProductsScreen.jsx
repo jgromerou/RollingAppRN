@@ -7,23 +7,30 @@ import { CustomQuantity } from "../../components/products/CustomQuantity";
 import { useQuantity } from "../../hooks/useQuantity";
 import { CartContext } from "../../contexts/CartContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { ProductsContext } from "../../contexts/ProductsContext";
 import { CartShop } from "../../components/products/CartShop";
 import { GoBack } from "../../components/products/GoBack";
 import { CustomModal } from "../../components/products/CustomModal";
 import { AuthContext } from "../../contexts/AuthContext";
 
+
 export const ProductsScreen = ({ route, navigation }) => {
 
-  const { itemData } = route.params;
+  const { productId } = route.params;
   const [talle, setTalle] = useState(0);
   const { quantity, restQuantity, sumQuantity } = useQuantity();
   const { addCart, state, calculateCart, editCart, isLoading, addUserDate } = useContext(CartContext);
   const { state: { colors } } = useContext(ThemeContext);
   const { state: cliente  } = useContext(AuthContext);
+  const { state: stateProducts , getProduct, isLoading:isLoadingProduct, productSelected } = useContext(ProductsContext)
   const [visible, setVisible] = useState(false);
 
-  //console.log(itemData,'productscreen')
   const messageModal = "No puede agregar un producto en 0";
+
+  useEffect(()=>{
+    getProduct(productId)
+    console.log('DETALLE PRODUCTO', productSelected)
+  },[isLoadingProduct])
 
 
   const obtenerTalle = (dataTalle) => 
@@ -48,14 +55,14 @@ export const ProductsScreen = ({ route, navigation }) => {
       }
       // busco si ya esta en el carrito el producto
       let cartExist = ""
-      cartExist = state.cart.find((cart) => cart._id === itemData._id )
+      cartExist = state.cart.find((cart) => cart._id === productSelected?._id )
       if ( cartExist !== undefined ) {
-        let numindex = state.cart.findIndex((cart) => cart._id === itemData._id)
+        let numindex = state.cart.findIndex((cart) => cart._id === productSelected?._id)
         ActCart(cartExist, numindex);
         return;
       }
       const data = {
-        product: itemData,
+        product: productSelected,
         waist: talle,
         quantity: quantity
       }
@@ -81,10 +88,6 @@ export const ProductsScreen = ({ route, navigation }) => {
     editCart(CartModificada, numindex);
     calculateCart();
 }
-  // useEffect(() => {
-  //   calculateCart();
-  // }, [isLoading])
-
   
 
   return (
@@ -111,7 +114,7 @@ export const ProductsScreen = ({ route, navigation }) => {
           messageModal={ messageModal }
           /> : null}
         <Image
-          source={require("../../assets/thoto/banners/shoes-color.jpg")}
+          source={{uri: `${productSelected?.image.secure_url}`}}
           style={{
             width: "100%",
             height: "100%",
@@ -130,13 +133,13 @@ export const ProductsScreen = ({ route, navigation }) => {
         }}
       >
         <Text style={{ fontSize: 14, color: colors.titleColor }}>
-          {itemData.category}
+          {productSelected?.category}
         </Text>
         <Text style={{ fontSize: 16, color: colors.titleColor, fontWeight: "bold" }}>
-          {itemData.productName}{" "}
+          {productSelected?.productName}{" "}
         </Text>
         <Text style={{ fontSize: 22, color: colors.titleColor, fontWeight: "bold" }}>
-          ${itemData.price}
+          ${productSelected?.price}
         </Text>
       </View>
 

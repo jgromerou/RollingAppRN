@@ -7,7 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 export const CustomCardProducts = ({itemData}) => {
     const {
       state: { colors },
-    } = useContext(ThemeContext);
+  } = useContext(ThemeContext);
+
 
     //console.log(itemData)
 
@@ -30,18 +31,18 @@ export const CustomCardProducts = ({itemData}) => {
           borderRadius: 15
         }}
           onPress={() => navigate('ProductsScreen', {
-          itemData,
+          productId: itemData._id,
         })}
       >
 
         <View style={{
-          height: 180,
+          height: 220,
           width: 160,
           padding: 10
         }}>
           <View>
             <Image
-              source={require('../../assets/thoto/banners/shoes-color.jpg')}
+              source={{uri: `${itemData.image.secure_url}`}}
               style={{
                 width:'100%',
                 height: 130,
@@ -55,12 +56,12 @@ export const CustomCardProducts = ({itemData}) => {
             paddingHorizontal:3,
             marginTop: 3,
           }}>
-            <Text style={{ fontSize: 10, color: 'rgba(255,255,255, 0.5)',  }}>{ itemData.category}</Text>
-            <Text style={{ fontSize: 10, color: '#fff'}}>{ itemData.productName }</Text>
-            <Text style={{ fontSize: 12, color: '#f2058b'}}>${ itemData.price }.00</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'black'}}>{ itemData.productName }</Text>
+            <Text style={{ fontSize: 13, color: colors.text,  }}>{ itemData.category}</Text>
+            <Text style={{ fontSize: 10, color: colors.title}}>${ itemData.price }.00</Text>
           </View>
 
-          <Pressable 
+          <Pressable
             onPress={() => onPresFavorite(itemData._id)}
           >
             <View style={{

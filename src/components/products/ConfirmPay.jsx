@@ -21,7 +21,6 @@ export const ConfirmPay = ({navigation}) => {
     const { addTypePay, state, initCartShoping, addSales } = useContext(CartContext);
     const [messageModal, setMessageModal] = useState("");
     const [ sale, setSale] = useState(false);
-    //console.log(colors.primary, 'colors.primary')
 
     const closeAlert = () => 
     {
@@ -38,17 +37,15 @@ export const ConfirmPay = ({navigation}) => {
       switch (value) {
         case 'Cash':
           // Execute actions for Cash
-          //console.log('Cash selected');
+
           addTypePay(value);
           break;
         case 'Credit Card':
           // Execute actions for Credit cart
-          //console.log('Credit Card selected');
           addTypePay(value);
           break;
         case 'Mercadopago':
           // Execute actions for Mercadopago
-          //console.log('Mercadopago selected');
           addTypePay(value);
           break;
         default:

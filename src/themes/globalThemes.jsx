@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const globalThemes = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 10,
   },
   title: {
@@ -30,7 +30,7 @@ export const globalThemes = StyleSheet.create({
     marginHorizontal: 15,
     marginVertical: 15,
     paddingHorizontal: 12,
- },
+  },
   defaultBtn: {
     fontSize: 16,
     paddingVertical: 10,
@@ -52,10 +52,20 @@ export const globalThemes = StyleSheet.create({
     bottom: -40,
   },
   footer: {
-      fontSize: 13,
-      color: 'rgba(255,255,255, 0.3)',
-      alignSelf: 'center',
-      marginVertical: 20,
+    fontSize: 13,
+    color: "rgba(255,255,255, 0.3)",
+    alignSelf: "center",
+    marginVertical: 20,
+  },
+  avatarContainer: {
+    alignItems: "center",
+    marginTop: 20,
+    marginBottom: 25,
+  },
+  avatar: {
+    width: 150,
+    height: 150,
+    borderRadius: 100,
   },
 
   // defaultBtn: {

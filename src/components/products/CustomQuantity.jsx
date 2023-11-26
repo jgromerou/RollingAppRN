@@ -13,9 +13,6 @@ const {
     state: { colors },
   } = useContext(ThemeContext);
 
-//const [editCart, setEditCart] = useState([])
-//console.log(quantity, 'customquantity')
-//console.log(item,'item customQuantity')
 const RestContext = () => {
    initLoading();
    restQuantity();
@@ -36,7 +33,7 @@ useEffect(() => {
     if (index !== null && index !== undefined) {
     //console.log(state.isLoading,'isloading')
     ActCart();
-    console.log(state.cart, 'cart')
+    // console.log(state.cart, 'cart')
 }
 //console.log(state.cart, 'cart')
 //calculateCart();
