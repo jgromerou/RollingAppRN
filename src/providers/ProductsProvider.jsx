@@ -8,7 +8,8 @@ const initialState = {
     isLoading: true,
     errorMessage: '',
     products: null,
-    productSelected: null
+    productSelected: null,
+    categories: null
 }
 
 export const ProductProvider = ({ children }) => {
@@ -69,9 +70,9 @@ export const ProductProvider = ({ children }) => {
         }
     }
 
-    const getProductByCategory = async(category) => {
+    const getProductsByCategory = async(category) => {
         try {
-         const data = await dashAxios.get(`category/${category}`);            
+         const data = await dashAxios.get(`products/category/${category}`);            
          console.log('PRODUCTOS POR CATEGORIA', data)
 
         //     dispatch({
@@ -92,6 +93,29 @@ export const ProductProvider = ({ children }) => {
             })
         }
     }
+    const getCategories = async() => {
+        try {
+         const data = await dashAxios.get(`/categories`);            
+         console.log(data)
+
+        //     dispatch({
+        //         type: types.products.getCategories,
+        //         payload:  {
+        //             ...state,
+        //          categories: data.data
+        //         }
+        //     })
+
+            
+        } catch (error) {
+            dispatch({
+                type: types.products.error,
+                payload:  {
+                    errorMessage: error.response.data.msg
+                }
+            })
+        }
+    }
 
 return (
   <ProductsContext.Provider value={{
@@ -99,7 +123,8 @@ return (
     getProducts,
     state,
     getProduct,
-    getProductByCategory
+    getProductsByCategory,
+    getCategories
 
         }}>
             { children }

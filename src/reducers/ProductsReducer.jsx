@@ -33,7 +33,7 @@ export const ProductReducer = (state={}, action) => {
                 ...state,
                 isLoading: false,
                 errorMessage: '',
-                products: action.payload.products
+                categories: action.payload.categories
             }    
         case types.products.error:
             return {

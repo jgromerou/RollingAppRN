@@ -24,7 +24,6 @@ const ProductsByCategory = ({ navigation, route }) => {
     state: stateProducts,
     getProducts,
     isLoading,
-    getProductByCategory
   } = useContext(ProductsContext);
 
   useEffect(() => {

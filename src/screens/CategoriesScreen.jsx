@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-paper';
 import { ThemeContext } from '../contexts/ThemeContext';
@@ -35,9 +35,8 @@ const CategoriesScreen = ({ navigation }) => {
 
  
 
-  const {
-    state: { colors },
-  } = useContext(ThemeContext);
+  const {state: 
+    { colors } } = useContext(ThemeContext);
 
   return (
     <View>
