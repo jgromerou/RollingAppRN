@@ -64,7 +64,9 @@ export const ProductsScreen = ({ route, navigation }) => {
       const data = {
         product: productSelected,
         waist: talle,
-        quantity: quantity
+        quantity: quantity,
+        image: productSelected.image.secure_url        
+        
       }
       addCart(data);
       calculateCart();
@@ -241,7 +243,7 @@ export const ProductsScreen = ({ route, navigation }) => {
             }}
             onPress={addToCart}
           >
-            <Text style={globalThemes.defaulTextBtn}>ADD TO CART</Text>
+            <Text style={globalThemes.defaulTextBtn}>Agregar al Carrito</Text>
           </TouchableOpacity>
         </View>
       </View>

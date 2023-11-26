@@ -25,6 +25,7 @@ useEffect(() => {
     calculateCart();
     //console.log(item.qty, 'caritem qty')
     //console.log(quantity, 'quantity cartItem')
+    console.log(item)
 }, [item.quantity])
 
 
@@ -48,7 +49,7 @@ return (
             marginRight: 5
         }}>
             <Image 
-                source={require('../../assets/thoto/banners/shoes-color.jpg')}
+                source={{uri:`${item.image}`}}
                 style={{
                     width:50,
                     height: 50,
