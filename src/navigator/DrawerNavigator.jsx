@@ -210,7 +210,7 @@ const Menu = ({ navigation }) => {
         {/* Link a Categorías */}
         <TouchableOpacity
           style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-          onPress={() => console.log("categorías")}
+          onPress={() => navigation.navigate("CategoriesScreen")}
         >
           <Text style={{ ...globalThemes.text, color: colors.primary }}>
             - Categorías
