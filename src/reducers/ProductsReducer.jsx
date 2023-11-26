@@ -34,6 +34,13 @@ export const ProductReducer = (state={}, action) => {
                 errorMessage: '',
                 categories: action.payload.categories
             }    
+        case types.products.getFeaturedProducts:
+            return {
+                ...state,
+                isLoading: false,
+                errorMessage: '',
+                featuredProducts: action.payload.featuredProducts
+            }    
         case types.products.error:
             return {
                 ...state,

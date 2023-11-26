@@ -54,7 +54,7 @@ export const DrawerNavigator = () => {
             >
               <Drawer.Screen
                 name="TabsNavigator"
-                options={{ title: "Página de Inicio" }}
+                options={{ title: "Inicio" }}
                 component={TabsNavigator}
               />
               <Drawer.Screen
