@@ -10,6 +10,7 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 import { CartShop } from "../../components/products/CartShop";
 import { GoBack } from "../../components/products/GoBack";
 import { CustomModal } from "../../components/products/CustomModal";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const ProductsScreen = ({ route, navigation }) => {
 
@@ -17,9 +18,8 @@ export const ProductsScreen = ({ route, navigation }) => {
   const [talle, setTalle] = useState(0);
   const { quantity, restQuantity, sumQuantity } = useQuantity();
   const { addCart, state, calculateCart, editCart, isLoading, addUserDate } = useContext(CartContext);
-  const {
-    state: { colors },
-  } = useContext(ThemeContext);
+  const { state: { colors } } = useContext(ThemeContext);
+  const { state: cliente  } = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
 
   //console.log(itemData,'productscreen')
@@ -62,8 +62,9 @@ export const ProductsScreen = ({ route, navigation }) => {
       addCart(data);
       calculateCart();
       //borrar solo para agregar user y date al contextcart
-      let user = 'jekfefhjeekkdkwd4dd14f1f4f';
-      addUserDate(user);
+      //let user = 'jekfefhjeekkdkwd4dd14f1f4f';
+      //console.log(cliente.user.id, 'cliente')
+      addUserDate(cliente.user.id);
   }
 
   // funcion para modificar solo cantidad cuando ingresa el mismo product

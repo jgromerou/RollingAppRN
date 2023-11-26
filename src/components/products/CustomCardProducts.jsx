@@ -9,7 +9,7 @@ export const CustomCardProducts = ({itemData}) => {
       state: { colors },
     } = useContext(ThemeContext);
 
-    console.log(itemData)
+    //console.log(itemData)
 
     const { navigate } =  useNavigation();
     //const photo = `../../assets/photo/products/${itemData.photo}`;

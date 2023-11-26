@@ -15,7 +15,7 @@ const {
 
 //const [editCart, setEditCart] = useState([])
 //console.log(quantity, 'customquantity')
-console.log(item,'item customQuantity')
+//console.log(item,'item customQuantity')
 const RestContext = () => {
    initLoading();
    restQuantity();
@@ -55,9 +55,9 @@ const ActCart = () => {
         _id: item._id,
         productName: item.productName,
         price: item.price,
-        waist: item.waist,
+        //waist: item.waist,
         quantity: quantity,
-        category: item.category
+        //category: item.category
     }
     //console.log(CartModificada, 'cardmodificada')
     //modifica la cantidades de cada item

@@ -1,6 +1,6 @@
 export const searchData = [
     {
-      _id: 1,
+      _id: '1',
       category: 'Zapatillas Deportivas',
       productName: 'Nike Air A123',
       image: require('../assets/thoto/banners/shoes-color.jpg'),
@@ -9,7 +9,7 @@ export const searchData = [
       status: ''
     },
     {
-      _id: 2,
+      _id: '2',
       category: 'Zapatillas Deportivas',
       productName: 'Puma Slinter',
       image: require('../assets/thoto/banners/shoes-color.jpg'),
@@ -18,7 +18,7 @@ export const searchData = [
       status: ''
     },
     {
-      _id: 3,
+      _id: "654d00ce6dedb6c9930e4afe",
       category: 'Zapatillas Deportivas',
       productName: 'Adidas Tennis',
       image: require('../assets/thoto/banners/shoes-color.jpg'),
@@ -27,7 +27,7 @@ export const searchData = [
       status: ''
     },
     {
-      _id: 4,
+      _id: '4',
       category: 'Zapatillas Deportivas',
       productName: 'Nike Jordan',
       image: require('../assets/thoto/banners/shoes-color.jpg'),
@@ -36,7 +36,7 @@ export const searchData = [
       status: ''
     },
     {
-      _id: 5,
+      _id: '5',
       category: 'Zapatillas Deportivas',
       productName: 'Nike Jordan',
       image: require('../assets/thoto/banners/shoes-color.jpg'),
@@ -45,7 +45,7 @@ export const searchData = [
       status: ''
     },
     {
-      _id: 6,
+      _id: '6',
       category: 'Zapatillas Deportivas',
       productName: 'Nike Jordan',
       image: require('../assets/thoto/banners/shoes-color.jpg'),
@@ -54,7 +54,7 @@ export const searchData = [
       status: ''
     },
     {
-      _id: 7,
+      _id: '7',
       category: 'Zapatillas Deportivas',
       productName: 'Nike Jordan',
       image: require('../assets/thoto/banners/shoes-color.jpg'),
@@ -63,7 +63,7 @@ export const searchData = [
       status: ''
     },
     {
-      _id: 8,
+      _id: '8',
       category: 'Zapatillas Deportivas',
       productName: 'Nike Jordan',
       image: require('../assets/thoto/banners/shoes-color.jpg'),
@@ -72,7 +72,7 @@ export const searchData = [
       status: ''
     },
     {
-      _id: 9,
+      _id: '9',
       category: 'Zapatillas Deportivas',
       productName: 'Nike Jordan',
       image: require('../assets/thoto/banners/shoes-color.jpg'),

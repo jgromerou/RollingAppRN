@@ -8,6 +8,7 @@ import { RadioButton } from 'react-native-paper';
 import { Button } from 'react-native';
 import { CartContext } from '../../contexts/CartContext';
 import { CustomModal } from './CustomModal';
+import { dashAxios } from '../../config/dashAxios';
 
 export const ConfirmPay = ({navigation}) => {
     //console.log(props) colors
@@ -17,10 +18,10 @@ export const ConfirmPay = ({navigation}) => {
     } = useContext(ThemeContext);
     const [visible, setVisible] = useState(false);
     const [selectedValue, setSelectedValue] = useState('');
-    const { addTypePay, state, initCartShoping } = useContext(CartContext);
+    const { addTypePay, state, initCartShoping, addSales } = useContext(CartContext);
     const [messageModal, setMessageModal] = useState("");
     const [ sale, setSale] = useState(false);
-    console.log(colors.primary, 'colors.primary')
+    //console.log(colors.primary, 'colors.primary')
 
     const closeAlert = () => 
     {
@@ -37,17 +38,17 @@ export const ConfirmPay = ({navigation}) => {
       switch (value) {
         case 'Cash':
           // Execute actions for Cash
-          console.log('Cash selected');
+          //console.log('Cash selected');
           addTypePay(value);
           break;
         case 'Credit Card':
           // Execute actions for Credit cart
-          console.log('Credit Card selected');
+          //console.log('Credit Card selected');
           addTypePay(value);
           break;
         case 'Mercadopago':
           // Execute actions for Mercadopago
-          console.log('Mercadopago selected');
+          //console.log('Mercadopago selected');
           addTypePay(value);
           break;
         default:
@@ -74,13 +75,43 @@ export const ConfirmPay = ({navigation}) => {
         return;
       }
       //Aqui guardo en la base de datos y si es ok
+      addSales01();
+    }
+
+    const addSales01 = async() => {
+    try {
+        //console.log('ingresa al sales')
+        
+        let user = state.user;
+        let saleDate = state.saleDate;
+        let cartProducts = state.cart;
+        let paymentType = state.paymentType;
+        let status = 'Realizada';
+        let totalPrice = state.totalPrice;
+        const { data } = await dashAxios.post("/sales", {
+          user,
+          saleDate, 
+          cartProducts,
+          cartProducts,
+          paymentType,
+          status,
+          totalPrice
+      });
+      console.log(data, 'data axios')
       setSale(true);
       setMessageModal("Felicitaciones, su compra se genero con exito!");
       setVisible(true);
 
       //inicializo cartShopping y voy pagina principal
       initCartShoping();
-    }
+
+      } catch (error) {
+        const msg = error.response.data.errores[0].msg
+        console.log('ERROR', msg)
+        setMessageModal("En estos momentos no se puede Realizar la compra, espere unos minutos e intente, Gracias!");
+        setVisible(true);
+      }
+  }
 
 
   useEffect(() => {

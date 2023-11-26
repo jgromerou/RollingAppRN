@@ -4,6 +4,7 @@ import { AuthReducer } from '../reducers/AuthReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { types } from '../types/types';
 import { dashAxios } from '../config/dashAxios';
+import { CartProvider } from './CartProvider';
 
 const initialState = {
   isLogged: false,

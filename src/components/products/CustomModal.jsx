@@ -1,6 +1,6 @@
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import React, {useState} from 'react'
-import { Pressable, StyleSheet, Text } from 'react-native'
+import { Image, Pressable, StyleSheet, Text } from 'react-native'
 import { Modal } from 'react-native'
 import { View } from 'react-native'
 import { Feather } from 'react-native-vector-icons';
@@ -44,7 +44,17 @@ export const CustomModal = ({closeAlert, visible, messageModal}) => {
                         height: 2
                     }
                 }}> 
-                    <Feather name='x-octagon' size={35} color={colors.primary} />
+                    {/* <Feather name='x-octagon' size={35} color={colors.primary} /> */}
+                    <Image 
+                      source={require('../../assets/thoto/banners/rc-logo.jpg')}
+                      style={{
+                        width:70,
+                        height: 70,
+                        //marginLeft: 30,
+                        //verticalAlign: 'center',
+                        objectFit: 'cover',
+                      }} 
+                  />
                     <Text style={{ 
                         fontSize: 20,
                         fontWeight: 'bold',

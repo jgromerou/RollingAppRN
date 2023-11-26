@@ -4,6 +4,7 @@ import { CartContext } from '../contexts/CartContext';
 //import { AuthContext } from '../contexts/AuthContext';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 import { types } from '../types/types';
+import { dashAxios } from '../config/dashAxios';
 
 
 const initialState = {
@@ -33,9 +34,9 @@ export const CartProvider = ({ children }) => {
                 _id: productData.product._id,
                 productName: productData.product.productName,
                 price: productData.product.price,
-                waist: productData.waist,
+                //waist: productData.waist,
                 quantity: productData.quantity,
-                category: productData.product.category
+                //category: productData.product.category
             }
         ]
 
@@ -119,6 +120,56 @@ export const CartProvider = ({ children }) => {
         })
 
     }
+    //GUARDAR EN BD CON AXIOS
+    const addSales = async () => {
+        try {
+        console.log('ingresa al sales')
+          
+          let user = state.user;
+          let saleDate = state.saleDate;
+          let cartProducts = state.cart;
+          let paymentType = state.paymentType;
+          let status = 'Realizada';
+          let totalPrice = state.totalPrice;
+
+          console.log(user, 'user')
+          console.log(saleDate, 'saleDate')
+          console.log(cartProducts,'cartProducts')
+          console.log(paymentType, 'paymentType')
+          console.log(status, 'status')
+          console.log(totalPrice, 'totalPrice')
+          const { data } = await dashAxios.post("/sales", {
+            user: "6513a6202faaee60b5eb9cb2",
+            saleDate: "2023-11-25", 
+            cartProducts: [{_id: "654d00ce6dedb6c9930e4afe", price: 25000, productName: "Adidas Tennis", quantity: 1}],
+            paymentType: "Credit Card",
+            status: "Realizada",
+            totalPrice: 25000
+
+        });
+        console.log(data, 'data axios')
+    
+        //   dispatch({
+        //     type: types.users.createUser,
+        //     payload: {
+        //       ...state,
+        //       errorMessage: '',
+              
+        //     },
+    
+        //   });
+        } catch (error) {
+        //   console.log(error);
+          const msg = error.response.data.errores[0].msg
+          console.log('ERROR', msg)
+        //   dispatch({
+        //     type: types.users.createUser,
+        //     payload: {
+        //       errorMessage: msg,
+        //     },
+        //   });
+        }
+      };
   
     return (
         <CartContext.Provider value={{
@@ -130,7 +181,8 @@ export const CartProvider = ({ children }) => {
             initLoading,
             addTypePay,
             initCartShoping, 
-            addUserDate
+            addUserDate,
+            addSales
         }}>
             { children }
         </CartContext.Provider>
