@@ -15,6 +15,7 @@ import { Image } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import Carousel from "react-native-reanimated-carousel";
 import { ProductsContext } from "../contexts/ProductsContext";
+import { CustomLoading } from "../components/CustomLoading";
 
 export const HomeScreen = ({ navigation }) => {
   const {
@@ -100,7 +101,9 @@ export const HomeScreen = ({ navigation }) => {
             </View>
             {/* Categories */}
 
-            {categories && (
+            {!categories ? (
+              <CustomLoading />
+            ) : (
               <View style={{ padding: 10, marginBottom: 10 }}>
                 <View
                   style={{
@@ -295,7 +298,9 @@ export const HomeScreen = ({ navigation }) => {
               </View>
             </ScrollView>
             {/* Most sold */}
-            {featuredProducts && (
+            {!featuredProducts ? (
+              <CustomLoading />
+            ) : (
               <View style={{ padding: 10, marginBottom: 10 }}>
                 <View
                   style={{

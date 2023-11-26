@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as LocalAuthentication from "expo-local-authentication";
 import { Ionicons } from "@expo/vector-icons";
 
-import { useWindowDimensions } from "react-native";
+import { Dimensions, useWindowDimensions } from "react-native";
 import {
   DrawerContentScrollView,
   createDrawerNavigator,
@@ -19,8 +19,11 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { CartScreen } from "../screens/CartScreen";
 import { AuthContext } from "../contexts/AuthContext";
 import { CustomLoading } from "../components/CustomLoading";
+import { Image } from "react-native";
 
 const Drawer = createDrawerNavigator();
+
+const screenHeight = Dimensions.get("window").height;
 
 export const DrawerNavigator = () => {
   const { state } = useContext(ThemeContext);
@@ -54,13 +57,8 @@ export const DrawerNavigator = () => {
             >
               <Drawer.Screen
                 name="TabsNavigator"
-                options={{ title: "Inicio" }}
+                options={{ title: "Sportify" }}
                 component={TabsNavigator}
-              />
-              <Drawer.Screen
-                name="CartScreen"
-                component={CartScreen}
-                options={{ title: "Mi Carrito" }}
               />
             </Drawer.Navigator>
           </NavigationContainer>
@@ -167,92 +165,110 @@ const Menu = ({ navigation }) => {
 
   return (
     <DrawerContentScrollView>
-      {/* Contenedor de los botones de cambiar tema */}
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
-          marginTop: 30,
+          height: screenHeight - 50,
         }}
       >
-        <TouchableOpacity
-          onPress={setLightTheme}
-          activeOpacity={0.8}
-          style={[globalThemes.defaultBtn, { borderColor: colors.primary }]}
+        {/* Opciones de Menú - Navegación Tabs */}
+        <View
+          style={
+            ([globalThemes.container], { backgroundColor: colors.background })
+          }
         >
-          <Text style={[globalThemes.defaulTextBtn, { color: colors.text }]}>
-            Light
-          </Text>
-        </TouchableOpacity>
+          {/* Contenedor del avatar */}
+          <View style={globalThemes.avatarContainer}>
+            <Image
+              style={globalThemes.avatar}
+              source={require("../../assets/avatar_2.jpg")}
+            />
+          </View>
+          {state.isLogged && (
+            <>
+              {/* Link a Inicio */}
+              <TouchableOpacity
+                style={{ ...globalThemes.menuButton, flexDirection: "row" }}
+                onPress={() => navigation.navigate("HomeScreen")}
+              >
+                <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                  - Inicio
+                </Text>
+              </TouchableOpacity>
+              {/* Link a Categorías */}
+              <TouchableOpacity
+                style={{ ...globalThemes.menuButton, flexDirection: "row" }}
+                onPress={() => navigation.navigate("CategoriesScreen")}
+              >
+                <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                  - Categorías
+                </Text>
+              </TouchableOpacity>
+            </>
+          )}
+          {state.isLogged && (
+            <>
+              <TouchableOpacity
+                style={{ ...globalThemes.menuButton, flexDirection: "row" }}
+                onPress={() => logout()}
+              >
+                <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                  - Cerrar sesión
+                </Text>
+              </TouchableOpacity>
+            </>
+          )}
+          {!state.isLogged && (
+            <>
+              <TouchableOpacity
+                style={{ ...globalThemes.menuButton, flexDirection: "row" }}
+                onPress={() =>
+                  navigation.navigate("StackAuthNavigator", {
+                    screen: "StackAuthNavigator",
+                  })
+                }
+              >
+                <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                  - Login
+                </Text>
+              </TouchableOpacity>
+            </>
+          )}
+        </View>
+        {/* Contenedor de los botones de cambiar tema */}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-around",
+            alignItems: "center",
+            backgroundColor: colors.background,
+          }}
+        >
+          <TouchableOpacity
+            onPress={setLightTheme}
+            activeOpacity={0.8}
+            style={[
+              globalThemes.defaultBtn,
+              { borderColor: colors.primary, padding: 5 },
+            ]}
+          >
+            <Text style={[globalThemes.defaulTextBtn, { color: colors.text }]}>
+              Claro
+            </Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={setDarkTheme}
-          activeOpacity={0.8}
-          style={[globalThemes.defaultBtn, { borderColor: colors.primary }]}
-        >
-          <Text style={[globalThemes.defaulTextBtn, { color: colors.text }]}>
-            Dark
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Opciones de Menú - Navegación Tabs */}
-      <View style={globalThemes.container}>
-        {/* Link a Productos */}
-        <TouchableOpacity
-          style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-          onPress={() => navigation.navigate("ProfileScreen")}
-        >
-          <Text style={{ ...globalThemes.text, color: colors.primary }}>
-            - Productos
-          </Text>
-        </TouchableOpacity>
-        {/* Link a Categorías */}
-        <TouchableOpacity
-          style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-          onPress={() => navigation.navigate("CategoriesScreen")}
-        >
-          <Text style={{ ...globalThemes.text, color: colors.primary }}>
-            - Categorías
-          </Text>
-        </TouchableOpacity>
-        {state.isLogged && (
-          <>
-            <TouchableOpacity
-              style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-              // onPress={() => navigation.navigate('CartScreen')}
-              onPress={() => handleBiometricAuth()}
-            >
-              <Text style={{ ...globalThemes.text, color: colors.primary }}>
-                - Mi carrito
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-              onPress={() => logout()}
-            >
-              <Text style={{ ...globalThemes.text, color: colors.primary }}>
-                - Logout
-              </Text>
-            </TouchableOpacity>
-          </>
-        )}
-        {!state.isLogged && (
-          <>
-            <TouchableOpacity
-              style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-              onPress={() =>
-                navigation.navigate("StackAuthNavigator", {
-                  screen: "StackAuthNavigator",
-                })
-              }
-            >
-              <Text style={{ ...globalThemes.text, color: colors.primary }}>
-                - Login
-              </Text>
-            </TouchableOpacity>
-          </>
-        )}
+          <TouchableOpacity
+            onPress={setDarkTheme}
+            activeOpacity={0.8}
+            style={[
+              globalThemes.defaultBtn,
+              { borderColor: colors.primary, padding: 5 },
+            ]}
+          >
+            <Text style={[globalThemes.defaulTextBtn, { color: colors.text }]}>
+              Oscuro
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </DrawerContentScrollView>
   );
