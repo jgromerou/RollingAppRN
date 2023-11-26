@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -8,20 +8,33 @@ import {
   Dimensions,
   TouchableOpacity,
   SafeAreaView,
+  Pressable,
 } from "react-native";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Carousel from "react-native-reanimated-carousel";
+import { ProductsContext } from "../contexts/ProductsContext";
 
 
 export const HomeScreen = ({navigation}) => {
-  const {
-    state: { colors },
-  } = useContext(ThemeContext);
+  const { state: { colors } } = useContext(ThemeContext);
+
+  const {categories, isLoading, getCategories} = useContext(ProductsContext)
 
   const navigatetoCategories = () => {
-    navigation.navigate('CategoriesScreen');}
+    navigation.navigate('CategoriesScreen');
+  }
+
+  const navigateToCategory = (categoryName) => {
+    navigation.navigate('ProductsByCategory', { categoryName });
+  };  
+  
+  useEffect(() => {
+    getCategories()
+    console.log(`HOMESCREEN`, categories)
+  },[isLoading])
+
 
   return (
     <ScrollView>
@@ -63,7 +76,8 @@ export const HomeScreen = ({navigation}) => {
               </View>
             </View>
             {/* Categories */}
-            <View style={{ padding: 10, marginBottom: 10 }}>
+
+            {categories && <View style={{ padding: 10, marginBottom: 10 }}>
               <View
                 style={{
                   flexDirection: "row",
@@ -95,30 +109,44 @@ export const HomeScreen = ({navigation}) => {
                 }}
               >
                 <View style={{ gap: 10 }}>
+                <Pressable 
+                onPress={() => navigateToCategory(categories[4]?.categoryName)}
+                >
                   <Image
                     source={{
-                      uri: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
+                      uri: `${categories[4]?.image}`,
                     }}
                     style={{ height: 120, borderRadius: 15, width: 140 }}
                   />
-
+                  </Pressable>
+                  <Pressable 
+                  onPress={() => navigateToCategory(categories[5]?.categoryName)}
+                  >
                   <Image
                     source={{
-                      uri: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
+                      uri: `${categories[5]?.image}`,
                     }}
                     style={{ height: 120, borderRadius: 15, width: 140 }}
                   />
+                  </Pressable>
                 </View>
                 <View>
+                  <Pressable 
+                  onPress={() => navigateToCategory(categories[3]?.categoryName)}
+                  >
                   <Image
                     source={{
-                      uri: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
+                      uri: `${categories[3]?.image}`,
                     }}
                     style={{ height: 250, borderRadius: 15, width: 200 }}
                   />
+                  </Pressable>
                 </View>
               </View>
-            </View>
+            </View>  }
+            
+
+            
             {/* Brands */}
             <ScrollView horizontal={true}>
               <View

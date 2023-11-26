@@ -30,7 +30,6 @@ export const ProductReducer = (state={}, action) => {
 
         case types.products.getCategories:
             return {
-                ...state,
                 isLoading: false,
                 errorMessage: '',
                 categories: action.payload.categories

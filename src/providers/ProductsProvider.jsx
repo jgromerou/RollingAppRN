@@ -101,7 +101,6 @@ export const ProductProvider = ({ children }) => {
             dispatch({
                 type: types.products.getCategories,
                 payload:  {
-                    ...state,
                  categories: data.data
                 }
             })    
