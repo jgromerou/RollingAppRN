@@ -60,7 +60,7 @@ export const CustomModal = ({closeAlert, visible, messageModal}) => {
                         fontWeight: 'bold',
                         marginVertical: 10
                         //color: 'white'
-                    }}>Message Cart Shopping</Text>
+                    }}>Mensaje</Text>
                     <Text style={{ fontSize: 15, textAlign: 'center'}}>
                         {messageModal}
                     </Text>
