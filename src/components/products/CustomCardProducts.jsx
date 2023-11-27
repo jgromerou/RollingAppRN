@@ -5,6 +5,7 @@ import { AntDesign } from 'react-native-vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 export const CustomCardProducts = ({ itemData }) => {
+  console.log(itemData, 'itemData')
   const {
     state: { colors },
   } = useContext(ThemeContext);

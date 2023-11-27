@@ -78,7 +78,7 @@ export const ProductsScreen = ({ route, navigation }) => {
     }
     const data = {
       product: productSelected,
-      // waist: talle,
+      waist: talle,
       quantity: quantity,
       // image: productSelected?.image.secure_url,
     };
