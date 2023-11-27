@@ -78,9 +78,9 @@ export const ProductsScreen = ({ route, navigation }) => {
     }
     const data = {
       product: productSelected,
-      // waist: talle,
+      waist: talle,
       quantity: quantity,
-      // image: productSelected?.image.secure_url,
+ 
     };
     addCart(data);
     calculateCart();
@@ -188,7 +188,7 @@ export const ProductsScreen = ({ route, navigation }) => {
                 backgroundColor:
                   item == talle
                     ? 'rgba(242, 5, 139, 0.4)'
-                    : 'rgba(255,255,255,0)',
+                    : "rgba(0,0,0,0.5)",
                 padding: 12,
                 borderWidth: 1,
                 borderColor:
