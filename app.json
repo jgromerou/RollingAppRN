@@ -23,6 +23,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "pugins": [
+      [
+        "expo-updates",
+        {
+          "username": "gerardorom"
+        }
+      ]
+    ]
   }
 }
