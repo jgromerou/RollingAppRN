@@ -8,6 +8,7 @@ import { CartContext } from '../../contexts/CartContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
 export const CartItem = ({ item, index }) => {
+  console.log(item, 'itemcategory')
   const {
     state: { colors },
   } = useContext(ThemeContext);
@@ -68,7 +69,7 @@ export const CartItem = ({ item, index }) => {
             {item.category}
           </Text>
           <Text style={{ fontSize: 13, color: '#fff' }}>
-            {item.productName}
+            {item.productName.length < 28 ? item.productName : item.productName.slice(0,27)}
           </Text>
           <Text
             style={{

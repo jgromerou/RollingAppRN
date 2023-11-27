@@ -57,8 +57,11 @@ export const CustomCardProducts = ({ itemData }) => {
             marginTop: 3,
           }}
         >
-          <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'black' }}>
-            {itemData.productName}
+          <Text style={{ 
+            fontWeight: 'bold', 
+            fontSize: 9, 
+            color: 'black' }}>
+            {itemData.productName.length < 20 ? itemData.productName : itemData.productName.slice(0,20)}
           </Text>
           <Text style={{ fontSize: 13, color: colors.text }}>
             {itemData.category}
