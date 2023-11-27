@@ -23,51 +23,31 @@ export const CustomQuantity = ({
   const RestContext = () => {
     initLoading();
     restQuantity();
-    //    if (index !== null && index !== undefined) {
-    //         console.log('ingresa actcart1')
-    //         ActCart();
-    //    }
   };
   const SumContext = () => {
     initLoading();
     sumQuantity();
-    //    if (index !== null && index !== undefined) {
-    //         console.log('ingresa actcart1')
-    //         ActCart();
-    //    }
   };
   useEffect(() => {
     if (index !== null && index !== undefined) {
-      //console.log(state.isLoading,'isloading')
       ActCart();
-      // console.log(state.cart, 'cart')
     }
-    //console.log(state.cart, 'cart')
-    //calculateCart();
   }, [quantity]);
 
   useEffect(() => {
-    //console.log(state.cart, 'cart')
     calculateCart();
   }, [state.isLoading]);
 
   const ActCart = () => {
-    //console.log('ingresa actcart2')
     const CartModificada = {
       _id: item._id,
       productName: item.productName,
       price: item.price,
-      //waist: item.waist,
       quantity: quantity,
       image: item.image,
-      //category: item.category
     };
-    //console.log(CartModificada, 'cardmodificada')
-    //modifica la cantidades de cada item
     initLoading();
     editCart(CartModificada, index);
-    //calcula el valor total del carrito
-    //calculateCart();
   };
   const ActCalculateCart = () => {
     calculateCart();
@@ -93,7 +73,6 @@ export const CustomQuantity = ({
           //color="rgba(255, 255, 255, 0.5)"
           color={colors.titleColor}
         />
-        {/* <AntDesign name="minussquare" size={25} color="rgba(255, 255, 255, 0.5)" /> */}
       </Pressable>
 
       <View
@@ -117,10 +96,8 @@ export const CustomQuantity = ({
 
       <Pressable
         style={{ alignItems: 'center', justifyContent: 'center' }}
-        //onPress={ sumQuantity }
         onPress={() => SumContext()}
       >
-        {/* <AntDesign name="plussquare" size={25} color="rgba(255, 255, 255, 0.5)" /> */}
         <AntDesign
           name="pluscircle"
           size={25}

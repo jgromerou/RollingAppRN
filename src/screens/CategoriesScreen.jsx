@@ -17,7 +17,6 @@ const CategoriesScreen = ({ navigation }) => {
 
   useEffect(() => {
     getCategories();
-    //console.log("CATEGORIAS", stateCategories);
   }, [isLoading]);
 
   const navigatetoProductos = (categoryId, categoryName) => {

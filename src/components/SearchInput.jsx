@@ -9,18 +9,13 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useDebounceSetValue } from '../hooks/useDebounceSetValue';
 
-
-
 export const SearchInput = ({ style, onDebounce }) => {
   const [textValue, setTextValue] = useState('');
-
-  // console.log(textValue);
 
   const debouncedValue = useDebounceSetValue(textValue);
 
   useEffect(() => {
     onDebounce(debouncedValue);
-    //console.log({ debouncedValue });
   }, [debouncedValue]);
 
   return (

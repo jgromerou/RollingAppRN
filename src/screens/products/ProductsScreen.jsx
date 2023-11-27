@@ -43,15 +43,10 @@ export const ProductsScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     getProduct(productId);
-    console.log(
-      'DETALLE PRODUCTO is loading product selected',
-      productSelected
-    );
   }, [isLoadingProductSelected]);
 
   useEffect(() => {
     getProduct(productId);
-    console.log('DETALLE PRODUCTO', productSelected);
   }, [productId]);
 
   const obtenerTalle = (dataTalle) => {
@@ -89,9 +84,6 @@ export const ProductsScreen = ({ route, navigation }) => {
     };
     addCart(data);
     calculateCart();
-    //borrar solo para agregar user y date al contextcart
-    //let user = 'jekfefhjeekkdkwd4dd14f1f4f';
-    //console.log(cliente.user.id, 'cliente')
     addUserDate(cliente.user.id);
   };
 
@@ -110,10 +102,6 @@ export const ProductsScreen = ({ route, navigation }) => {
     editCart(CartModificada, numindex);
     calculateCart();
   };
-
-  if (isLoadingProductSelected) {
-    return console.log('está cargando');
-  }
 
   return (
     <View

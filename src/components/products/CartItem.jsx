@@ -8,7 +8,6 @@ import { CartContext } from '../../contexts/CartContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
 export const CartItem = ({ item, index }) => {
-  //console.log(index, 'cartItem')
   const {
     state: { colors },
   } = useContext(ThemeContext);
@@ -17,15 +16,11 @@ export const CartItem = ({ item, index }) => {
     useContext(CartContext);
 
   const deleCart = (index) => {
-    //console.log(index,'ELIMINAR');
     initLoading();
     deleteCart(index);
-    //calculateCart();
   };
   useEffect(() => {
     calculateCart();
-    //console.log(item.qty, 'caritem qty')
-    //console.log(quantity, 'quantity cartItem')
   }, [item.quantity]);
 
   return (

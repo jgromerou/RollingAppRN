@@ -11,7 +11,6 @@ import { CustomModal } from './CustomModal';
 import { dashAxios } from '../../config/dashAxios';
 
 export const ConfirmPay = ({ navigation }) => {
-  //console.log(props) colors
   const { navigate } = useNavigation();
   const {
     state: { colors },
@@ -33,11 +32,8 @@ export const ConfirmPay = ({ navigation }) => {
 
   const handleRadioButtonPress = (value) => {
     setSelectedValue(value);
-    // You can add your custom logic here based on the selected value
     switch (value) {
       case 'Efectivo':
-        // Execute actions for Cash
-
         addTypePay(value);
         break;
       case 'Tarjeta de Crédito':
@@ -45,7 +41,6 @@ export const ConfirmPay = ({ navigation }) => {
         addTypePay(value);
         break;
       case 'Mercadopago':
-        // Execute actions for Mercadopago
         addTypePay(value);
         break;
       default:
@@ -77,8 +72,6 @@ export const ConfirmPay = ({ navigation }) => {
 
   const addSales01 = async () => {
     try {
-      //console.log('ingresa al sales')
-
       let user = state.user;
       let saleDate = state.saleDate;
       let cartProducts = state.cart;
@@ -94,7 +87,6 @@ export const ConfirmPay = ({ navigation }) => {
         status,
         totalPrice,
       });
-      console.log(data, 'data axios');
       setSale(true);
       setMessageModal('Felicitaciones, su compra se genero con exito!');
       setVisible(true);
