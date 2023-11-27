@@ -78,9 +78,9 @@ export const ProductsScreen = ({ route, navigation }) => {
     }
     const data = {
       product: productSelected,
-      // waist: talle,
+      waist: talle,
       quantity: quantity,
-      // image: productSelected?.image.secure_url,
+ 
     };
     addCart(data);
     calculateCart();
@@ -136,8 +136,8 @@ export const ProductsScreen = ({ route, navigation }) => {
         <Image
           source={{ uri: `${productSelected?.image.secure_url}` }}
           style={{
-            width: '100%',
-            height: '100%',
+            width: 180,
+            height: 180,
             borderRadius: 10,
           }}
         />
@@ -158,7 +158,7 @@ export const ProductsScreen = ({ route, navigation }) => {
         <Text
           style={{ fontSize: 16, color: colors.titleColor, fontWeight: 'bold' }}
         >
-          {productSelected?.productName}{' '}
+          {productSelected?.productName.length < 28 ? productSelected?.productName : productSelected?.productName.slice(0,27)}{' '}
         </Text>
         <Text
           style={{ fontSize: 22, color: colors.titleColor, fontWeight: 'bold' }}
@@ -171,12 +171,46 @@ export const ProductsScreen = ({ route, navigation }) => {
         style={{
           flex: 1.8,
           //backgroundColor: colors.primary,
+          backgroundColor: "rgba(0,0,0,0)",
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
         }}
       >
-        {[36, 37, 38, 39, 40].map((item) => (
+        {productSelected?.category === "Zapatillas" ? 
+        (
+          [36,37,38,39,40].map((item) => (
+            <Pressable
+              key={item}
+              onPress={() => obtenerTalle(item)}
+              style={{
+                marginHorizontal: 5,
+                backgroundColor:
+                  item == talle
+                    ? 'rgba(242, 5, 139, 0.4)'
+                    : "rgba(0,0,0,0.5)",
+                padding: 12,
+                borderWidth: 1,
+                borderColor:
+                  item == talle ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.4)',
+                borderRadius: 5,
+              }}
+            >
+              <Text
+                style={{
+                  color:
+                    item == talle
+                      ? 'rgba(255,255,255,1)'
+                      : 'rgba(255,255,255,0.5)',
+                }}
+              >
+                {item}
+              </Text>
+            </Pressable>
+          ))
+        )
+        :
+        (["XS", "S", "M", "L", "XL"].map((item) => (
           <Pressable
             key={item}
             onPress={() => obtenerTalle(item)}
@@ -185,7 +219,7 @@ export const ProductsScreen = ({ route, navigation }) => {
               backgroundColor:
                 item == talle
                   ? 'rgba(242, 5, 139, 0.4)'
-                  : 'rgba(255,255,255,0)',
+                  : "rgba(0,0,0,0.5)",
               padding: 12,
               borderWidth: 1,
               borderColor:
@@ -204,7 +238,9 @@ export const ProductsScreen = ({ route, navigation }) => {
               {item}
             </Text>
           </Pressable>
-        ))}
+        )))
+        }
+        
       </View>
 
       <View

@@ -45,6 +45,8 @@ export const CustomQuantity = ({
       price: item.price,
       quantity: quantity,
       image: item.image,
+      category: item.category,
+      waist: item.waist
     };
     initLoading();
     editCart(CartModificada, index);

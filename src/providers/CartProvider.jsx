@@ -29,10 +29,9 @@ export const CartProvider = ({ children }) => {
         productName: productData.product.productName,
         price: productData.product.price,
         image: productData.product.image.secure_url,
-        //waist: productData.waist,
+        waist: productData.waist,
         quantity: productData.quantity,
-
-        //category: productData.product.category
+        category: productData.product.category
       },
     ];
 
