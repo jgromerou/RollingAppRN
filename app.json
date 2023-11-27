@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -31,6 +33,11 @@
           "username": "gerardorom"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "61b9619d-032e-47d7-b389-3cf5495f8e1a"
+      }
+    }
   }
 }
