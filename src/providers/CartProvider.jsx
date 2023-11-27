@@ -22,8 +22,6 @@ export const CartProvider = ({ children }) => {
   //const { state: userData } = useContext(AuthContext);
 
   const addCart = async (productData) => {
-    // console.log(productData.product.productName, 'productdata providers')
-    console.log('PRODUCT DATA', productData.product);
     const addProduct = [
       ...state.cart,
       {
@@ -53,7 +51,6 @@ export const CartProvider = ({ children }) => {
 
   // Modificar item del carrito
   const editCart = async (CartModificada, index) => {
-    //console.log(CartModificada, 'dentro provider')
     dispatch({
       type: types.cart.editCart,
       payload: { CartModificada, index },
@@ -70,7 +67,6 @@ export const CartProvider = ({ children }) => {
 
   //eliminar item del carrito
   const deleteCart = async (index) => {
-    //console.log(index, 'dentro provider')
     dispatch({
       type: types.cart.deleteItemCar,
       payload: { index },
@@ -79,14 +75,12 @@ export const CartProvider = ({ children }) => {
   // Calcular total del carrito
   const calculateCart = async () => {
     if (state.cart.length === 0) {
-      //console.log('cart 0')
       let totalprecio = 0.0;
       dispatch({
         type: types.cart.calculateCart,
         payload: { totalprecio },
       });
     } else {
-      //console.log('cart > 0')
       //fn calcula el total de cant*precio del todos los prod del carrito
       let totalprecio = state.cart.reduce(
         (acc, num) => acc + num.quantity * num.price,
@@ -106,7 +100,6 @@ export const CartProvider = ({ children }) => {
   };
   //CAMBIAR LOADINGCART
   const initLoading = () => {
-    //console.log('ingresa initloading')
     dispatch({
       type: types.cart.loadingCart,
     });
@@ -122,8 +115,6 @@ export const CartProvider = ({ children }) => {
   //GUARDAR EN BD CON AXIOS
   const addSales = async () => {
     try {
-      //console.log('ingresa al sales');
-
       let user = state.user;
       let saleDate = state.saleDate;
       let cartProducts = state.cart;
@@ -131,12 +122,6 @@ export const CartProvider = ({ children }) => {
       let status = 'Realizada';
       let totalPrice = state.totalPrice;
 
-      // console.log(user, 'user');
-      // console.log(saleDate, 'saleDate');
-      // console.log(cartProducts, 'cartProducts');
-      // console.log(paymentType, 'paymentType');
-      // console.log(status, 'status');
-      // console.log(totalPrice, 'totalPrice');
       const { data } = await dashAxios.post('/sales', {
         user: '6513a6202faaee60b5eb9cb2',
         saleDate: '2023-11-25',
@@ -152,7 +137,6 @@ export const CartProvider = ({ children }) => {
         status: 'Realizada',
         totalPrice: 25000,
       });
-      console.log(data, 'data axios');
 
       //   dispatch({
       //     type: types.users.createUser,

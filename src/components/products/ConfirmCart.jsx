@@ -25,7 +25,6 @@ export const ConfirmCart = ({ navigation }) => {
   }, [isLoading]);
 
   const cartRender = (item, index) => {
-    //console.log('ITEM', item);
     return (
       <View
         style={{
@@ -33,7 +32,6 @@ export const ConfirmCart = ({ navigation }) => {
           backgroundColor: colors.primary,
           borderColor: colors.text,
           borderWidth: 3,
-          //backgroundColor: '#ccc',
           flexDirection: 'row',
           borderWidth: 1,
           justifyContent: 'center',

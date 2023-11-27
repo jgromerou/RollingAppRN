@@ -70,8 +70,6 @@ export const ProductProvider = ({ children }) => {
     try {
       const data = await dashAxios.get(`products/category/${category}`);
 
-      console.log(data.data);
-
       dispatch({
         type: types.products.getProductsByCategory,
         payload: {
@@ -111,7 +109,6 @@ export const ProductProvider = ({ children }) => {
   const getFeaturedProducts = async () => {
     try {
       const data = await dashAxios.get(`sales/filter/byProduct`);
-      //   console.log(`FEATURED PRODUCTS`, data.data);
 
       const featuredProductsId = data.data.map((product) => {
         return product._id;

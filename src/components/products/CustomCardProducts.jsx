@@ -9,10 +9,7 @@ export const CustomCardProducts = ({ itemData }) => {
     state: { colors },
   } = useContext(ThemeContext);
 
-  //console.log('item-data', itemData);
-
   const { navigate } = useNavigation();
-  //const photo = `../../assets/photo/products/${itemData.photo}`;
   const [favorite, setFavorite] = useState(0);
 
   const onPresFavorite = (id) => {

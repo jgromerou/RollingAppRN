@@ -27,14 +27,10 @@ const ProductsByCategory = ({ navigation, route }) => {
 
   useEffect(() => {
     getProductsByCategory(categoryName);
-    //console.log('PRODUCT LIST', stateProducts.products);
   }, [isLoading]);
 
   const navigatetoProductos = (productId) => {
-    // console.log(productId);
     navigation.navigate('ProductsScreen', { productId });
-
-    console.log(productId);
   };
 
   return (

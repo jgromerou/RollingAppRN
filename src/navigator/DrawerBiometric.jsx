@@ -1,33 +1,34 @@
-import React, { useContext, useState, useEffect } from "react";
-import * as LocalAuthentication from "expo-local-authentication";
-import { StatusBar, View, TouchableOpacity, Text, useWindowDimensions, SafeAreaView, Button, Alert, TouchableHighlight  } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import React, { useContext, useState, useEffect } from 'react';
+import * as LocalAuthentication from 'expo-local-authentication';
+import {
+  StatusBar,
+  View,
+  TouchableOpacity,
+  Text,
+  useWindowDimensions,
+  SafeAreaView,
+  Button,
+  Alert,
+  TouchableHighlight,
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import {
   DrawerContentScrollView,
   createDrawerNavigator,
-} from "@react-navigation/drawer";
-import { Ionicons } from "@expo/vector-icons";
-import { TabsNavigator } from "./TabsNavigator";
-import { StackAuthNavigator } from "./StackAuthNavigator";
-import { globalThemes } from "../themes/globalThemes";
-import { ThemeContext } from "../contexts/ThemeContext";
-import { CartScreen } from "../screens/CartScreen";
-import { AlertComponent } from "../components/AlertComponent";
+} from '@react-navigation/drawer';
+import { Ionicons } from '@expo/vector-icons';
+import { TabsNavigator } from './TabsNavigator';
+import { StackAuthNavigator } from './StackAuthNavigator';
+import { globalThemes } from '../themes/globalThemes';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { CartScreen } from '../screens/CartScreen';
+import { AlertComponent } from '../components/AlertComponent';
 
 const Drawer = createDrawerNavigator();
-
-
-
 
 export const DrawerBiometric = () => {
   const { state } = useContext(ThemeContext);
   const { width } = useWindowDimensions();
-
-
-
-
-
-
 
   return (
     <>
@@ -36,8 +37,8 @@ export const DrawerBiometric = () => {
         <NavigationContainer theme={state}>
           <Drawer.Navigator
             screenOptions={{
-              drawerPosition: "left",
-              drawerType: width >= 768 ? "permanent" : "front",
+              drawerPosition: 'left',
+              drawerType: width >= 768 ? 'permanent' : 'front',
               headerTintColor: state.colors.background,
               headerStyle: {
                 backgroundColor: state.colors.primary,
@@ -46,8 +47,16 @@ export const DrawerBiometric = () => {
             drawerContent={(props) => <Menu {...props} />}
           >
             <Drawer.Screen name="TabsNavigator" component={TabsNavigator} />
-            <Drawer.Screen name="StackAuthNavigator" component={StackAuthNavigator} options={{title:'Inicio de Sesión'}} />
-            <Drawer.Screen name="CartScreen" component={CartScreen} options={{title:'Mi Carrito'}} />
+            <Drawer.Screen
+              name="StackAuthNavigator"
+              component={StackAuthNavigator}
+              options={{ title: 'Inicio de Sesión' }}
+            />
+            <Drawer.Screen
+              name="CartScreen"
+              component={CartScreen}
+              options={{ title: 'Mi Carrito' }}
+            />
           </Drawer.Navigator>
         </NavigationContainer>
       </View>
@@ -63,69 +72,67 @@ const Menu = ({ navigation }) => {
   } = useContext(ThemeContext);
   const [isLogin, setIsLogin] = useState(false);
   const [isBiometricSupported, setIsBiometricSupported] = useState(false);
-//para detección de rostro o escaneo de huella digital
+  //para detección de rostro o escaneo de huella digital
 
-useEffect(()=>{
-  (async () => {
-    const compatible = await LocalAuthentication.hasHardwareAsync();
-    setIsBiometricSupported(compatible);
-  })();
-},[]);
+  useEffect(() => {
+    (async () => {
+      const compatible = await LocalAuthentication.hasHardwareAsync();
+      setIsBiometricSupported(compatible);
+    })();
+  }, []);
 
-const fallBackToDefaultAuth = ()=>{
-  //tendría que redireccionar a la pantalla de inicio de sesión
-  console.log("volver a autenticación por defecto");
-}
+  const fallBackToDefaultAuth = () => {
+    //tendría que redireccionar a la pantalla de inicio de sesión
+    console.log('volver a autenticación por defecto');
+  };
 
-const handleBiometricAuth = async()=>{
-  //checkear si el dispositivo soporta biometría
-  const isBiometricAvailable = await LocalAuthentication.hasHardwareAsync();
-  //Volver a la autenticación por defecto si el dispositivo no soporta biometría
-  if(!isBiometricAvailable){
-    <AlertComponent 
-    title={'Por favor ingrese su contraseña'} 
-    mess={'Su dispositivo no admite escaneo de huella'} 
-    btnTxt={'Ok'} 
-    btnFun={()=>fallBackToDefaultAuth()}/>
-  }
-  //chequea tipos de biometrics disponibles (huella, reconocimiento facial, reconocimiento de iris)
-  let supportedBiometrics;
-  if(isBiometricAvailable){
-    supportedBiometrics = await LocalAuthentication.supportedAuthenticationTypesAsync();
-  }
+  const handleBiometricAuth = async () => {
+    //checkear si el dispositivo soporta biometría
+    const isBiometricAvailable = await LocalAuthentication.hasHardwareAsync();
+    //Volver a la autenticación por defecto si el dispositivo no soporta biometría
+    if (!isBiometricAvailable) {
+      <AlertComponent
+        title={'Por favor ingrese su contraseña'}
+        mess={'Su dispositivo no admite escaneo de huella'}
+        btnTxt={'Ok'}
+        btnFun={() => fallBackToDefaultAuth()}
+      />;
+    }
+    //chequea tipos de biometrics disponibles (huella, reconocimiento facial, reconocimiento de iris)
+    let supportedBiometrics;
+    if (isBiometricAvailable) {
+      supportedBiometrics =
+        await LocalAuthentication.supportedAuthenticationTypesAsync();
+    }
     //chequea si el dispositivo tiene guardada los datos biométricos del usuario
     const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
-    if(!savedBiometrics){
-      <AlertComponent 
-    title={'Datos biometricos no encontrados'} 
-    mess={'Por favor loguearse con su email y contraseña'} 
-    btnTxt={'Ok'} 
-    btnFun={()=>fallBackToDefaultAuth()}/>
-    };
+    if (!savedBiometrics) {
+      <AlertComponent
+        title={'Datos biometricos no encontrados'}
+        mess={'Por favor loguearse con su email y contraseña'}
+        btnTxt={'Ok'}
+        btnFun={() => fallBackToDefaultAuth()}
+      />;
+    }
     //autenticarse con datos biométricos
     const biometricAuth = await LocalAuthentication.authenticateAsync({
       promptMessage: 'Loguearse con datos Biométricos',
       cancelLabel: 'Cancelar',
       disableDeviceFallback: true,
-    })
-  // si la autenticación fue exitosa, mostrar mensaje de bienvenida
-  if(biometricAuth){
-    biometricAuth.success?
-    setIsLogin(true):setIsLogin(false)
+    });
+    // si la autenticación fue exitosa, mostrar mensaje de bienvenida
+    if (biometricAuth) {
+      biometricAuth.success ? setIsLogin(true) : setIsLogin(false);
+    }
   };
-  console.log({isBiometricAvailable});
-  console.log({supportedBiometrics});
-  console.log({savedBiometrics});
-  console.log({biometricAuth})
-}
 
   return (
     <DrawerContentScrollView>
       {/* Contenedor de los botones de cambiar tema */}
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
+          flexDirection: 'row',
+          justifyContent: 'space-around',
           marginTop: 30,
         }}
       >
@@ -154,8 +161,8 @@ const handleBiometricAuth = async()=>{
       <View style={globalThemes.container}>
         {/* Link a Productos */}
         <TouchableOpacity
-          style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-          onPress={() => console.log("productos")}
+          style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+          onPress={() => console.log('productos')}
         >
           <Text style={{ ...globalThemes.text, color: colors.primary }}>
             - Productos
@@ -163,8 +170,8 @@ const handleBiometricAuth = async()=>{
         </TouchableOpacity>
         {/* Link a Categorías */}
         <TouchableOpacity
-          style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-          onPress={() => console.log("categorías")}
+          style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+          onPress={() => console.log('categorías')}
         >
           <Text style={{ ...globalThemes.text, color: colors.primary }}>
             - Categorías
@@ -172,50 +179,58 @@ const handleBiometricAuth = async()=>{
         </TouchableOpacity>
         {isLogin && (
           <>
-          <TouchableOpacity
-            style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-            onPress={() =>handleBiometricAuth() }
-            // navigation.navigate("CartScreen")
-          >
-            <Text style={{ ...globalThemes.text, color: colors.primary }}>
-              - Mi carrito
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-          style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-          onPress={() => setIsLogin(false)}
-        >
-          <Text style={{ ...globalThemes.text, color: colors.primary }}>
-            - Logout
-          </Text>
-        </TouchableOpacity>
-        </>
+            <TouchableOpacity
+              style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+              onPress={() => handleBiometricAuth()}
+              // navigation.navigate("CartScreen")
+            >
+              <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                - Mi carrito
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+              onPress={() => setIsLogin(false)}
+            >
+              <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                - Logout
+              </Text>
+            </TouchableOpacity>
+          </>
         )}
         {!isLogin && (
           <>
-          <TouchableOpacity
-            style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-            onPress={() => navigation.navigate("StackAuthNavigator",{screen:'StackAuthNavigator'})}
-          >
-            <Text style={{ ...globalThemes.text, color: colors.primary }}>
-              - Login
-            </Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+              onPress={() =>
+                navigation.navigate('StackAuthNavigator', {
+                  screen: 'StackAuthNavigator',
+                })
+              }
+            >
+              <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                - Login
+              </Text>
+            </TouchableOpacity>
           </>
-          )}
-          {!isLogin && isBiometricSupported && (
-                  <>
-                  <TouchableOpacity
-                    style={{ ...globalThemes.menuButton, flexDirection: "row" }}
-                    onPress={handleBiometricAuth}
-                  >
-                    <Text style={{ ...globalThemes.text, color: colors.primary }}>
-                      - Login 
-                    </Text>
-                    <Ionicons name="finger-print" size={35} color={colors.contrastColor} />
-                  </TouchableOpacity>
-                  </>
-          )}
+        )}
+        {!isLogin && isBiometricSupported && (
+          <>
+            <TouchableOpacity
+              style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+              onPress={handleBiometricAuth}
+            >
+              <Text style={{ ...globalThemes.text, color: colors.primary }}>
+                - Login
+              </Text>
+              <Ionicons
+                name="finger-print"
+                size={35}
+                color={colors.contrastColor}
+              />
+            </TouchableOpacity>
+          </>
+        )}
       </View>
     </DrawerContentScrollView>
   );
