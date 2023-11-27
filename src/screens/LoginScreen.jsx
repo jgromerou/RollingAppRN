@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 import {
   Image,
   StyleSheet,
@@ -6,146 +6,132 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from "react-native";
-import { globalThemes } from "../themes/globalThemes";
-import { ThemeContext } from "../contexts/ThemeContext";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { AuthContext } from "../contexts/AuthContext";
-//import { CustomModal } from "../../components/CustomModal";
+} from 'react-native';
+import { globalThemes } from '../themes/globalThemes';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { AuthContext } from '../contexts/AuthContext';
+import { ErrorMessage } from '../components/ErrorMessage';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { useEffect } from 'react';
 
 export const LoginScreen = ({ navigation }) => {
-  const { state } = useContext(ThemeContext);
-  const { login } = useContext(AuthContext);
+  const {
+    state: { colors },
+  } = useContext(ThemeContext);
+  const { login, state } = useContext(AuthContext);
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
-    validateOnChange: false,
     validationSchema: Yup.object({
       email: Yup.string()
-        .email("Formato de email es incorrecto")
-        .required("Este campo es obligatorio"),
+        .email('Formato de email es incorrecto')
+        .required('Este campo es obligatorio'),
       password: Yup.string()
-        .required("Este campo es obligatorio")
-        .min(8, "La contraseña debe tener al menos 8 caracteres"),
+        .required('Este campo es obligatorio')
+        .min(8, 'La contraseña debe tener al menos 8 caracteres'),
     }),
-    onSubmit: (values) => {
-      console.log(values)
+    onSubmit: (values, { resetForm }) => {
       login(formik.values);
+      resetForm();
     },
   });
-
-  // const showAlert = ()=>{
-  //   Alert.alert(
-  //     'Error Acceso',
-  //     'Los datos ingresados son incorrectos',
-  //     [
-  //       {
-  //         text: 'Camcelar',
-  //         onPress: ()=>Alert.alert(
-  //           'Usuario Bloqueado',
-  //           'Los datos ingresados son incorrectos',
-  //           [
-  //             {
-  //               text: 'Cerrar',
-  //               style: 'cancel'
-  //             }
-  //           ]
-  //         ),
-  //         style: 'cancel'
-  //       },
-  //       {
-  //         text: 'Ok',
-  //         onPress: ()=>{console.log('ok')},
-  //         style: 'default'
-  //       }
-  //     ]
-  //   )
-  // }
 
   return (
     <>
       <View>
-        <Text style={[globalThemes.title, { color: state.colors.titleColor }]}>
+        <Text style={[globalThemes.title, { color: colors.titleColor }]}>
           Bienvenid@s
         </Text>
       </View>
-      <View style={state.container}>
+      <View style={globalThemes.container}>
         <View>
           <Image
             style={styles.logo}
-            source={require("../../assets/avatar_2.jpg")}
+            source={require('../../assets/avatar_2.jpg')}
           />
         </View>
-        {formik.touched.email && formik.errors.email && <Text>{formik.errors.email}</Text>}
+
         <View>
           <TextInput
             style={[
               globalThemes.defaultInputText,
-              { color: state.colors.text, borderColor: state.colors.border },
+              { color: colors.text, borderColor: colors.border },
             ]}
             placeholder="Correo"
-            placeholderTextColor={state.colors.notification}
+            placeholderTextColor={colors.notification}
+            keyboardType="email-address"
             name="email"
-            onChangeText={(value) => formik.setFieldValue("email", value)}
+            onChangeText={(value) => formik.setFieldValue('email', value)}
           />
+          {formik.errors.email && (
+            <ErrorMessage message={formik.errors.email} />
+          )}
           <TextInput
             style={[
               globalThemes.defaultInputText,
-              { color: state.colors.text, borderColor: state.colors.border },
+              { color: colors.text, borderColor: colors.border },
             ]}
             placeholder="Contraseña"
-            placeholderTextColor={state.colors.notification}
+            placeholderTextColor={colors.notification}
             secureTextEntry={true}
             name="password"
-            onChangeText={(value) => formik.setFieldValue("password", value)}
+            onChangeText={(value) => formik.setFieldValue('password', value)}
           />
+          {formik.errors.password && (
+            <ErrorMessage message={formik.errors.password} />
+          )}
         </View>
         <View>
           <TouchableOpacity
             style={[
               globalThemes.defaultBtn,
               {
-                backgroundColor: state.colors.primary,
-                borderColor: state.colors.border,
+                backgroundColor: colors.primary,
+                borderColor: colors.border,
               },
             ]}
             onPress={formik.handleSubmit}
-            //onPress={showAlert} //para usar con el alert
           >
-            <Text style={[globalThemes.defaulTextBtn, { color: "#000" }]}>
-              {" "}
-              INGRESAR{" "}
+            <Text
+              style={[
+                globalThemes.defaulTextBtn,
+                { color: colors.title },
+              ]}
+            >
+              INGRESAR
             </Text>
           </TouchableOpacity>
         </View>
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("RegisterScreen")}
+            onPress={() => navigation.navigate('RegisterScreen')}
             style={[
               globalThemes.defaultBtn,
               {
-                backgroundColor: state.colors.primary,
-                borderColor: state.colors.border,
+                backgroundColor: colors.primary,
+                borderColor: colors.border,
               },
             ]}
-            //onPress={showAlert} //para usar con el alert
           >
-            <Text style={[globalThemes.defaulTextBtn, { color: "#000" }]}>
-              {" "}
-              REGISTRARSE{" "}
+            <Text
+              style={[
+                globalThemes.defaulTextBtn,
+                { color: colors.title },
+              ]}
+            >
+              REGISTRARSE
             </Text>
           </TouchableOpacity>
         </View>
         <View>
-          <Text style={[globalThemes.footer, { color: state.colors.text }]}>
+          <Text style={[globalThemes.footer, { color: colors.text }]}>
             RollingAppRN
           </Text>
         </View>
       </View>
-      {/* <CustomModal/> */}
     </>
   );
 };
@@ -153,7 +139,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 150,
     height: 150,
-    alignSelf: "center",
+    alignSelf: 'center',
     borderRadius: 100,
     marginVertical: 10,
   },

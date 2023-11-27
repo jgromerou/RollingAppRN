@@ -1,22 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 
-export const useQuantity = () => {
-  const [quantity, setQuantty] = useState(0)
+export const useQuantity = (item = 1) => {
+  const [quantity, setQuantity] = useState(item);
 
-  const addOne = () => {
-    setQuantty((prev) => prev + 1)
-  }
+  useEffect(() => {
+    setQuantity(item);
+  }, [item]);
 
-  const removeOne = () => {
-    if (quantity <= 0) return; 
-    setQuantty((prev) => prev - 1)
-  }
+  const sumQuantity = () => {
+    if (quantity > 14) return;
+    setQuantity((prev) => prev + 1);
+  };
+
+  const restQuantity = () => {
+    if (quantity < 2) return;
+    setQuantity((prev) => prev - 1);
+  };
 
   return {
     quantity,
-    addOne,
-    removeOne
-  }
-}
-
-
+    sumQuantity,
+    restQuantity,
+  };
+};

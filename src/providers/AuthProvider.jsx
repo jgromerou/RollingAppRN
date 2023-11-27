@@ -1,8 +1,10 @@
-import { useReducer } from "react";
-import { AuthContext } from "../contexts/AuthContext";
-import { AuthReducer } from "../reducers/AuthReducer";
-import { types } from "../types/types";
-import { dashAxios } from "../config/dashAxios";
+import { useReducer } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+import { AuthReducer } from '../reducers/AuthReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { types } from '../types/types';
+import { dashAxios } from '../config/dashAxios';
+import { CartProvider } from './CartProvider';
 
 const initialState = {
   isLogged: false,
@@ -16,30 +18,29 @@ const initialState = {
   //   status: null,
   //  },
   // userToken: null,
-  errorMessage: "",
+  errorMessage: '',
   isLoading: true,
 };
 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-  const registerUser = async (firstname, lastname, email, password) => {
+  const registerUser = async (values) => {
     try {
-      const { data } = await dashAxios.post("auth/registerclient", {
-        firstname, 
-        lastname, 
-        email, 
-        password
-      })
-      AsyncStorage.setItem("tokenAuth", data.token);
+      let emailMinusculas = values.email.toLowerCase();
+      const { data } = await dashAxios.post('auth/registerclient', {
+        firstname: values.firstname,
+        lastname: values.lastname,
+        email: emailMinusculas,
+        password: values.password,
+      });
+      //console.log(data);
+
       dispatch({
-        type: types.auth.login,
-        payload: {
-          user: data,
-        },
+        type: types.auth.registerUser,
       });
     } catch (error) {
-      const {msg} = error.response.data.errores[0]
+      const { msg } = error.response.data.errores[0];
       dispatch({
         type: types.auth.logout,
         payload: {
@@ -62,7 +63,6 @@ export const AuthProvider = ({ children }) => {
       }
       const { data } = await dashAxios.get(`auth/revalidatetoken`);
       AsyncStorage.setItem('tokenAuth', data.res.token);
-      //console.log(data,'data')
       dispatch({
         type: types.auth.login,
         payload: {
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      AsyncStorage.removeItem('tokenAuth')
+      AsyncStorage.removeItem('tokenAuth');
       dispatch({
         type: types.auth.logout,
         payload: {
@@ -78,16 +78,16 @@ export const AuthProvider = ({ children }) => {
         },
       });
     }
- 
   };
 
-  const login = async (values) => {
+  const login = async ({ email, password }) => {
     try {
-      const { data } = await dashAxios.post("auth/login", {
-        email: values.email,
-        password: values.password,
+      let emailMinusculas = email.toLowerCase();
+      const { data } = await dashAxios.post('auth/login', {
+        email: emailMinusculas,
+        password,
       });
-      await AsyncStorage.setItem("tokenAuth", data.token);
+      await AsyncStorage.setItem('tokenAuth', data.token);
       dispatch({
         type: types.auth.login,
         payload: {
@@ -95,29 +95,30 @@ export const AuthProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      const { msg }  = error.response.data.errores[0];
+      const { msg } = error.response.data.errores[0];
       dispatch({
         type: types.auth.logout,
         payload: {
           errorMessage: msg,
-    
         },
       });
     }
   };
 
   const logout = async () => {
-    await AsyncStorage.removeItem('tokenAuth')
+    AsyncStorage.removeItem('tokenAuth');
     dispatch({
       type: types.auth.logout,
-      payload: { errorMessage: "" },
-    
+      payload: {
+        errorMessage: '',
+      },
     });
   };
 
   return (
     <AuthContext.Provider
       value={{
+        ...state,
         state,
         login,
         logout,

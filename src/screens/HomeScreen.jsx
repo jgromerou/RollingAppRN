@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -8,20 +8,53 @@ import {
   Dimensions,
   TouchableOpacity,
   SafeAreaView,
+  Pressable,
 } from "react-native";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Image } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
 import Carousel from "react-native-reanimated-carousel";
+import { ProductsContext } from "../contexts/ProductsContext";
+import { CustomLoading } from "../components/CustomLoading";
 
-
-export const HomeScreen = ({navigation}) => {
+export const HomeScreen = ({ navigation }) => {
   const {
     state: { colors },
   } = useContext(ThemeContext);
 
+  const {
+    categories,
+    isLoading,
+    getCategories,
+    getFeaturedProducts,
+    featuredProducts,
+    getProduct,
+    productSelected,
+  } = useContext(ProductsContext);
+
   const navigatetoCategories = () => {
-    navigation.navigate('CategoriesScreen');}
+    navigation.navigate("CategoriesScreen");
+  };
+
+  const navigateToCategory = (categoryName) => {
+    navigation.navigate("ProductsByCategory", { categoryName });
+  };
+
+  const navigateToProduct = (productId) => {
+    navigation.navigate("ProductsScreen", { productId });
+  };
+
+  const navigateToProductList = () => {
+    navigation.navigate("ProductsList");
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, [isLoading]);
+
+  useEffect(() => {
+    getFeaturedProducts();
+  }, [isLoading]);
 
   return (
     <ScrollView>
@@ -39,7 +72,9 @@ export const HomeScreen = ({navigation}) => {
                     textAlign: "center",
                     textTransform: "uppercase",
                     color:
-                      colors.background === "#192229" ? colors.primary : "black",
+                      colors.background === "#192229"
+                        ? colors.primary
+                        : "black",
                   }}
                 >
                   Siente el poder del deporte
@@ -55,7 +90,9 @@ export const HomeScreen = ({navigation}) => {
                     textAlign: "center",
                     textTransform: "uppercase",
                     color:
-                      colors.background === "#192229" ? colors.primary : "black",
+                      colors.background === "#192229"
+                        ? colors.primary
+                        : "black",
                   }}
                 >
                   Rinde al máximo con estilo
@@ -63,62 +100,85 @@ export const HomeScreen = ({navigation}) => {
               </View>
             </View>
             {/* Categories */}
-            <View style={{ padding: 10, marginBottom: 10 }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: 10,
-                }}
-              >
-                <Text
+
+            {!categories ? (
+              <CustomLoading />
+            ) : (
+              <View style={{ padding: 10, marginBottom: 10 }}>
+                <View
                   style={{
-                    fontWeight: "bold",
-                    fontSize: 18,
-                    color: colors.text,
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: 10,
                   }}
                 >
-                  Categorias
-                </Text>
-                <TouchableOpacity onPress={()=>navigatetoCategories()}>
-                  <Text style={{ color: colors.primary }}>Ver todo</Text>
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  textAlign: "center",
-                  gap: 20,
-                }}
-              >
-                <View style={{ gap: 10 }}>
-                  <Image
-                    source={{
-                      uri: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: 18,
+                      color: colors.text,
                     }}
-                    style={{ height: 120, borderRadius: 15, width: 140 }}
-                  />
+                  >
+                    Categorias
+                  </Text>
+                  <TouchableOpacity onPress={() => navigatetoCategories()}>
+                    <Text style={{ color: colors.primary }}>Ver todo</Text>
+                  </TouchableOpacity>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
+                    gap: 20,
+                  }}
+                >
+                  <View style={{ gap: 10 }}>
+                    <Pressable
+                      onPress={() =>
+                        navigateToCategory(categories[4]?.categoryName)
+                      }
+                    >
+                      <Image
+                        source={{
+                          uri: `${categories[4]?.image}`,
+                        }}
+                        style={{ height: 120, borderRadius: 15, width: 140 }}
+                      />
+                    </Pressable>
+                    <Pressable
+                      onPress={() =>
+                        navigateToCategory(categories[5]?.categoryName)
+                      }
+                    >
+                      <Image
+                        source={{
+                          uri: `${categories[5]?.image}`,
+                        }}
+                        style={{ height: 120, borderRadius: 15, width: 140 }}
+                      />
+                    </Pressable>
+                  </View>
+                  <View>
+                    <Pressable
+                      onPress={() =>
+                        navigateToCategory(categories[3]?.categoryName)
+                      }
+                    >
+                      <Image
+                        source={{
+                          uri: `${categories[3]?.image}`,
+                        }}
+                        style={{ height: 250, borderRadius: 15, width: 200 }}
+                      />
+                    </Pressable>
+                  </View>
+                </View>
+              </View>
+            )}
 
-                  <Image
-                    source={{
-                      uri: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
-                    }}
-                    style={{ height: 120, borderRadius: 15, width: 140 }}
-                  />
-                </View>
-                <View>
-                  <Image
-                    source={{
-                      uri: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
-                    }}
-                    style={{ height: 250, borderRadius: 15, width: 200 }}
-                  />
-                </View>
-              </View>
-            </View>
             {/* Brands */}
             <ScrollView horizontal={true}>
               <View
@@ -238,61 +298,83 @@ export const HomeScreen = ({navigation}) => {
               </View>
             </ScrollView>
             {/* Most sold */}
-            <View style={{ padding: 10, marginBottom: 10 }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: 10,
-                }}
-              >
-                <Text
+            {!featuredProducts ? (
+              <CustomLoading />
+            ) : (
+              <View style={{ padding: 10, marginBottom: 10 }}>
+                <View
                   style={{
-                    fontWeight: "bold",
-                    fontSize: 18,
-                    color: colors.text,
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: 10,
                   }}
                 >
-                  Destacados
-                </Text>
-                <TouchableOpacity>
-                  <Text style={{ color: colors.primary  }}>Ver todo</Text>
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  textAlign: "center",
-                  gap: 20,
-                }}
-              >
-                <View style={{ gap: 10, flexDirection: "row" }}>
-                  <Image
-                    source={{
-                      uri: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: 18,
+                      color: colors.text,
                     }}
-                    style={{ height: 140, borderRadius: 15, width: 175 }}
-                  />
+                  >
+                    Destacados
+                  </Text>
+                  <TouchableOpacity onPress={() => navigateToProductList()}>
+                    <Text style={{ color: colors.primary }}>Ver todo</Text>
+                  </TouchableOpacity>
+                </View>
+                <View
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
+                    gap: 20,
+                  }}
+                >
+                  <View style={{ gap: 10, flexDirection: "row" }}>
+                    <Pressable
+                      onPress={() =>
+                        navigateToProduct(featuredProducts[0]?._id)
+                      }
+                    >
+                      <Image
+                        source={{
+                          uri: featuredProducts[0]?.image.secure_url,
+                        }}
+                        style={{ height: 140, borderRadius: 15, width: 175 }}
+                      />
+                    </Pressable>
 
-                  <Image
-                    source={{
-                      uri: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
-                    }}
-                    style={{ height: 140, borderRadius: 15, width: 175 }}
-                  />
-                </View>
-                <View>
-                  <Image
-                    source={{
-                      uri: "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg",
-                    }}
-                    style={{ height: 200, borderRadius: 15, width: 360 }}
-                  />
+                    <Pressable
+                      onPress={() =>
+                        navigateToProduct(featuredProducts[1]?._id)
+                      }
+                    >
+                      <Image
+                        source={{
+                          uri: featuredProducts[1]?.image.secure_url,
+                        }}
+                        style={{ height: 140, borderRadius: 15, width: 175 }}
+                      />
+                    </Pressable>
+                  </View>
+                  <View>
+                    <Pressable
+                      onPress={() =>
+                        navigateToProduct(featuredProducts[2]?._id)
+                      }
+                    >
+                      <Image
+                        source={{
+                          uri: featuredProducts[2]?.image.secure_url,
+                        }}
+                        style={{ height: 200, borderRadius: 15, width: 360 }}
+                      />
+                    </Pressable>
+                  </View>
                 </View>
               </View>
-            </View>
+            )}
             {/* Call to Action */}
             <View
               style={{
@@ -311,36 +393,8 @@ export const HomeScreen = ({navigation}) => {
                   fontWeight: "bold",
                 }}
               >
-                ¡Suscríbete y consigue un 10% de descuento extra!
+                ¡APROVECHA ENVIOS GRATIS DESDE $10000 Y DESCUENTOS EXTRA!
               </Text>
-              <View
-                style={{
-                  flex: 1,
-                  width: "60%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <TouchableOpacity
-                  style={{
-                    borderRadius: 15,
-                    backgroundColor: "black",
-                    padding: 10,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      textAlign: "center",
-                      fontSize: 20,
-                      textTransform: "uppercase",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Regístrate Gratis
-                  </Text>
-                </TouchableOpacity>
-              </View>
             </View>
           </View>
         </View>

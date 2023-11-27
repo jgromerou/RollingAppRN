@@ -11,7 +11,7 @@ export const lightTheme = {
     background: "#FBFBFE",
     border: "#EFF3F5",
     card: "#FFFFFF",
-    active: "#6a9951"
+    contrastColor: "#f2058b"
   },
 };
 
@@ -26,7 +26,8 @@ export const darkTheme = {
     background: "#192229",
     border: "#2A3B47",
     card: "#212E36",
-    active: "#b4ed9e"
+    active: "#b4ed9e",
+    contrastColor: "#f2058b"
   },
 };
 
