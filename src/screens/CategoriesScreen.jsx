@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from "react";
-import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
-import { Card } from "react-native-paper";
-import { ThemeContext } from "../contexts/ThemeContext";
-import { globalThemes } from "../themes/globalThemes";
-import { ProductsContext } from "../contexts/ProductsContext";
+import React, { useContext, useEffect } from 'react';
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import { Card } from 'react-native-paper';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { globalThemes } from '../themes/globalThemes';
+import { ProductsContext } from '../contexts/ProductsContext';
 
 const CategoriesScreen = ({ navigation }) => {
   const {
@@ -17,11 +17,11 @@ const CategoriesScreen = ({ navigation }) => {
 
   useEffect(() => {
     getCategories();
-    console.log("CATEGORIAS", stateCategories);
+    //console.log("CATEGORIAS", stateCategories);
   }, [isLoading]);
 
   const navigatetoProductos = (categoryId, categoryName) => {
-    navigation.navigate("ProductsByCategory", { categoryId, categoryName });
+    navigation.navigate('ProductsByCategory', { categoryId, categoryName });
   };
 
   return (
@@ -38,7 +38,7 @@ const CategoriesScreen = ({ navigation }) => {
             <View style={{ height: 200 }}>
               <Image
                 source={{ uri: item.image }}
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: '100%', height: '100%' }}
                 resizeMode="contain"
               />
             </View>

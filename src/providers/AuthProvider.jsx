@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
         email: emailMinusculas,
         password: values.password,
       });
-      console.log(data);
+      //console.log(data);
 
       dispatch({
         type: types.auth.registerUser,

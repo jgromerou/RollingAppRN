@@ -15,14 +15,19 @@ import { CustomCardProducts } from '../components/products/CustomCardProducts';
 import { ProductsContext } from '../contexts/ProductsContext';
 
 const ProductsByCategory = ({ navigation, route }) => {
- 
-  const {state: { colors } } = useContext(ThemeContext);
-  const {state: stateProducts, isLoading, getProductsByCategory } = useContext(ProductsContext);
+  const {
+    state: { colors },
+  } = useContext(ThemeContext);
+  const {
+    state: stateProducts,
+    isLoading,
+    getProductsByCategory,
+  } = useContext(ProductsContext);
   const { categoryId, categoryName } = route.params;
-  
+
   useEffect(() => {
-    getProductsByCategory(categoryName)
-    console.log('PRODUCT LIST', stateProducts.products)
+    getProductsByCategory(categoryName);
+    //console.log('PRODUCT LIST', stateProducts.products);
   }, [isLoading]);
 
   const navigatetoProductos = (productId) => {

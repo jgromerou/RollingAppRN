@@ -1,14 +1,15 @@
-import React, { useReducer } from "react";
-import { ProductsContext } from "../contexts/ProductsContext";
-import { types } from "../types/types";
-import { dashAxios } from "../config/dashAxios";
-import { ProductReducer } from "../reducers/ProductsReducer";
+import React, { useReducer } from 'react';
+import { ProductsContext } from '../contexts/ProductsContext';
+import { types } from '../types/types';
+import { dashAxios } from '../config/dashAxios';
+import { ProductReducer } from '../reducers/ProductsReducer';
 
 const initialState = {
   isLoading: true,
-  errorMessage: "",
+  errorMessage: '',
   products: null,
   productSelected: null,
+  isLoadingProductSelected: true,
   categories: null,
 };
 
@@ -17,7 +18,7 @@ export const ProductProvider = ({ children }) => {
 
   const getProducts = async () => {
     try {
-      const data = await dashAxios.get("/products");
+      const data = await dashAxios.get('/products');
 
       // if(!products){
       //     dispatch({
@@ -116,7 +117,7 @@ export const ProductProvider = ({ children }) => {
         return product._id;
       });
 
-      const response = await dashAxios.get("/products");
+      const response = await dashAxios.get('/products');
 
       const products = response.data;
 

@@ -15,7 +15,7 @@ export const ProductReducer = (state={}, action) => {
         case types.products.getProduct:
             return {
                 ...state,
-                isLoading: false,
+                isLoadingProductSelected: false,
                 errorMessage: '',
                 productSelected: action.payload.productSelected,
             }

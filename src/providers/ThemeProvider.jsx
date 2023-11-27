@@ -17,7 +17,6 @@ export const ThemeProvider = ({ children }) => {
       }
     });
   }, []);
-  console.log(darkTheme);
   const setDarkTheme = () => {
     dispatch({ type: 'set_dark_theme' });
     console.log('setDarkTheme');

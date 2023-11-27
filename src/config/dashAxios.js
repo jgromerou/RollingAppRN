@@ -5,7 +5,7 @@ import axios from 'axios';
 export const dashAxios = axios.create({
   // baseURL: process.env.API_BACKEND,
   baseURL: 'https://dashboard-react-avanzado-backend.vercel.app/api',
-  //baseURL: 'http://192.168.1.17:4010/api/',  
+  //baseURL: 'http://192.168.1.17:4010/api/',
   timeout: 12000,
   headers: {
     'Content-Type': 'application/json',
@@ -20,12 +20,11 @@ export const dashAxios = axios.create({
 //   };
 //   return config;
 // });
-dashAxios.interceptors.request.use( 
-  async (config)  => {
+dashAxios.interceptors.request.use(async (config) => {
   const token = await AsyncStorage.getItem('tokenAuth');
-  console.log(token, 'token')
+  // console.log(token, 'token')
   if (token) {
-      config.headers['x-token'] = token;
+    config.headers['x-token'] = token;
   }
-  return  config;
+  return config;
 });
