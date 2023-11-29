@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,  useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -6,36 +6,46 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
-import { globalThemes } from '../themes/globalThemes';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { AuthContext } from '../contexts/AuthContext';
-import { ErrorMessage } from '../components/ErrorMessage';
-import { ThemeContext } from '../contexts/ThemeContext';
-import { useEffect } from 'react';
+} from "react-native";
+import { globalThemes } from "../themes/globalThemes";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { AuthContext } from "../contexts/AuthContext";
+import { ErrorMessage } from "../components/ErrorMessage";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 export const LoginScreen = ({ navigation }) => {
   const {
     state: { colors },
   } = useContext(ThemeContext);
+
   const { login, state } = useContext(AuthContext);
+  // const [backMessage, setBackMessage] = useState("");
+
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email('Formato de email es incorrecto')
-        .required('Este campo es obligatorio'),
+        .email("Formato de email es incorrecto")
+        .required("Este campo es obligatorio"),
       password: Yup.string()
-        .required('Este campo es obligatorio')
-        .min(8, 'La contraseña debe tener al menos 8 caracteres'),
+        .matches(
+          /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,}$/,
+          "Los datos ingresados son incorrectos"
+        )
+        .required("Este campo es obligatorio"),
     }),
-    onSubmit: (values, { resetForm }) => {
+    validateOnChange: false,
+    onSubmit: () => {
       login(formik.values);
-      resetForm();
+      formik.resetForm();
+      // setBackMessage(state.errorMessage);
+      // setTimeout(() => {
+      //   setBackMessage("");
+      // }, 3000);
     },
   });
 
@@ -50,7 +60,7 @@ export const LoginScreen = ({ navigation }) => {
         <View>
           <Image
             style={styles.logo}
-            source={require('../../assets/avatar_2.jpg')}
+            source={require("../../assets/avatar_2.jpg")}
           />
         </View>
 
@@ -64,7 +74,8 @@ export const LoginScreen = ({ navigation }) => {
             placeholderTextColor={colors.notification}
             keyboardType="email-address"
             name="email"
-            onChangeText={(value) => formik.setFieldValue('email', value)}
+            value={formik.values.email}
+            onChangeText={(value) => formik.setFieldValue("email", value)}
           />
           {formik.errors.email && (
             <ErrorMessage message={formik.errors.email} />
@@ -78,11 +89,13 @@ export const LoginScreen = ({ navigation }) => {
             placeholderTextColor={colors.notification}
             secureTextEntry={true}
             name="password"
-            onChangeText={(value) => formik.setFieldValue('password', value)}
+            value={formik.values.password}
+            onChangeText={(value) => formik.setFieldValue("password", value)}
           />
           {formik.errors.password && (
             <ErrorMessage message={formik.errors.password} />
           )}
+          {state.errorMessage && <ErrorMessage message={state.errorMessage} />}
         </View>
         <View>
           <TouchableOpacity
@@ -95,19 +108,14 @@ export const LoginScreen = ({ navigation }) => {
             ]}
             onPress={formik.handleSubmit}
           >
-            <Text
-              style={[
-                globalThemes.defaulTextBtn,
-                { color: colors.title },
-              ]}
-            >
+            <Text style={[globalThemes.defaulTextBtn, { color: colors.title }]}>
               INGRESAR
             </Text>
           </TouchableOpacity>
         </View>
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate('RegisterScreen')}
+            onPress={() => navigation.navigate("RegisterScreen")}
             style={[
               globalThemes.defaultBtn,
               {
@@ -116,12 +124,7 @@ export const LoginScreen = ({ navigation }) => {
               },
             ]}
           >
-            <Text
-              style={[
-                globalThemes.defaulTextBtn,
-                { color: colors.title },
-              ]}
-            >
+            <Text style={[globalThemes.defaulTextBtn, { color: colors.title }]}>
               REGISTRARSE
             </Text>
           </TouchableOpacity>
@@ -139,7 +142,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 150,
     height: 150,
-    alignSelf: 'center',
+    alignSelf: "center",
     borderRadius: 100,
     marginVertical: 10,
   },

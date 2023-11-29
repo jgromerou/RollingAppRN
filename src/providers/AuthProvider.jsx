@@ -4,20 +4,10 @@ import { AuthReducer } from '../reducers/AuthReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { types } from '../types/types';
 import { dashAxios } from '../config/dashAxios';
-import { CartProvider } from './CartProvider';
 
 const initialState = {
   isLogged: false,
   user: null,
-  //  userInfo: {
-  //   id: null,
-  //   username: null,
-  //   email: null,
-  //   password: null,
-  //   role: null,
-  //   status: null,
-  //  },
-  // userToken: null,
   errorMessage: '',
   isLoading: true,
 };
@@ -37,11 +27,14 @@ export const AuthProvider = ({ children }) => {
 
       dispatch({
         type: types.auth.registerUser,
+        payload: {
+          errorMessage: '',
+        },
       });
     } catch (error) {
       const { msg } = error.response.data.errores[0];
       dispatch({
-        type: types.auth.logout,
+        type: types.auth.error,
         payload: {
           errorMessage: msg,
         },
@@ -55,9 +48,6 @@ export const AuthProvider = ({ children }) => {
       if (!token) {
         return dispatch({
           type: types.auth.logout,
-          payload: {
-            errorMessage: '',
-          },
         });
       }
       const { data } = await dashAxios.get(`auth/revalidatetoken`);
@@ -66,14 +56,15 @@ export const AuthProvider = ({ children }) => {
         type: types.auth.login,
         payload: {
           user: data.res,
+          errorMessage:''
         },
       });
     } catch (error) {
       AsyncStorage.removeItem('tokenAuth');
       dispatch({
-        type: types.auth.logout,
+        type: types.auth.error,
         payload: {
-          errorMessage: '',
+          errorMessage: 'Error reiniciando sesión, debe loguearse nuevamente',
         },
       });
     }
@@ -91,12 +82,13 @@ export const AuthProvider = ({ children }) => {
         type: types.auth.login,
         payload: {
           user: data,
+          errorMessage:''
         },
       });
     } catch (error) {
       const { msg } = error.response.data.errores[0];
       dispatch({
-        type: types.auth.logout,
+        type: types.auth.error,
         payload: {
           errorMessage: msg,
         },
@@ -117,7 +109,6 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        ...state,
         state,
         login,
         logout,

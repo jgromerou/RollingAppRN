@@ -8,10 +8,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 export const RegisterScreen = ({ navigation }) => {
-
   const [redirect, setRedirect] = useState(false);
   const { state } = useContext(ThemeContext);
-  const { state: stateAuth, registerUser } = useContext(AuthContext);
+  const {
+    state: stateAuth,
+    registerUser,
+  } = useContext(AuthContext);
+  const [backMessage, setBackMessage] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -20,27 +23,41 @@ export const RegisterScreen = ({ navigation }) => {
       email: "",
       password: "",
     },
-    validateOnChange: false,
     validationSchema: Yup.object({
-      firstname: Yup.string().required("Este campo es obligatorio"),
-      lastname: Yup.string().required("Este campo es obligatorio"),
+      firstname: Yup.string()
+        .required("Este campo es obligatorio")
+        .min(3, "El nombre no debe tener menos de 3 caracteres")
+        .max(20, "El nombre no debe tener más de 20 caracteres"),
+      lastname: Yup.string()
+        .required("Este campo es obligatorio")
+        .min(3, "El apellido no debe tener menos de 3 caracteres")
+        .max(20, "El apellido no debe tener más de 20 caracteres"),
       email: Yup.string()
         .email("Formato de email es incorrecto")
         .required("Este campo es obligatorio"),
       password: Yup.string()
         .required("Este campo es obligatorio")
-        .min(8, "La contraseña debe tener al menos 8 caracteres"),
+        .matches(
+          /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,}$/,
+          "La contraseña debe tener mìnimo 8 caracteres , un n°, una minúscula, una mayúscula y no contener caracteres especiales."
+        ),
     }),
-    onSubmit: ({ resetForm }) => {  
+    validateOnChange: false,
+
+    onSubmit: () => {
       registerUser(formik.values);
-      // resetForm();
-      navigation.navigate('StackAuthNavigator')
-       },
+      formik.resetForm();
+      setRedirect(true);
+      setBackMessage(stateAuth.errorMessage);
+      setTimeout(() => {
+        setBackMessage("");
+      }, 3000);
+    },
   });
 
   return (
     <>
-      
+    {redirect && navigation.navigate("LoginScreen")}
       <View>
         <Text style={[globalThemes.title, { color: state.colors.titleColor }]}>
           Bienvenid@s
@@ -61,6 +78,7 @@ export const RegisterScreen = ({ navigation }) => {
             placeholder="Nombre"
             placeholderTextColor={state.colors.notification}
             name="firstname"
+            value={formik.values.firstname}
             onChangeText={(value) => formik.setFieldValue("firstname", value)}
           />
           {formik.errors.firstname && (
@@ -74,6 +92,7 @@ export const RegisterScreen = ({ navigation }) => {
             placeholder="Apellido"
             placeholderTextColor={state.colors.notification}
             name="lastname"
+            value={formik.values.lastname}
             onChangeText={(value) => formik.setFieldValue("lastname", value)}
           />
           {formik.errors.lastname && (
@@ -88,6 +107,7 @@ export const RegisterScreen = ({ navigation }) => {
             placeholderTextColor={state.colors.notification}
             keyboardType="email-address"
             name="email"
+            value={formik.values.email}
             onChangeText={(value) => formik.setFieldValue("email", value)}
           />
           {formik.errors.email && (
@@ -103,6 +123,7 @@ export const RegisterScreen = ({ navigation }) => {
             placeholderTextColor={state.colors.notification}
             secureTextEntry={true}
             name="password"
+            value={formik.values.password}
             onChangeText={(value) => formik.setFieldValue("password", value)}
           />
           {formik.errors.password && (
@@ -110,9 +131,7 @@ export const RegisterScreen = ({ navigation }) => {
           )}
         </View>
 
-        {stateAuth.errorMessage  && (
-            <ErrorMessage message={stateAuth.errorMessage} />
-          )}
+        {backMessage && <ErrorMessage message={backMessage} />}
 
         <View>
           <TouchableOpacity

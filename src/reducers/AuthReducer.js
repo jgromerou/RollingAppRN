@@ -1,13 +1,14 @@
-import { types } from '../types/types';
+import { types } from "../types/types";
 
 export const AuthReducer = (state = {}, action) => {
   switch (action.type) {
+
     case types.auth.login:
       return {
         ...state,
         user: action.payload.user,
         isLogged: true,
-        errorMessage: '',
+        errorMessage: action.payload.errorMessage,
         isLoading: false,
       };
 
@@ -19,10 +20,12 @@ export const AuthReducer = (state = {}, action) => {
         errorMessage: action.payload.errorMessage,
         isLoading: false,
       };
-      case types.auth.registerUser:
-        return{
-          ...state,
-        }
+
+    case types.auth.registerUser:
+      return {
+        ...state,
+        errorMessage: action.payload.errorMessage,
+      };
 
     case types.auth.error:
       return {

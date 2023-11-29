@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const globalThemes = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff", si dejamos este background, no funciona correctamente el modo dark/light, a los colores hay que tomarlos del ThemeProvider
     padding: 10,
   },
   title: {
