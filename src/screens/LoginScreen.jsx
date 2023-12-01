@@ -1,4 +1,4 @@
-import React, { useContext,  useState } from "react";
+import React, { useContext } from "react";
 import {
   Image,
   StyleSheet,
@@ -13,6 +13,7 @@ import * as Yup from "yup";
 import { AuthContext } from "../contexts/AuthContext";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { ThemeContext } from "../contexts/ThemeContext";
+import PasswordInput from "../components/PasswordInput";
 
 export const LoginScreen = ({ navigation }) => {
   const {
@@ -20,7 +21,6 @@ export const LoginScreen = ({ navigation }) => {
   } = useContext(ThemeContext);
 
   const { login, state } = useContext(AuthContext);
-  // const [backMessage, setBackMessage] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -38,14 +38,9 @@ export const LoginScreen = ({ navigation }) => {
         )
         .required("Este campo es obligatorio"),
     }),
-    validateOnChange: false,
     onSubmit: () => {
       login(formik.values);
       formik.resetForm();
-      // setBackMessage(state.errorMessage);
-      // setTimeout(() => {
-      //   setBackMessage("");
-      // }, 3000);
     },
   });
 

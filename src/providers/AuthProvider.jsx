@@ -10,6 +10,7 @@ const initialState = {
   user: null,
   errorMessage: '',
   isLoading: true,
+  successRegister: false
 };
 
 export const AuthProvider = ({ children }) => {
@@ -29,8 +30,18 @@ export const AuthProvider = ({ children }) => {
         type: types.auth.registerUser,
         payload: {
           errorMessage: '',
+          successRegister: true
         },
       });
+      setTimeout(()=>{
+        dispatch({
+          type: types.auth.registerUser,
+          payload: {
+            successRegister: false
+          },
+        });
+      
+      },3000)
     } catch (error) {
       const { msg } = error.response.data.errores[0];
       dispatch({
@@ -39,6 +50,15 @@ export const AuthProvider = ({ children }) => {
           errorMessage: msg,
         },
       });
+      setTimeout(() => {
+        dispatch({
+          type: types.auth.error,
+          payload: {
+            errorMessage: '',
+          },
+        });
+
+      },2000)
     }
   };
 
@@ -67,6 +87,15 @@ export const AuthProvider = ({ children }) => {
           errorMessage: 'Error reiniciando sesión, debe loguearse nuevamente',
         },
       });
+      setTimeout(() => {
+        dispatch({
+          type: types.auth.error,
+          payload: {
+            errorMessage: '',
+          },
+        });
+
+      },2000)
     }
   };
 
@@ -93,6 +122,15 @@ export const AuthProvider = ({ children }) => {
           errorMessage: msg,
         },
       });
+      setTimeout(() => {
+        dispatch({
+          type: types.auth.error,
+          payload: {
+            errorMessage: '',
+          },
+        });
+
+      },2000)
     }
   };
 
@@ -105,6 +143,8 @@ export const AuthProvider = ({ children }) => {
       },
     });
   };
+
+
 
   return (
     <AuthContext.Provider

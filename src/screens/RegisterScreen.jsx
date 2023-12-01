@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { globalThemes } from "../themes/globalThemes";
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -6,15 +6,14 @@ import { AuthContext } from "../contexts/AuthContext";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { AlertComponent } from "../components/AlertComponent";
 
 export const RegisterScreen = ({ navigation }) => {
-  const [redirect, setRedirect] = useState(false);
   const { state } = useContext(ThemeContext);
   const {
     state: stateAuth,
     registerUser,
   } = useContext(AuthContext);
-  const [backMessage, setBackMessage] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -42,22 +41,20 @@ export const RegisterScreen = ({ navigation }) => {
           "La contraseña debe tener mìnimo 8 caracteres , un n°, una minúscula, una mayúscula y no contener caracteres especiales."
         ),
     }),
-    validateOnChange: false,
 
     onSubmit: () => {
       registerUser(formik.values);
       formik.resetForm();
-      setRedirect(true);
-      setBackMessage(stateAuth.errorMessage);
-      setTimeout(() => {
-        setBackMessage("");
-      }, 3000);
     },
   });
 
+  const navigateToLogin = ()=>{
+    navigation.navigate("LoginScreen")
+  }
+
   return (
     <>
-    {redirect && navigation.navigate("LoginScreen")}
+    {stateAuth.successRegister && navigation.navigate("LoginScreen")}
       <View>
         <Text style={[globalThemes.title, { color: state.colors.titleColor }]}>
           Bienvenid@s
@@ -130,8 +127,7 @@ export const RegisterScreen = ({ navigation }) => {
             <ErrorMessage message={formik.errors.password} />
           )}
         </View>
-
-        {backMessage && <ErrorMessage message={backMessage} />}
+        {stateAuth.errorMessage && <ErrorMessage message={stateAuth.errorMessage} />}
 
         <View>
           <TouchableOpacity
@@ -160,6 +156,16 @@ export const RegisterScreen = ({ navigation }) => {
           </Text>
         </View>
       </View>
+      {/* <View>
+        {stateAuth.successRegister && 
+        <AlertComponent
+        title={'Registro'}
+        mess={'Usuario registrado exitosamente'}
+        btnTxt={'Ok'}
+        btnFun={() => console.log('usuario registrado')}
+      />
+      }
+      </View> */}
     </>
   );
 };

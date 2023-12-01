@@ -25,6 +25,7 @@ export const AuthReducer = (state = {}, action) => {
       return {
         ...state,
         errorMessage: action.payload.errorMessage,
+        successRegister: action.payload.successRegister,
       };
 
     case types.auth.error:

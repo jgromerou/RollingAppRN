@@ -8,6 +8,7 @@ export const PasswordInput = (formik) => {
   const [viewPw, setViewPw] = useState(true);
   const [icon, setIcon] = useState("eye-off");
   const [opacity, setOpacity] = useState("0.3");
+  const {state:  colors } = useContext(ThemeContext);
 
   const handleViewPw = () => {
     if (viewPw) {
