@@ -94,11 +94,11 @@ export const ProductsList = () => {
               style={{
                 ...styles.title,
                 ...styles.marginHorizontal,
-                marginTop: 65,
+                marginTop: 15,
                 paddingBottom: 10,
               }}
             >
-              {term}
+              {/* {term} */}
             </Text>
           }
           renderItem={({ item }) => (

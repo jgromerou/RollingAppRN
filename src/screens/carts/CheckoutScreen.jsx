@@ -23,7 +23,7 @@ export const CheckoutScreen = ({ navigation }) => {
   //const { quantity, sumQuantity, restQuantity} = useQuantity(item.qty);
 
   const cartRender = (item, index) => {
-    console.log(item, 'cartrender')
+    //console.log(item, 'cartrender')
     return <CartItem item={item} index={index} />;
   };
 
@@ -71,36 +71,59 @@ export const CheckoutScreen = ({ navigation }) => {
           alignItems: 'center',
         }}
       >
-        <Text
+        <View
           style={{
-            fontSize: 25,
-            //color: '#f2058b',
-            color: colors.text,
-            fontWeight: '500',
-          }}
-        >
-          Price $ {state.totalPrice}
-        </Text>
-
-        <TouchableOpacity
-          style={{
-            backgroundColor: colors.primary,
-            borderColor: colors.text,
-            borderWidth: 3,
-            //backgroundColor: "#f2058b",
+            flexDirection: 'row',
+            //flex: 1,
+            justifyContent: 'space-evenly',
+            marginTop: 3,
+            marginBottom: 3,
+            //backgroundColor:'white',
             alignItems: 'center',
-            fontSize: '17',
-            fontWeight: '600',
-            color: '#fff',
-            paddingHorizontal: 20,
-            paddingVertical: 15,
-            borderRadius: 5,
-            alignSelf: 'center',
           }}
-          onPress={() => navigate('ConfirmCart')}
         >
-          <Text style={globalThemes.defaulTextBtn}>CONFIRMAR</Text>
-        </TouchableOpacity>
+          <Text
+            style={{
+              fontSize: 18,
+              //color: '#f2058b',
+              color: colors.text,
+              fontWeight: '500',
+            }}
+          >
+            Pagaras: {' '}
+          </Text>
+          <Text
+            style={{
+              fontSize: 25,
+              //color: '#f2058b',
+              color: colors.text,
+              fontWeight: '500',
+            }}
+          >
+            $ {state.totalPrice}
+          </Text>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={{
+              backgroundColor: colors.primary,
+              borderColor: colors.text,
+              borderWidth: 3,
+              //backgroundColor: "#f2058b",
+              alignItems: 'center',
+              fontSize: '17',
+              fontWeight: '600',
+              color: '#fff',
+              paddingHorizontal: 20,
+              paddingVertical: 15,
+              borderRadius: 5,
+              alignSelf: 'center',
+            }}
+            onPress={() => navigate('ConfirmCart')}
+          >
+            <Text style={globalThemes.defaulTextBtn}>CONFIRMAR</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

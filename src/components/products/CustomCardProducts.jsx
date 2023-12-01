@@ -34,9 +34,11 @@ export const CustomCardProducts = ({ itemData }) => {
     >
       <View
         style={{
-          height: 220,
-          width: 160,
-          padding: 10,
+          //height: 220,
+          //width: 160,
+          height: 225,
+          width: 190,
+          padding: 3,
         }}
       >
         <View>
@@ -44,7 +46,7 @@ export const CustomCardProducts = ({ itemData }) => {
             source={{ uri: `${itemData.image.secure_url}` }}
             style={{
               width: '100%',
-              height: 130,
+              height: 150,
               marginBottom: 5,
               borderRadius: 10,
               resizeMode: 'contain',
@@ -82,14 +84,14 @@ export const CustomCardProducts = ({ itemData }) => {
               borderTopLeftRadius: 25,
               borderBottomRightRadius: 15,
               position: 'absolute',
-              bottom: -32,
+              bottom: -20,
               right: -11,
             }}
           >
-            <Text style={{ fontSize: 20 }}>
+            <Text style={{ fontSize: 18 }}>
               <AntDesign
                 name={favorite == itemData._id ? 'heart' : 'hearto'}
-                size={18}
+                size={20}
                 color={favorite == itemData.id ? '#f2058b' : '#fff'}
               />
             </Text>

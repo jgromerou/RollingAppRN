@@ -74,10 +74,17 @@ export const ConfirmPay = ({ navigation }) => {
     try {
       let user = state.user;
       let saleDate = state.saleDate;
-      let cartProducts = state.cart;
+      let cartProducts = state.cart.map((ventas) => {
+       let cart = {_id: ventas._id,
+        productName: ventas.productName,
+        price: ventas.price,
+        quantity: ventas.quantity};
+        return cart;
+      });
       let paymentType = state.paymentType;
       let status = 'Realizada';
       let totalPrice = state.totalPrice;
+      //console.log(cartProducts, 'cartProducts')
       const { data } = await dashAxios.post('/sales', {
         user,
         saleDate,

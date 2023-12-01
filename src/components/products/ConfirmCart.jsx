@@ -69,7 +69,7 @@ export const ConfirmCart = ({ navigation }) => {
               {item.category}
             </Text>
             <Text style={{ fontSize: 13, color: '#fff' }}>
-              {item.productName}
+              {item.productName.length < 28 ? item.productName : item.productName.slice(0,27)}
             </Text>
             <Text
               style={{
