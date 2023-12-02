@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
   Animated,
+  Button,
   Keyboard,
   StyleSheet,
   Text,
@@ -186,6 +187,16 @@ export const RegisterScreen = ({ navigation }) => {
           <Text style={[globalThemes.footer, { color: state.colors.text }]}>
             RollingAppRN
           </Text>
+        </View>
+        <View>
+          <Button
+          title="Success Message"
+          onPress={() => {
+            setStatus("success");
+            popIn();
+          }}
+          style={{ marginTop: 30 }}
+        ></Button>
         </View>
       </View> 
     </>

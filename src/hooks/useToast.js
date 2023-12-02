@@ -5,12 +5,12 @@ const windowHeight = Dimensions.get('window').height;
 
 export const useToast = () => {
   // Toast
-  const popAnim = useRef(new Animated.Value(windowHeight - 300)).current;
+  const popAnim = useRef(new Animated.Value(windowHeight * -1)).current;
 
   const popIn = () => {
     Animated.timing(popAnim, {
-      toValue: 1,
-      duration: 500,
+      toValue: windowHeight * 0.01,
+      duration: 400,
       useNativeDriver: true,
     }).start(popOut);
   };
@@ -19,7 +19,7 @@ export const useToast = () => {
     setTimeout(() => {
       Animated.timing(popAnim, {
         toValue: windowHeight * -1,
-        duration: 500,
+        duration: 400,
         useNativeDriver: true,
       }).start();
     }, 2000);
@@ -28,7 +28,7 @@ export const useToast = () => {
   const instantPopOut = () => {
     Animated.timing(popAnim, {
       toValue: windowHeight * -1,
-      duration: 150,
+      duration: 200,
       useNativeDriver: true,
     }).start();
   };
