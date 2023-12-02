@@ -37,11 +37,12 @@ export const AuthProvider = ({ children }) => {
         dispatch({
           type: types.auth.registerUser,
           payload: {
+            errorMessage: '',
             successRegister: false
           },
         });
       
-      },3000)
+      },2500)
     } catch (error) {
       const { msg } = error.response.data.errores[0];
       dispatch({

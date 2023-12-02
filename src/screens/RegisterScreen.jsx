@@ -1,8 +1,7 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Animated,
-  Button,
-  Dimensions,
+  Keyboard,
   StyleSheet,
   Text,
   TextInput,
@@ -13,7 +12,7 @@ import { globalThemes } from '../themes/globalThemes';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { ErrorMessage } from '../components/ErrorMessage';
-import { useFormik } from 'formik';
+import {  useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { AlertToast } from '../components/AlertToast';
@@ -51,22 +50,29 @@ export const RegisterScreen = ({ navigation }) => {
     }),
 
     onSubmit: () => {
+      Keyboard.dismiss();
       registerUser(formik.values);
-      formik.resetForm();
+      //formik.resetForm();
+      
     },
   });
 
+  // Variables para los Toast
   const [status, setStatus] = useState(null);
-  const { popIn, popAnim, setearStatus } = useToast();
+  const { popIn, popAnim } = useToast();
 
-  const navigateToLogin = () => {
-    // navigation.navigate("LoginScreen")
-  };
+  useEffect(()=> {
+    if(stateAuth.successRegister){
+      setStatus('success')
+      popIn()
+      setTimeout(()=> {
+        navigation.replace('LoginScreen')
+      },1000)
+    }
+  },[stateAuth.successRegister])
 
   return (
     <>
-      {stateAuth.successRegister && navigation.navigate('LoginScreen')}
-
       {/* Toast View Animated */}
       {status && (
         <Animated.View
@@ -169,7 +175,7 @@ export const RegisterScreen = ({ navigation }) => {
             <Text
               style={[
                 globalThemes.defaulTextBtn,
-                { color: state.colors.contrastColor },
+                { color: state.colors.title },
               ]}
             >
               GUARDAR
@@ -182,34 +188,6 @@ export const RegisterScreen = ({ navigation }) => {
           </Text>
         </View>
       </View> 
-      {/* <View>
-        {stateAuth.successRegister && 
-        <AlertComponent
-        title={'Registro'}
-        mess={'Usuario registrado exitosamente'}
-        btnTxt={'Ok'}
-        btnFun={() => console.log('usuario registrado')}
-      />
-      }
-      </View>
-
-      Botones para probar los toast de success y fail
-      {/* <Button
-        title="Success Message"
-        onPress={() => {
-          setStatus('success');
-          popIn();
-        }}
-        style={{ marginTop: 30 }}
-      ></Button>
-      <Button
-        title="Fail Message"
-        onPress={() => {
-          setStatus('fail');
-          popIn();
-        }}
-        style={{ marginTop: 30 }}
-      ></Button> */}
     </>
   );
 };

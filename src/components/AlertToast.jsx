@@ -16,7 +16,6 @@ export const AlertToast = ({ status, titulo }) => {
   const failColor = '#bf6060';
   const failHeader = 'Error';
   const failMessage = 'Ocurrió un error, inténtelo nuevamente';
-  console.log('status', status);
   const { instantPopOut } = useToast();
   return (
     <View style={styles.toastRow}>
