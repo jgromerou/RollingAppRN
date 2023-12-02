@@ -1,44 +1,52 @@
-import React, { useContext } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
-import { globalThemes } from "../themes/globalThemes";
-import { ThemeContext } from "../contexts/ThemeContext";
-import { AuthContext } from "../contexts/AuthContext";
-import { ErrorMessage } from "../components/ErrorMessage";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { AlertComponent } from "../components/AlertComponent";
+import React, { useContext, useRef, useState } from 'react';
+import {
+  Animated,
+  Button,
+  Dimensions,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { globalThemes } from '../themes/globalThemes';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { AuthContext } from '../contexts/AuthContext';
+import { ErrorMessage } from '../components/ErrorMessage';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+import { AlertToast } from '../components/AlertToast';
+import { useToast } from '../hooks/useToast';
 
 export const RegisterScreen = ({ navigation }) => {
   const { state } = useContext(ThemeContext);
-  const {
-    state: stateAuth,
-    registerUser,
-  } = useContext(AuthContext);
+  const { state: stateAuth, registerUser } = useContext(AuthContext);
 
   const formik = useFormik({
     initialValues: {
-      firstname: "",
-      lastname: "",
-      email: "",
-      password: "",
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
     },
     validationSchema: Yup.object({
       firstname: Yup.string()
-        .required("Este campo es obligatorio")
-        .min(3, "El nombre no debe tener menos de 3 caracteres")
-        .max(20, "El nombre no debe tener más de 20 caracteres"),
+        .required('Este campo es obligatorio')
+        .min(3, 'El nombre no debe tener menos de 3 caracteres')
+        .max(20, 'El nombre no debe tener más de 20 caracteres'),
       lastname: Yup.string()
-        .required("Este campo es obligatorio")
-        .min(3, "El apellido no debe tener menos de 3 caracteres")
-        .max(20, "El apellido no debe tener más de 20 caracteres"),
+        .required('Este campo es obligatorio')
+        .min(3, 'El apellido no debe tener menos de 3 caracteres')
+        .max(20, 'El apellido no debe tener más de 20 caracteres'),
       email: Yup.string()
-        .email("Formato de email es incorrecto")
-        .required("Este campo es obligatorio"),
+        .email('Formato de email es incorrecto')
+        .required('Este campo es obligatorio'),
       password: Yup.string()
-        .required("Este campo es obligatorio")
+        .required('Este campo es obligatorio')
         .matches(
           /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,}$/,
-          "La contraseña debe tener mìnimo 8 caracteres , un n°, una minúscula, una mayúscula y no contener caracteres especiales."
+          'La contraseña debe tener mìnimo 8 caracteres , un n°, una minúscula, una mayúscula y no contener caracteres especiales.'
         ),
     }),
 
@@ -48,13 +56,31 @@ export const RegisterScreen = ({ navigation }) => {
     },
   });
 
-  const navigateToLogin = ()=>{
-    navigation.navigate("LoginScreen")
-  }
+  const [status, setStatus] = useState(null);
+  const { popIn, popAnim, setearStatus } = useToast();
+
+  const navigateToLogin = () => {
+    // navigation.navigate("LoginScreen")
+  };
 
   return (
     <>
-    {stateAuth.successRegister && navigation.navigate("LoginScreen")}
+      {stateAuth.successRegister && navigation.navigate('LoginScreen')}
+
+      {/* Toast View Animated */}
+      {status && (
+        <Animated.View
+          style={[
+            styles.toastContainer,
+            {
+              transform: [{ translateY: popAnim }],
+            },
+          ]}
+        >
+          <AlertToast status={status} titulo={'registró'} />
+        </Animated.View>
+      )}
+
       <View>
         <Text style={[globalThemes.title, { color: state.colors.titleColor }]}>
           Bienvenid@s
@@ -155,7 +181,7 @@ export const RegisterScreen = ({ navigation }) => {
             RollingAppRN
           </Text>
         </View>
-      </View>
+      </View> 
       {/* <View>
         {stateAuth.successRegister && 
         <AlertComponent
@@ -165,7 +191,47 @@ export const RegisterScreen = ({ navigation }) => {
         btnFun={() => console.log('usuario registrado')}
       />
       }
-      </View> */}
+      </View>
+
+      Botones para probar los toast de success y fail
+      {/* <Button
+        title="Success Message"
+        onPress={() => {
+          setStatus('success');
+          popIn();
+        }}
+        style={{ marginTop: 30 }}
+      ></Button>
+      <Button
+        title="Fail Message"
+        onPress={() => {
+          setStatus('fail');
+          popIn();
+        }}
+        style={{ marginTop: 30 }}
+      ></Button> */}
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  toastContainer: {
+    height: 60,
+    width: '100%',
+    backgroundColor: '#f5f5f5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginHorizontal: 5,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+});
