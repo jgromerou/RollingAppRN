@@ -6,6 +6,7 @@ import { ProductReducer } from '../reducers/ProductsReducer';
 
 const initialState = {
   isLoading: true,
+  isLoadingListProducts: true,
   errorMessage: '',
   products: null,
   productSelected: null,

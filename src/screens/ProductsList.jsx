@@ -15,7 +15,8 @@ export const ProductsList = () => {
   const {
     state: { colors },
   } = useContext(ThemeContext);
-  const { getProducts, isLoading, products } = useContext(ProductsContext);
+  const { getProducts, isLoadingListProducts, products } =
+    useContext(ProductsContext);
 
   // Arreglo de productos buscados
   const [productsFiltered, setProductsFiltered] = useState(products);
@@ -25,10 +26,8 @@ export const ProductsList = () => {
 
   useEffect(() => {
     getProducts();
-    if (term.length === 0) {
-      return setProductsFiltered(products);
-    }
-  }, [isLoading]);
+    setProductsFiltered(products);
+  }, [isLoadingListProducts]);
 
   useEffect(() => {
     if (term.length === 0 || term === '') {
@@ -43,6 +42,10 @@ export const ProductsList = () => {
       )
     );
   }, [term]);
+
+  if (isLoadingListProducts) {
+    return <CustomLoading />;
+  }
 
   return (
     <View
@@ -74,17 +77,17 @@ export const ProductsList = () => {
           Productos
         </Text>
 
-       <View style={{alignItems: 'center'}}>
-       <SearchInput
-          style={{
-            position: 'absolute',
-            zIndex: 999,
-            width: screenWidth - 30,
-            top: 25,
-          }}
-          onDebounce={(value) => setTerm(value)}
-        />
-       </View>
+        <View style={{ alignItems: 'center' }}>
+          <SearchInput
+            style={{
+              position: 'absolute',
+              zIndex: 999,
+              width: screenWidth - 30,
+              top: 25,
+            }}
+            onDebounce={(value) => setTerm(value)}
+          />
+        </View>
 
         <FlatList
           data={productsFiltered}
