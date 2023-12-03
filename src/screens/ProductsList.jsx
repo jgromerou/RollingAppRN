@@ -52,15 +52,6 @@ export const ProductsList = () => {
       style={([globalThemes.container], { backgroundColor: colors.background })}
     >
       <View style={styles.head}>
-        {/* <View>
-              <View style={styles.menuContainer}>
-                <TouchableOpacity 
-                  //onPress={onFilter}
-                >
-                  <Ionicons name='filter-sharp'  size={28} color='#ccc'/>
-                </TouchableOpacity>
-              </View>
-      </View> */}
         <CartShop />
       </View>
 
@@ -101,6 +92,7 @@ export const ProductsList = () => {
                 ...styles.marginHorizontal,
                 marginTop: 65,
                 paddingBottom: 10,
+                color: colors.text,
               }}
             >
               {term}
