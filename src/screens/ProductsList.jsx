@@ -74,15 +74,17 @@ export const ProductsList = () => {
           Productos
         </Text>
 
-        <SearchInput
+       <View style={{alignItems: 'center'}}>
+       <SearchInput
           style={{
             position: 'absolute',
             zIndex: 999,
-            width: screenWidth - 40,
-            top: 50,
+            width: screenWidth - 30,
+            top: 25,
           }}
           onDebounce={(value) => setTerm(value)}
         />
+       </View>
 
         <FlatList
           data={productsFiltered}
