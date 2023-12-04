@@ -35,8 +35,8 @@ export const CustomCardProducts = ({ itemData }) => {
     >
       <View
         style={{
-          height: 220,
-          width: 160,
+          height: 258,
+          width: 185,
           padding: 10,
         }}
       >
@@ -60,14 +60,14 @@ export const CustomCardProducts = ({ itemData }) => {
         >
           <Text style={{ 
             fontWeight: 'bold', 
-            fontSize: 9, 
+            fontSize: 16, 
             color: 'black' }}>
-            {itemData.productName.length < 20 ? itemData.productName : itemData.productName.slice(0,20)}
+            {itemData.productName.length < 18 ? itemData.productName  : `${itemData.productName.slice(0,18)}...`}
           </Text>
-          <Text style={{ fontSize: 13, color: colors.text }}>
+          <Text style={{ fontSize: 15, color: colors.title }}>
             {itemData.category}
           </Text>
-          <Text style={{ fontSize: 10, color: colors.title }}>
+          <Text style={{ fontSize: 15, marginTop:12, color: colors.title, fontWeight:"bold" }}>
             ${itemData.price}.00
           </Text>
         </View>
@@ -83,14 +83,14 @@ export const CustomCardProducts = ({ itemData }) => {
               borderTopLeftRadius: 25,
               borderBottomRightRadius: 15,
               position: 'absolute',
-              bottom: -32,
+              bottom: -42,
               right: -11,
             }}
           >
-            <Text style={{ fontSize: 20 }}>
+            <Text>
               <AntDesign
                 name={favorite == itemData._id ? 'heart' : 'hearto'}
-                size={18}
+                size={27}
                 color={favorite == itemData.id ? '#f2058b' : '#fff'}
               />
             </Text>

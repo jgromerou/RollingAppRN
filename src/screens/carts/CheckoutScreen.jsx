@@ -79,7 +79,7 @@ export const CheckoutScreen = ({ navigation }) => {
             fontWeight: '500',
           }}
         >
-          Price $ {state.totalPrice}
+          Precio: $ {state.totalPrice}
         </Text>
 
         <TouchableOpacity

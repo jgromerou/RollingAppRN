@@ -12,6 +12,7 @@ const initialState = {
   productSelected: null,
   isLoadingProductSelected: true,
   categories: null,
+  isLoadingFeatures: true
 };
 
 export const ProductProvider = ({ children }) => {
@@ -148,7 +149,7 @@ export const ProductProvider = ({ children }) => {
         getProduct,
         getProductsByCategory,
         getCategories,
-        getFeaturedProducts,
+        getFeaturedProducts
       }}
     >
       {children}

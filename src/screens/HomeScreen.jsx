@@ -30,6 +30,7 @@ export const HomeScreen = ({ navigation }) => {
     featuredProducts,
     getProduct,
     productSelected,
+    isLoadingFeatures
   } = useContext(ProductsContext);
 
   const navigatetoCategories = () => {
@@ -54,7 +55,7 @@ export const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     getFeaturedProducts();
-  }, [isLoading]);
+  }, [isLoadingFeatures]);
 
   return (
     <ScrollView>

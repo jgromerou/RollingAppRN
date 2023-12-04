@@ -104,7 +104,7 @@ export const ProductsList = () => {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginVertical: 3,
+                marginVertical: 10,
               }}
             >
               <CustomCardProducts
