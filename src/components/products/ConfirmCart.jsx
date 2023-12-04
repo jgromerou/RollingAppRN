@@ -139,9 +139,9 @@ export const ConfirmCart = ({ navigation }) => {
         />
       </View>
       <View>
-        <Text style={{ color: colors.text }}>Continuar comprando</Text>
+        <Text style={{ color: colors.text, marginBottom:22, fontWeight:"bold", fontSize:18, }}>Continuar comprando</Text>
       </View>
-      <View style={{ flex: 2 }}>
+      <View style={{ flex: 2.5 }}>
         <FlatList
           data={products}
           renderItem={({ item }) => <CustomCardProducts itemData={item} />}
