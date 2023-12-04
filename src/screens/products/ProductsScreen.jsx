@@ -25,25 +25,13 @@ export const ProductsScreen = ({ route, navigation }) => {
   const { productId } = route.params;
   const [talle, setTalle] = useState(0);
   const { quantity, restQuantity, sumQuantity } = useQuantity();
-  const { addCart, state, calculateCart, editCart, isLoading, addUserDate } =
-    useContext(CartContext);
-  const {
-    state: { colors },
-  } = useContext(ThemeContext);
+  const { addCart, state, calculateCart, editCart, isLoading, addUserDate } = useContext(CartContext);
+  const { state: { colors } } = useContext(ThemeContext);
   const { state: cliente } = useContext(AuthContext);
-  const {
-    state: stateProducts,
-    getProduct,
-    isLoadingProductSelected,
-    productSelected,
-  } = useContext(ProductsContext);
+  const {  state: stateProducts, getProduct, isLoadingProductSelected, productSelected, resetProduct } = useContext(ProductsContext);
   const [visible, setVisible] = useState(false);
 
   const messageModal = 'No puede agregar un producto en 0';
-
-  useEffect(() => {
-    getProduct(productId);
-  }, [isLoadingProductSelected]);
 
   useEffect(() => {
     getProduct(productId);
@@ -102,6 +90,10 @@ export const ProductsScreen = ({ route, navigation }) => {
     editCart(CartModificada, numindex);
     calculateCart();
   };
+
+  if(isLoadingProductSelected){
+    return <CustomLoading />
+  }
 
   return (
     <View

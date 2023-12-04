@@ -65,16 +65,16 @@ export const CartItem = ({ item, index }) => {
         }}
       >
         <View>
-          <Text style={{ fontSize: 12, color: colors.titleColor }}>
+          <Text style={{ fontSize: 12, color: '#000' }}>
             {item?.category}
           </Text>
-          <Text style={{ fontSize: 13, color: '#fff' }}>
+          <Text style={{ fontSize: 13, color: '#000' }}>
             {item?.productName?.length < 28 ? item?.productName : item?.productName?.slice(0,27)}
           </Text>
           <Text
             style={{
               fontSize: 14,
-              color: colors.titleColor,
+              color: '#000',
               fontWeight: 'bold',
             }}
           >
