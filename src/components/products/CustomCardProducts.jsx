@@ -3,8 +3,11 @@ import { Image, Pressable, Text, View } from 'react-native';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { AntDesign } from 'react-native-vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import {ProductsContext} from '../../contexts/ProductsContext'
 
 export const CustomCardProducts = ({ itemData }) => {
+  const  {resetProduct} = useContext(ProductsContext)
+  
   console.log(itemData, 'itemData')
   const {
     state: { colors },
@@ -28,9 +31,9 @@ export const CustomCardProducts = ({ itemData }) => {
         borderRadius: 15,
       }}
       onPress={() =>
-        navigate('ProductsScreen', {
+        {navigate('ProductsScreen', {
           productId: itemData._id,
-        })
+        }); resetProduct()}
       }
     >
       <View

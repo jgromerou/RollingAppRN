@@ -17,6 +17,12 @@ export const ProductReducer = (state = {}, action) => {
         errorMessage: '',
         productSelected: action.payload.productSelected,
       };
+      
+    case types.products.resetProduct:
+      return {
+        ...state,
+        isLoadingProductSelected: true
+      }  
 
     case types.products.getProductsByCategory:
       return {

@@ -15,7 +15,7 @@ export const ProductsList = () => {
   const {
     state: { colors },
   } = useContext(ThemeContext);
-  const { getProducts, isLoadingListProducts, products } =
+  const { getProducts, isLoadingListProducts, products, resetProduct } =
     useContext(ProductsContext);
 
   // Arreglo de productos buscados

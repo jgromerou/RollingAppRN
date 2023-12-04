@@ -68,6 +68,12 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const resetProduct = async () => {
+    dispatch({
+      type: types.products.resetProduct,
+    });
+  }
+
   const getProductsByCategory = async (category) => {
     try {
       const data = await dashAxios.get(`products/category/${category}`);
@@ -149,7 +155,8 @@ export const ProductProvider = ({ children }) => {
         getProduct,
         getProductsByCategory,
         getCategories,
-        getFeaturedProducts
+        getFeaturedProducts,
+        resetProduct
       }}
     >
       {children}
