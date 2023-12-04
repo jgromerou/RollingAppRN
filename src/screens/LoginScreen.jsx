@@ -46,12 +46,12 @@ export const LoginScreen = ({ navigation }) => {
 
   return (
     <>
-      <View>
+      <View >
         <Text style={[globalThemes.title, { color: colors.titleColor }]}>
           Bienvenid@s
         </Text>
       </View>
-      <View style={globalThemes.container}>
+      <View style={[globalThemes.container, { color: colors.background }]}>
         <View>
           <Image
             style={styles.logo}

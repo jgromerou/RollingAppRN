@@ -13,7 +13,7 @@ import { globalThemes } from '../themes/globalThemes';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { ErrorMessage } from '../components/ErrorMessage';
-import {  useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { AlertToast } from '../components/AlertToast';
@@ -53,28 +53,27 @@ export const RegisterScreen = ({ navigation }) => {
     onSubmit: () => {
       Keyboard.dismiss();
       registerUser(formik.values);
-      //formik.resetForm();
-      
+      formik.resetForm();
     },
   });
 
-  // Variables para los Toast
+
   const [status, setStatus] = useState(null);
   const { popIn, popAnim } = useToast();
 
-  useEffect(()=> {
-    if(stateAuth.successRegister){
-      setStatus('success')
-      popIn()
-      setTimeout(()=> {
-        navigation.replace('LoginScreen')
-      },1000)
+  useEffect(() => {
+    if (stateAuth.successRegister) {
+      setStatus('success');
+      popIn();
+      setTimeout(() => {
+        navigation.replace('LoginScreen');
+      }, 1000);
     }
-  },[stateAuth.successRegister])
+  }, [stateAuth.successRegister]);
 
   return (
     <>
-      {/* Toast View Animated */}
+  
       {status && (
         <Animated.View
           style={[
@@ -109,7 +108,7 @@ export const RegisterScreen = ({ navigation }) => {
             placeholderTextColor={state.colors.notification}
             name="firstname"
             value={formik.values.firstname}
-            onChangeText={(value) => formik.setFieldValue("firstname", value)}
+            onChangeText={(value) => formik.setFieldValue('firstname', value)}
           />
           {formik.errors.firstname && (
             <ErrorMessage message={formik.errors.firstname} />
@@ -123,7 +122,7 @@ export const RegisterScreen = ({ navigation }) => {
             placeholderTextColor={state.colors.notification}
             name="lastname"
             value={formik.values.lastname}
-            onChangeText={(value) => formik.setFieldValue("lastname", value)}
+            onChangeText={(value) => formik.setFieldValue('lastname', value)}
           />
           {formik.errors.lastname && (
             <ErrorMessage message={formik.errors.lastname} />
@@ -138,7 +137,7 @@ export const RegisterScreen = ({ navigation }) => {
             keyboardType="email-address"
             name="email"
             value={formik.values.email}
-            onChangeText={(value) => formik.setFieldValue("email", value)}
+            onChangeText={(value) => formik.setFieldValue('email', value)}
           />
           {formik.errors.email && (
             <ErrorMessage message={formik.errors.email} />
@@ -154,13 +153,15 @@ export const RegisterScreen = ({ navigation }) => {
             secureTextEntry={true}
             name="password"
             value={formik.values.password}
-            onChangeText={(value) => formik.setFieldValue("password", value)}
+            onChangeText={(value) => formik.setFieldValue('password', value)}
           />
           {formik.errors.password && (
             <ErrorMessage message={formik.errors.password} />
           )}
         </View>
-        {stateAuth.errorMessage && <ErrorMessage message={stateAuth.errorMessage} />}
+        {stateAuth.errorMessage && (
+          <ErrorMessage message={stateAuth.errorMessage} />
+        )}
 
         <View>
           <TouchableOpacity
@@ -188,17 +189,7 @@ export const RegisterScreen = ({ navigation }) => {
             RollingAppRN
           </Text>
         </View>
-        <View>
-          <Button
-          title="Success Message"
-          onPress={() => {
-            setStatus("success");
-            popIn();
-          }}
-          style={{ marginTop: 30 }}
-        ></Button>
-        </View>
-      </View> 
+      </View>
     </>
   );
 };

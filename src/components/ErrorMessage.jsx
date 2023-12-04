@@ -8,7 +8,7 @@ export const ErrorMessage = ({ message }) => {
   const { state } = useContext(ThemeContext);
   return (
     <Text
-      style={[
+      style={ [
         globalThemes.errorText,
         {
           color: state.colors.contrastColor,
