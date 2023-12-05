@@ -65,6 +65,7 @@ export const LoginScreen = ({ navigation }) => {
               globalThemes.defaultInputText,
               { color: colors.text, borderColor: colors.border },
             ]}
+            maxLength={40}
             placeholder="Correo"
             placeholderTextColor={colors.notification}
             keyboardType="email-address"
@@ -80,6 +81,7 @@ export const LoginScreen = ({ navigation }) => {
               globalThemes.defaultInputText,
               { color: colors.text, borderColor: colors.border },
             ]}
+            maxLength={30}
             placeholder="Contraseña"
             placeholderTextColor={colors.notification}
             secureTextEntry={true}
