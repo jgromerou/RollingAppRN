@@ -181,7 +181,7 @@ export const HomeScreen = ({ navigation }) => {
             )}
 
             {/* Brands */}
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               <View
                 style={{
                   paddingVertical: 20,
