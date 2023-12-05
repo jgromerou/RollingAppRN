@@ -104,6 +104,7 @@ export const RegisterScreen = ({ navigation }) => {
               globalThemes.defaultInputText,
               { color: state.colors.text, borderColor: state.colors.border },
             ]}
+            maxLength={20}
             placeholder="Nombre"
             placeholderTextColor={state.colors.notification}
             name="firstname"
@@ -118,6 +119,7 @@ export const RegisterScreen = ({ navigation }) => {
               globalThemes.defaultInputText,
               { color: state.colors.text, borderColor: state.colors.border },
             ]}
+            maxLength={20}
             placeholder="Apellido"
             placeholderTextColor={state.colors.notification}
             name="lastname"
@@ -132,6 +134,7 @@ export const RegisterScreen = ({ navigation }) => {
               globalThemes.defaultInputText,
               { color: state.colors.text, borderColor: state.colors.border },
             ]}
+            maxLength={40}
             placeholder="Correo"
             placeholderTextColor={state.colors.notification}
             keyboardType="email-address"
@@ -148,6 +151,7 @@ export const RegisterScreen = ({ navigation }) => {
               globalThemes.defaultInputText,
               { color: state.colors.text, borderColor: state.colors.border },
             ]}
+            maxLength={30}
             placeholder="Contraseña"
             placeholderTextColor={state.colors.notification}
             secureTextEntry={true}

@@ -22,6 +22,7 @@ export const SearchInput = ({ style, onDebounce }) => {
     <View style={{ ...styles.container, ...style }}>
       <View style={styles.textBackground}>
         <TextInput
+          maxLength={20}
           placeholder="Buscar producto"
           style={styles.textInput}
           autoCapitalize="none"
