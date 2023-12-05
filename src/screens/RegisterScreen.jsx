@@ -1,46 +1,92 @@
-import React, { useContext, useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
-import { globalThemes } from "../themes/globalThemes";
-import { ThemeContext } from "../contexts/ThemeContext";
-import { AuthContext } from "../contexts/AuthContext";
-import { ErrorMessage } from "../components/ErrorMessage";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import React, { useContext, useEffect, useState } from 'react';
+import {
+  Animated,
+  Button,
+  Keyboard,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { globalThemes } from '../themes/globalThemes';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { AuthContext } from '../contexts/AuthContext';
+import { ErrorMessage } from '../components/ErrorMessage';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+import { AlertToast } from '../components/AlertToast';
+import { useToast } from '../hooks/useToast';
 
 export const RegisterScreen = ({ navigation }) => {
-
-  const [redirect, setRedirect] = useState(false);
   const { state } = useContext(ThemeContext);
   const { state: stateAuth, registerUser } = useContext(AuthContext);
 
   const formik = useFormik({
     initialValues: {
-      firstname: "",
-      lastname: "",
-      email: "",
-      password: "",
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
     },
-    validateOnChange: false,
     validationSchema: Yup.object({
-      firstname: Yup.string().required("Este campo es obligatorio"),
-      lastname: Yup.string().required("Este campo es obligatorio"),
+      firstname: Yup.string()
+        .required('Este campo es obligatorio')
+        .min(3, 'El nombre no debe tener menos de 3 caracteres')
+        .max(20, 'El nombre no debe tener más de 20 caracteres'),
+      lastname: Yup.string()
+        .required('Este campo es obligatorio')
+        .min(3, 'El apellido no debe tener menos de 3 caracteres')
+        .max(20, 'El apellido no debe tener más de 20 caracteres'),
       email: Yup.string()
-        .email("Formato de email es incorrecto")
-        .required("Este campo es obligatorio"),
+        .email('Formato de email es incorrecto')
+        .required('Este campo es obligatorio'),
       password: Yup.string()
-        .required("Este campo es obligatorio")
-        .min(8, "La contraseña debe tener al menos 8 caracteres"),
+        .required('Este campo es obligatorio')
+        .matches(
+          /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,}$/,
+          'La contraseña debe tener mìnimo 8 caracteres , un n°, una minúscula, una mayúscula y no contener caracteres especiales.'
+        ),
     }),
-    onSubmit: ({ resetForm }) => {  
+
+    onSubmit: () => {
+      Keyboard.dismiss();
       registerUser(formik.values);
-      // resetForm();
-      navigation.navigate('StackAuthNavigator')
-       },
+      formik.resetForm();
+    },
   });
+
+
+  const [status, setStatus] = useState(null);
+  const { popIn, popAnim } = useToast();
+
+  useEffect(() => {
+    if (stateAuth.successRegister) {
+      setStatus('success');
+      popIn();
+      setTimeout(() => {
+        navigation.replace('LoginScreen');
+      }, 1000);
+    }
+  }, [stateAuth.successRegister]);
 
   return (
     <>
-      
+  
+      {status && (
+        <Animated.View
+          style={[
+            styles.toastContainer,
+            {
+              transform: [{ translateY: popAnim }],
+            },
+          ]}
+        >
+          <AlertToast status={status} titulo={'registró'} />
+        </Animated.View>
+      )}
+
       <View>
         <Text style={[globalThemes.title, { color: state.colors.titleColor }]}>
           Bienvenid@s
@@ -61,7 +107,8 @@ export const RegisterScreen = ({ navigation }) => {
             placeholder="Nombre"
             placeholderTextColor={state.colors.notification}
             name="firstname"
-            onChangeText={(value) => formik.setFieldValue("firstname", value)}
+            value={formik.values.firstname}
+            onChangeText={(value) => formik.setFieldValue('firstname', value)}
           />
           {formik.errors.firstname && (
             <ErrorMessage message={formik.errors.firstname} />
@@ -74,7 +121,8 @@ export const RegisterScreen = ({ navigation }) => {
             placeholder="Apellido"
             placeholderTextColor={state.colors.notification}
             name="lastname"
-            onChangeText={(value) => formik.setFieldValue("lastname", value)}
+            value={formik.values.lastname}
+            onChangeText={(value) => formik.setFieldValue('lastname', value)}
           />
           {formik.errors.lastname && (
             <ErrorMessage message={formik.errors.lastname} />
@@ -88,7 +136,8 @@ export const RegisterScreen = ({ navigation }) => {
             placeholderTextColor={state.colors.notification}
             keyboardType="email-address"
             name="email"
-            onChangeText={(value) => formik.setFieldValue("email", value)}
+            value={formik.values.email}
+            onChangeText={(value) => formik.setFieldValue('email', value)}
           />
           {formik.errors.email && (
             <ErrorMessage message={formik.errors.email} />
@@ -103,16 +152,16 @@ export const RegisterScreen = ({ navigation }) => {
             placeholderTextColor={state.colors.notification}
             secureTextEntry={true}
             name="password"
-            onChangeText={(value) => formik.setFieldValue("password", value)}
+            value={formik.values.password}
+            onChangeText={(value) => formik.setFieldValue('password', value)}
           />
           {formik.errors.password && (
             <ErrorMessage message={formik.errors.password} />
           )}
         </View>
-
-        {stateAuth.errorMessage  && (
-            <ErrorMessage message={stateAuth.errorMessage} />
-          )}
+        {stateAuth.errorMessage && (
+          <ErrorMessage message={stateAuth.errorMessage} />
+        )}
 
         <View>
           <TouchableOpacity
@@ -128,7 +177,7 @@ export const RegisterScreen = ({ navigation }) => {
             <Text
               style={[
                 globalThemes.defaulTextBtn,
-                { color: state.colors.contrastColor },
+                { color: state.colors.title },
               ]}
             >
               GUARDAR
@@ -144,3 +193,25 @@ export const RegisterScreen = ({ navigation }) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  toastContainer: {
+    height: 60,
+    width: '100%',
+    backgroundColor: '#f5f5f5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginHorizontal: 5,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+});
