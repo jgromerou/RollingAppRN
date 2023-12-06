@@ -8,7 +8,7 @@ import {ProductsContext} from '../../contexts/ProductsContext'
 export const CustomCardProducts = ({ itemData }) => {
   const  {resetProduct} = useContext(ProductsContext)
   
-  console.log(itemData, 'itemData')
+  // console.log(itemData, 'itemData')
   const {
     state: { colors },
   } = useContext(ThemeContext);
