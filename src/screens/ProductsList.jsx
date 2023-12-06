@@ -15,7 +15,8 @@ export const ProductsList = () => {
   const {
     state: { colors },
   } = useContext(ThemeContext);
-  const { getProducts, isLoading, products } = useContext(ProductsContext);
+  const { getProducts, isLoadingListProducts, products, resetProduct } =
+    useContext(ProductsContext);
 
   // Arreglo de productos buscados
   const [productsFiltered, setProductsFiltered] = useState(products);
@@ -25,10 +26,8 @@ export const ProductsList = () => {
 
   useEffect(() => {
     getProducts();
-    if (term.length === 0) {
-      return setProductsFiltered(products);
-    }
-  }, [isLoading]);
+    setProductsFiltered(products);
+  }, [isLoadingListProducts]);
 
   useEffect(() => {
     if (term.length === 0 || term === '') {
@@ -44,20 +43,15 @@ export const ProductsList = () => {
     );
   }, [term]);
 
+  if (isLoadingListProducts) {
+    return <CustomLoading />;
+  }
+
   return (
     <View
       style={([globalThemes.container], { backgroundColor: colors.background })}
     >
       <View style={styles.head}>
-        {/* <View>
-              <View style={styles.menuContainer}>
-                <TouchableOpacity 
-                  //onPress={onFilter}
-                >
-                  <Ionicons name='filter-sharp'  size={28} color='#ccc'/>
-                </TouchableOpacity>
-              </View>
-      </View> */}
         <CartShop />
       </View>
 
@@ -74,15 +68,17 @@ export const ProductsList = () => {
           Productos
         </Text>
 
-        <SearchInput
-          style={{
-            position: 'absolute',
-            zIndex: 999,
-            width: screenWidth - 40,
-            top: 50,
-          }}
-          onDebounce={(value) => setTerm(value)}
-        />
+        <View style={{ alignItems: 'center' }}>
+          <SearchInput
+            style={{
+              position: 'absolute',
+              zIndex: 999,
+              width: screenWidth - 30,
+              top: 25,
+            }}
+            onDebounce={(value) => setTerm(value)}
+          />
+        </View>
 
         <FlatList
           data={productsFiltered}
@@ -96,6 +92,7 @@ export const ProductsList = () => {
                 ...styles.marginHorizontal,
                 marginTop: 15,
                 paddingBottom: 10,
+                color: colors.text,
               }}
             >
               {/* {term} */}
@@ -107,7 +104,7 @@ export const ProductsList = () => {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginVertical: 3,
+                marginVertical: 10,
               }}
             >
               <CustomCardProducts

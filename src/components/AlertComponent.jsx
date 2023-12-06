@@ -5,7 +5,7 @@ export const AlertComponent = (title, mess, btnTxt, btnFun) => {
   return Alert.alert(title, mess, [
     { 
       text: btnTxt, 
-      onPress: btnFun 
+      onPress: btnFun,
     }
   ]);
 };

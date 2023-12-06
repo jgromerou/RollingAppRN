@@ -34,20 +34,11 @@ export const ProductsScreen = ({ route, navigation }) => {
     state: { colors },
   } = useContext(ThemeContext);
   const { state: cliente } = useContext(AuthContext);
-  const {
-    state: stateProducts,
-    getProduct,
-    isLoadingProductSelected,
-    productSelected,
-  } = useContext(ProductsContext);
+  const {  state: stateProducts, getProduct, isLoadingProductSelected, productSelected, resetProduct } = useContext(ProductsContext);
   const [visible, setVisible] = useState(false);
 
   const messageModal = 'No puede agregar un producto en 0';
   const { navigate } = useNavigation()
-
-  useEffect(() => {
-    getProduct(productId);
-  }, [isLoadingProductSelected]);
 
   useEffect(() => {
     getProduct(productId);
@@ -116,6 +107,10 @@ export const ProductsScreen = ({ route, navigation }) => {
     editCart(CartModificada, numindex);
     calculateCart();
   };
+
+  if(isLoadingProductSelected){
+    return <CustomLoading />
+  }
 
   return (
     <View

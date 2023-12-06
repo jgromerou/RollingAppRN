@@ -6,11 +6,13 @@ import { ProductReducer } from '../reducers/ProductsReducer';
 
 const initialState = {
   isLoading: true,
+  isLoadingListProducts: true,
   errorMessage: '',
   products: null,
   productSelected: null,
   isLoadingProductSelected: true,
   categories: null,
+  isLoadingFeatures: true
 };
 
 export const ProductProvider = ({ children }) => {
@@ -65,6 +67,12 @@ export const ProductProvider = ({ children }) => {
       });
     }
   };
+
+  const resetProduct = async () => {
+    dispatch({
+      type: types.products.resetProduct,
+    });
+  }
 
   const getProductsByCategory = async (category) => {
     try {
@@ -148,6 +156,7 @@ export const ProductProvider = ({ children }) => {
         getProductsByCategory,
         getCategories,
         getFeaturedProducts,
+        resetProduct
       }}
     >
       {children}
