@@ -76,17 +76,21 @@ export const CheckoutScreen = ({ navigation }) => {
             flexDirection: 'row',
             //flex: 1,
             justifyContent: 'space-evenly',
-            marginTop: 3,
-            marginBottom: 3,
-            //backgroundColor:'white',
+            marginTop: 2,
+            marginBottom: 2,
+            backgroundColor:'rgba(0,0,0, 0.5)',
             alignItems: 'center',
+            width: '100%',
+            borderColor: colors.text,
+            borderWidth: 2,
+            borderRadius: 6
           }}
         >
           <Text
             style={{
               fontSize: 18,
-              //color: '#f2058b',
-              color: colors.text,
+              color: 'white',
+              //color: colors.text,
               fontWeight: '500',
             }}
           >
@@ -95,8 +99,8 @@ export const CheckoutScreen = ({ navigation }) => {
           <Text
             style={{
               fontSize: 25,
-              //color: '#f2058b',
-              color: colors.text,
+              color: 'white',
+              //color: colors.text,
               fontWeight: '500',
             }}
           >
@@ -104,6 +108,7 @@ export const CheckoutScreen = ({ navigation }) => {
           </Text>
         </View>
         <View>
+          {state.cart.length > 0.00 ?
           <TouchableOpacity
             style={{
               backgroundColor: colors.primary,
@@ -123,6 +128,7 @@ export const CheckoutScreen = ({ navigation }) => {
           >
             <Text style={globalThemes.defaulTextBtn}>CONFIRMAR</Text>
           </TouchableOpacity>
+          : null }
         </View>
       </View>
     </View>
