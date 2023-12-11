@@ -20,26 +20,28 @@ export const CartShop = () => {
     <View>
       <View
         style={{
-          //backgroundColor: colors.primary,
-          backgroundColor: colors.container,
-          marginHorizontal: 10,
-          borderRadius: 10,
+          backgroundColor: colors.primary,
+          //backgroundColor: colors.container,
+          marginHorizontal: 5,
+          borderRadius: 50,
+          borderColor: 'green',
+          //borderWidth:2,
           padding: 10,
           zIndex: 999,
           alignSelf: 'center',
-          marginTop: 2,
+          marginTop: 5,
         }}
       >
         <TouchableOpacity onPress={() => navigate('CheckoutScreen')}>
           {/* <Ionicons name='filter-sharp'  size={28} color='#ccc'/> */}
           <AntDesign
             name="shoppingcart"
-            //color={'rgba(255,255,255,1)'}
-            color={colors.text}
+            color={'rgba(255,255,255,1)'}
+            //color={colors.text}
             size={28}
           />
           <View style={styles.BadgeCS}>
-            <Badge backgroundColor="#fff" style={{ color: colors.text }}>
+            <Badge backgroundColor="#fff" style={{ color: 'black' }}>
               {state.cart.length ? state.cart.length : 0}
             </Badge>
           </View>

@@ -8,7 +8,7 @@ import { CartContext } from '../../contexts/CartContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
 export const CartItem = ({ item, index }) => {
-  // console.log(item, 'itemcategory')
+  //console.log(item, 'itemcategory')
   const {
     state: { colors },
   } = useContext(ThemeContext);
@@ -29,10 +29,9 @@ export const CartItem = ({ item, index }) => {
       style={{
         backgroundColor: colors.primary,
         borderColor: colors.text,
-        borderWidth: 3,
+        borderWidth: 1,
         //backgroundColor: '#ccc',
         flexDirection: 'row',
-        //borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center',
         //backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -59,7 +58,7 @@ export const CartItem = ({ item, index }) => {
       </View>
       <View
         style={{
-          flex: 3,
+          flex: 4,
           alignItems: 'flex-start',
           justifyContent: 'center',
         }}
@@ -82,7 +81,7 @@ export const CartItem = ({ item, index }) => {
           </Text>
         </View>
       </View>
-      <View style={{ flex: 2, alignItems: 'center' }}>
+      <View style={{ flex: 1.9, alignItems: 'center' }}>
         <CustomQuantity
           quantity={quantity}
           sumQuantity={sumQuantity}
@@ -93,7 +92,7 @@ export const CartItem = ({ item, index }) => {
       </View>
       <View style={{ flex: 0.5, alignItems: 'center' }}>
         <Pressable onPress={() => deleCart(index)}>
-          <AntDesign name="delete" size={26} color={'white'} />
+          <AntDesign name="delete" size={25} color={'white'} />
         </Pressable>
       </View>
     </View>

@@ -69,7 +69,7 @@ export const ConfirmCart = ({ navigation }) => {
               {item.category}
             </Text>
             <Text style={{ fontSize: 13, color: '#fff' }}>
-              {item.productName}
+              {item.productName.length < 28 ? item.productName : item.productName.slice(0,27)}
             </Text>
             <Text
               style={{
@@ -162,11 +162,26 @@ export const ConfirmCart = ({ navigation }) => {
           //borderWidth:2
         }}
       >
+                <View
+          style={{
+            flexDirection: 'row',
+            //flex: 1,
+            justifyContent: 'space-evenly',
+            marginTop: 2,
+            marginBottom: 2,
+            backgroundColor:'rgba(0,0,0, 0.5)',
+            alignItems: 'center',
+            width: '65%',
+            borderColor: colors.text,
+            borderWidth: 2,
+            borderRadius: 6
+          }}
+        >
         <Text
           style={{
             fontSize: 25,
-            //color: '#f2058b',
-            color: colors.text,
+            color: 'white',
+            //color: colors.text,
             fontWeight: '500',
             //borderColor:'blue',
             //borderWidth:2
@@ -174,6 +189,7 @@ export const ConfirmCart = ({ navigation }) => {
         >
           $ {state.totalPrice}
         </Text>
+        </View>
         <TouchableOpacity
           style={{
             backgroundColor: colors.primary,

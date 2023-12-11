@@ -90,12 +90,12 @@ export const ProductsList = () => {
               style={{
                 ...styles.title,
                 ...styles.marginHorizontal,
-                marginTop: 65,
+                marginTop: 15,
                 paddingBottom: 10,
                 color: colors.text,
               }}
             >
-              {term}
+              {/* {term} */}
             </Text>
           }
           renderItem={({ item }) => (

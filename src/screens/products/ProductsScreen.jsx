@@ -19,19 +19,26 @@ import { CartShop } from '../../components/products/CartShop';
 import { GoBack } from '../../components/products/GoBack';
 import { CustomModal } from '../../components/products/CustomModal';
 import { AuthContext } from '../../contexts/AuthContext';
+import { useNavigation } from '@react-navigation/native';
 import { CustomLoading } from '../../components/CustomLoading';
 
 export const ProductsScreen = ({ route, navigation }) => {
   const { productId } = route.params;
+  //console.log(productId,' productId')
+
   const [talle, setTalle] = useState(0);
-  const { quantity, restQuantity, sumQuantity } = useQuantity();
-  const { addCart, state, calculateCart, editCart, isLoading, addUserDate } = useContext(CartContext);
-  const { state: { colors } } = useContext(ThemeContext);
+  const { quantity, restQuantity, sumQuantity, initQuantity } = useQuantity();
+  const { addCart, state, calculateCart, editCart, isLoading, addUserDate } =
+    useContext(CartContext);
+  const {
+    state: { colors },
+  } = useContext(ThemeContext);
   const { state: cliente } = useContext(AuthContext);
   const {  state: stateProducts, getProduct, isLoadingProductSelected, productSelected, resetProduct } = useContext(ProductsContext);
   const [visible, setVisible] = useState(false);
 
   const messageModal = 'No puede agregar un producto en 0';
+  const { navigate } = useNavigation()
 
   useEffect(() => {
     getProduct(productId);
@@ -56,12 +63,18 @@ export const ProductsScreen = ({ route, navigation }) => {
     }
     // busco si ya esta en el carrito el producto
     let cartExist = '';
-    cartExist = state.cart.find((cart) => cart._id === productSelected?._id);
+    //cartExist = state.cart.find((cart) => cart._id === productSelected?._id);
+    cartExist = state.cart.find((cart) => cart._id === productId);
+    //console.log(cartExist, 'find cartExist')
+
     if (cartExist !== undefined) {
       let numindex = state.cart.findIndex(
-        (cart) => cart._id === productSelected?._id
+        (cart) => cart._id === cartExist._id
       );
+      //console.log(numindex,'numindex')
+      //cart._id === productSelected?._id
       ActCart(cartExist, numindex);
+      initQuantity();
       return;
     }
     const data = {
@@ -73,13 +86,17 @@ export const ProductsScreen = ({ route, navigation }) => {
     addCart(data);
     calculateCart();
     addUserDate(cliente.user.id);
+    initQuantity();
+    navigate('ProductsList');
   };
 
   // funcion para modificar solo cantidad cuando ingresa el mismo product
   const ActCart = (cartExist, numindex) => {
+    //console.log(cartExist,' cartExist')
     const CartModificada = {
-      id: cartExist._id,
-      product: cartExist.product,
+      _id: cartExist._id,
+      //product: cartExist.product,
+      productName: cartExist.productName,
       price: cartExist.price,
       waist: cartExist.waist,
       quantity: cartExist.quantity + quantity,
@@ -112,7 +129,7 @@ export const ProductsScreen = ({ route, navigation }) => {
       </View>
       <View
         style={{
-          flex: 6,
+          flex: 8,
           justifyContent: 'center',
           //backgroundColor: colors.primary,
           alignItems: 'center',
@@ -128,8 +145,8 @@ export const ProductsScreen = ({ route, navigation }) => {
         <Image
           source={{ uri: `${productSelected?.image.secure_url}` }}
           style={{
-            width: 180,
-            height: 180,
+            width: 220,
+            height: 220,
             borderRadius: 10,
           }}
         />
@@ -137,23 +154,23 @@ export const ProductsScreen = ({ route, navigation }) => {
 
       <View
         style={{
-          flex: 1.8,
+          flex: 1.5,
           //backgroundColor: colors.primary,
           marginVertical: 20,
           justifyContent: 'center',
           alignItems: 'center',
         }}
       >
-        <Text style={{ fontSize: 14, color: colors.titleColor }}>
+        <Text style={{ fontSize: 12, color: colors.titleColor }}>
           {productSelected?.category}
         </Text>
         <Text
-          style={{ fontSize: 16, color: colors.titleColor, fontWeight: 'bold' }}
+          style={{ fontSize: 14, color: colors.titleColor, fontWeight: 'bold' }}
         >
           {productSelected?.productName.length < 28 ? productSelected?.productName : productSelected?.productName.slice(0,27)}{' '}
         </Text>
         <Text
-          style={{ fontSize: 22, color: colors.titleColor, fontWeight: 'bold' }}
+          style={{ fontSize: 20, color: colors.titleColor, fontWeight: 'bold' }}
         >
           ${productSelected?.price}
         </Text>
@@ -161,7 +178,7 @@ export const ProductsScreen = ({ route, navigation }) => {
 
       <View
         style={{
-          flex: 1.8,
+          flex: 3,
           //backgroundColor: colors.primary,
           backgroundColor: "rgba(0,0,0,0)",
           flexDirection: 'row',
@@ -183,6 +200,8 @@ export const ProductsScreen = ({ route, navigation }) => {
                     : "rgba(0,0,0,0.5)",
                 padding: 12,
                 borderWidth: 1,
+                width: 55,
+                alignItems: 'center',
                 borderColor:
                   item == talle ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.4)',
                 borderRadius: 5,
@@ -214,6 +233,8 @@ export const ProductsScreen = ({ route, navigation }) => {
                   : "rgba(0,0,0,0.5)",
               padding: 12,
               borderWidth: 1,
+              width: 55,
+              alignItems: 'center',
               borderColor:
                 item == talle ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.4)',
               borderRadius: 5,
@@ -237,7 +258,7 @@ export const ProductsScreen = ({ route, navigation }) => {
 
       <View
         style={{
-          marginVertical: 20,
+          marginVertical: 10,
           alignItems: 'center',
         }}
       >
@@ -270,8 +291,8 @@ export const ProductsScreen = ({ route, navigation }) => {
           style={{
             flex: 1,
             justifyContent: 'center',
-            marginTop: 10,
-            marginBottom: 30,
+            marginTop: 5,
+            marginBottom: 5,
           }}
         >
           <TouchableOpacity
@@ -289,7 +310,7 @@ export const ProductsScreen = ({ route, navigation }) => {
               borderRadius: 5,
               alignSelf: 'center',
             }}
-            onPress={addToCart}
+            onPress={() => {addToCart(); }}
           >
             <Text style={globalThemes.defaulTextBtn}>Agregar al Carrito</Text>
           </TouchableOpacity>
@@ -305,7 +326,7 @@ export const ProductsScreen = ({ route, navigation }) => {
       >
         <Text
           style={{
-            fontSize: 30,
+            fontSize: 25,
             fontWeight: 'bold',
             //color: "rgba(255,255,255,0.5)",
             color: colors.titleColor,
@@ -313,7 +334,7 @@ export const ProductsScreen = ({ route, navigation }) => {
         >
           4.8
         </Text>
-        <MaterialIcons name="star" color="yellow" size={30} />
+        <MaterialIcons name="star" color="yellow" size={25} />
       </View>
     </View>
   );

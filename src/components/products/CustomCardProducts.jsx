@@ -48,7 +48,7 @@ export const CustomCardProducts = ({ itemData }) => {
             source={{ uri: `${itemData.image.secure_url}` }}
             style={{
               width: '100%',
-              height: 130,
+              height: 150,
               marginBottom: 5,
               borderRadius: 10,
               resizeMode: 'contain',
