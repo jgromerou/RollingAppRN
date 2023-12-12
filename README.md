@@ -29,14 +29,12 @@ Notas Adicionales
 
 -   Este proyecto está construido con Expo, que simplifica el proceso de desarrollo para aplicaciones moviles utilizando React Native.
 
-Integrantes
------------------
-
--   Elias, Laura( Developer ).
--   Garcia, Lourdes ( Developer ).
--   Herrera, Nicolas( Developer ).
--   Medina, Ariel ( Developer ).
--   Romero Uro, Juan Gerardo ( Developer ).
--   Quiroga, Cristian ( Scrum Master ).
+## Integrantes
+- Elias, Laura (Developer)
+- Garcia, Lourdes (Developer)
+- Herrera, Nicolas (Developer)
+- Medina, Ariel (Developer)
+- Romero Uro, Juan Gerardo (Developer)
+- Quiroga, Cristian (Scrum Master).
 
 ¡Happy coding!
