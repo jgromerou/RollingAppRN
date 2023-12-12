@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
-import { ThemeContext } from '../contexts/ThemeContext';
-import { globalThemes } from '../themes/globalThemes';
+import { useContext, useEffect, useState } from "react";
+import { View, Text, StyleSheet, Dimensions, FlatList } from "react-native";
+import { ThemeContext } from "../contexts/ThemeContext";
+import { globalThemes } from "../themes/globalThemes";
 // import { searchData } from '../data/searchData'
-import { CustomCardProducts } from '../components/products/CustomCardProducts';
-import { CartShop } from '../components/products/CartShop';
-import { ProductsContext } from '../contexts/ProductsContext';
-import { SearchInput } from '../components/SearchInput';
-import { CustomLoading } from '../components/CustomLoading';
+import { CustomCardProducts } from "../components/products/CustomCardProducts";
+import { CartShop } from "../components/products/CartShop";
+import { ProductsContext } from "../contexts/ProductsContext";
+import { SearchInput } from "../components/SearchInput";
+import { CustomLoading } from "../components/CustomLoading";
 
-const screenWidth = Dimensions.get('window').width;
+const screenWidth = Dimensions.get("window").width;
 
 export const ProductsList = () => {
   const {
@@ -22,7 +22,7 @@ export const ProductsList = () => {
   const [productsFiltered, setProductsFiltered] = useState(products);
 
   //Término de búsqueda -> debounced Value
-  const [term, setTerm] = useState('');
+  const [term, setTerm] = useState("");
 
   useEffect(() => {
     getProducts();
@@ -30,7 +30,7 @@ export const ProductsList = () => {
   }, [isLoadingListProducts]);
 
   useEffect(() => {
-    if (term.length === 0 || term === '') {
+    if (term.length === 0 || term === "") {
       return setProductsFiltered(products);
     }
     //Aplicar filtro
@@ -55,23 +55,23 @@ export const ProductsList = () => {
         <CartShop />
       </View>
 
-      <View>
+      <View style={{ height: "100%" }}>
         <Text
           style={{
             fontSize: 24,
-            fontWeight: 'bold',
+            fontWeight: "bold",
             color: colors.primary,
-            textAlign: 'center',
-            textTransform: 'uppercase',
+            textAlign: "center",
+            textTransform: "uppercase",
           }}
         >
           Productos
         </Text>
 
-        <View style={{ alignItems: 'center' }}>
+        <View style={{ alignItems: "center", marginBottom: 10 }}>
           <SearchInput
             style={{
-              position: 'absolute',
+              position: "absolute",
               zIndex: 999,
               width: screenWidth - 30,
               top: 25,
@@ -102,8 +102,8 @@ export const ProductsList = () => {
             <View
               style={{
                 flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
+                justifyContent: "center",
+                alignItems: "center",
                 marginVertical: 10,
               }}
             >
@@ -122,16 +122,16 @@ export const ProductsList = () => {
 const styles = StyleSheet.create({
   headContainer: {
     flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   head: {
     flex: 1,
-    position: 'absolute',
-    width: '100%',
+    position: "absolute",
+    width: "100%",
     top: 0,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
 
   menuContainer: {
@@ -139,17 +139,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     zIndex: 999,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginTop: 30,
   },
   menuBtn: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     fontSize: 25,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   marginHorizontal: {
     marginHorizontal: 20,

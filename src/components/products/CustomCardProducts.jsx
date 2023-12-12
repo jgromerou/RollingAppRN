@@ -1,13 +1,13 @@
-import React, { useState, useContext } from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
-import { ThemeContext } from '../../contexts/ThemeContext';
-import { AntDesign } from 'react-native-vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import {ProductsContext} from '../../contexts/ProductsContext'
+import React, { useState, useContext } from "react";
+import { Image, Pressable, Text, View } from "react-native";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { AntDesign } from "react-native-vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { ProductsContext } from "../../contexts/ProductsContext";
 
 export const CustomCardProducts = ({ itemData }) => {
-  const  {resetProduct} = useContext(ProductsContext)
-  
+  const { resetProduct } = useContext(ProductsContext);
+
   // console.log(itemData, 'itemData')
   const {
     state: { colors },
@@ -30,11 +30,12 @@ export const CustomCardProducts = ({ itemData }) => {
         // borderWidth:2,
         borderRadius: 15,
       }}
-      onPress={() =>
-        {navigate('ProductsScreen', {
+      onPress={() => {
+        navigate("ProductsScreen", {
           productId: itemData._id,
-        }); resetProduct()}
-      }
+        });
+        resetProduct();
+      }}
     >
       <View
         style={{
@@ -47,11 +48,11 @@ export const CustomCardProducts = ({ itemData }) => {
           <Image
             source={{ uri: `${itemData.image.secure_url}` }}
             style={{
-              width: '100%',
+              width: "100%",
               height: 150,
               marginBottom: 5,
               borderRadius: 10,
-              resizeMode: 'contain',
+              resizeMode: "contain",
             }}
           />
         </View>
@@ -61,16 +62,28 @@ export const CustomCardProducts = ({ itemData }) => {
             marginTop: 3,
           }}
         >
-          <Text style={{ 
-            fontWeight: 'bold', 
-            fontSize: 16, 
-            color: 'black' }}>
-            {itemData.productName.length < 18 ? itemData.productName  : `${itemData.productName.slice(0,18)}...`}
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 16,
+              color: "black",
+            }}
+          >
+            {itemData.productName.length < 15
+              ? itemData.productName
+              : `${itemData.productName.slice(0, 15)}...`}
           </Text>
           <Text style={{ fontSize: 15, color: colors.title }}>
             {itemData.category}
           </Text>
-          <Text style={{ fontSize: 15, marginTop:12, color: colors.title, fontWeight:"bold" }}>
+          <Text
+            style={{
+              fontSize: 15,
+              marginTop: 12,
+              color: colors.title,
+              fontWeight: "bold",
+            }}
+          >
             ${itemData.price}.00
           </Text>
         </View>
@@ -78,23 +91,23 @@ export const CustomCardProducts = ({ itemData }) => {
         <Pressable onPress={() => onPresFavorite(itemData._id)}>
           <View
             style={{
-              backgroundColor: 'rgba(255,255,255, 0.1)',
+              backgroundColor: "rgba(255,255,255, 0.1)",
               paddingHorizontal: 10,
               paddingVertical: 20,
-              justifyContent: 'center',
-              alignItems: 'center',
+              justifyContent: "center",
+              alignItems: "center",
               borderTopLeftRadius: 25,
               borderBottomRightRadius: 15,
-              position: 'absolute',
-              bottom: -42,
-              right: -11,
+              position: "absolute",
+              bottom: -30,
+              right: -10,
             }}
           >
             <Text>
               <AntDesign
-                name={favorite == itemData._id ? 'heart' : 'hearto'}
+                name={favorite == itemData._id ? "heart" : "hearto"}
                 size={27}
-                color={favorite == itemData.id ? '#f2058b' : '#fff'}
+                color={favorite == itemData.id ? "#f2058b" : "#fff"}
               />
             </Text>
           </View>
