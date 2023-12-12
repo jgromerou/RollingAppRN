@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 export const globalThemes = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     padding: 10,
   },
   title: {
@@ -22,6 +21,7 @@ export const globalThemes = StyleSheet.create({
     fontSize: 15,
     fontWeight: 200,
     alignSelf: "center",
+    marginTop: -4,    
   },
   defaultInputText: {
     borderWidth: 2,
