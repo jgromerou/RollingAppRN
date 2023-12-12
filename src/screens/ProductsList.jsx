@@ -81,6 +81,7 @@ export const ProductsList = () => {
         </View>
 
         <FlatList
+        style={{borderColor: "orange", borderWidth: 5}}
           data={productsFiltered}
           keyExtractor={(item) => item._id}
           numColumns={2}
@@ -92,7 +93,7 @@ export const ProductsList = () => {
                 ...styles.marginHorizontal,
                 marginTop: 15,
                 paddingBottom: 10,
-                color: colors.text,
+                color: colors.text
               }}
             >
               {/* {term} */}
@@ -105,10 +106,12 @@ export const ProductsList = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginVertical: 10,
+                marginHorizontal: 5,
+                borderColor: "red",
+                borderWidth: 5
               }}
             >
               <CustomCardProducts
-                style={{ paddingBottom: 100 }}
                 itemData={item}
               />
             </View>

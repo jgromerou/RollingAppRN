@@ -41,6 +41,8 @@ export const CustomCardProducts = ({ itemData }) => {
           height: 258,
           width: 185,
           padding: 10,
+          borderColor: "yellow",
+          borderWidth: 5
         }}
       >
         <View>
