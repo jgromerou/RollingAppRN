@@ -19,7 +19,7 @@ export const SearchInput = ({ style, onDebounce }) => {
   }, [debouncedValue]);
 
   return (
-    <View style={{ ...styles.container, ...style }}>
+    <View style={{ ...style }}>
       <View style={styles.textBackground}>
         <TextInput
           maxLength={20}
@@ -37,9 +37,6 @@ export const SearchInput = ({ style, onDebounce }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    //backgroundColor: 'red',
-  },
   textBackground: {
     backgroundColor: '#F3F1F3',
     borderRadius: 50,

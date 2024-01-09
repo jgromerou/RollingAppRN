@@ -12,21 +12,12 @@ export const GoBack = ({navigation}) => {
 
     const { calculateCart, initLoading } = useContext(CartContext);
   return (
-    <View style={ colors.container
-        // backgroundColor: colors.primary,
-        // marginHorizontal: 10,
-        // borderRadius: 10,
-        // padding: 1,
-        // zIndex:999,
-        // marginTop: 2,
-        // marginBottom: 5       
-      }>
+    <View style={ colors.container }>
         <TouchableOpacity 
               onPress={() => {calculateCart(); navigation.goBack();}}
           >
             <AntDesign 
-                  name="left" 
-                  //color={'rgba(255,255,255,1)'}  
+                  name="left"  
                   color= { colors.text }
                   size={28}
             />

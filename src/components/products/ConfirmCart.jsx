@@ -2,14 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import { Text, Image, FlatList, View } from 'react-native';
 import { globalThemes } from '../../themes/globalThemes';
 import { TouchableOpacity } from 'react-native';
-import { ConfirmPay } from './ConfirmPay';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { useNavigation } from '@react-navigation/native';
 import { GoBack } from './GoBack';
 import { CartContext } from '../../contexts/CartContext';
-import { searchData } from '../../data/searchData';
 import { CustomCardProducts } from './CustomCardProducts';
-import { AntDesign } from 'react-native-vector-icons';
 import { ProductsContext } from '../../contexts/ProductsContext';
 
 export const ConfirmCart = ({ navigation }) => {
@@ -36,7 +33,6 @@ export const ConfirmCart = ({ navigation }) => {
           borderWidth: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          //backgroundColor: 'rgba(255, 255, 255, 0.1)',
           borderTopEndRadius: 10,
           borderBottomEndRadius: 10,
           padding: 5,
@@ -105,15 +101,8 @@ export const ConfirmCart = ({ navigation }) => {
       style={[
         colors.container,
         {
-          //globalThemes.container
-          //flex: 1,
-          //backgroundColor: colors.primary,
-
-          //backgroundColor: "yellow",
           padding: 10,
-          //globalThemes.container
           flex: 1,
-          //backgroundColor: colors.primary,
           padding: 10,
         },
       ]}
@@ -125,11 +114,6 @@ export const ConfirmCart = ({ navigation }) => {
       <View
         style={{
           flex: 2,
-          // justifyContent: "center",
-          // marginTop: 10,
-          // marginBottom: 30,
-          //borderColor:'blue',
-          //borderWidth:2
         }}
       >
         <FlatList
@@ -156,16 +140,12 @@ export const ConfirmCart = ({ navigation }) => {
           justifyContent: 'space-evenly',
           marginTop: 10,
           marginBottom: 5,
-          //backgroundColor:'white',
           alignItems: 'center',
-          //borderColor:'blue',
-          //borderWidth:2
         }}
       >
                 <View
           style={{
             flexDirection: 'row',
-            //flex: 1,
             justifyContent: 'space-evenly',
             marginTop: 2,
             marginBottom: 2,
@@ -181,10 +161,7 @@ export const ConfirmCart = ({ navigation }) => {
           style={{
             fontSize: 25,
             color: 'white',
-            //color: colors.text,
             fontWeight: '500',
-            //borderColor:'blue',
-            //borderWidth:2
           }}
         >
           $ {state.totalPrice}
@@ -196,17 +173,14 @@ export const ConfirmCart = ({ navigation }) => {
             borderColor: colors.text,
             borderWidth: 3,
             alignItems: 'center',
-            fontSize: '17',
-            fontWeight: '600',
-            color: '#fff',
             paddingHorizontal: 20,
-            paddingVertical: 15,
+            paddingVertical: 5,
             borderRadius: 5,
             alignSelf: 'center',
           }}
           onPress={() => navigate('ConfirmPay')}
         >
-          <Text style={globalThemes.defaulTextBtn}>PAGAR</Text>
+          <Text style={{...globalThemes.defaulTextBtn, paddingVertical:6}}>PAGAR</Text>
         </TouchableOpacity>
       </View>
     </View>

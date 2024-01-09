@@ -9,7 +9,7 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useToast } from '../hooks/useToast';
 
 export const AlertToast = ({ status, titulo }) => {
-  // Colores Toast success y fail
+
   const successColor = '#6dcf81';
   const successHeader = 'Éxito';
   const successMessage = `Se ${titulo} exitosamente`;
