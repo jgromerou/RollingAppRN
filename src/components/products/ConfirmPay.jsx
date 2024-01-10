@@ -100,7 +100,6 @@ export const ConfirmPay = ({ navigation }) => {
       initCartShoping();
     } catch (error) {
       const msg = error.response.data.errores[0].msg;
-      console.log('ERROR', msg);
       setMessageModal(
         'En estos momentos no se puede Realizar la compra, espere unos minutos e intente, Gracias!'
       );
@@ -261,7 +260,6 @@ export const ConfirmPay = ({ navigation }) => {
         </Text>
         <Text
           style={{
-            //color: 'white',
             color: colors.text,
             marginLeft: 10,
           }}

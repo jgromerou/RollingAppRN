@@ -45,7 +45,6 @@ export const CartItem = ({ item, index }) => {
         }}
       >
         <Image
-          //   source={{ uri: `${item?.image}` }}
           source={{ uri: `${item?.image}` }}
           style={{
             width: 50,

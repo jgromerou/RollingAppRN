@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 export const useQuantity = (item = 1) => {
-  //console.log(item.quantity,'item.quantity')
   const [quantity, setQuantity] = useState(item);
 
   useEffect(() => {

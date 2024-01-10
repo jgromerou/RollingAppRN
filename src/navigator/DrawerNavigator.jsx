@@ -16,7 +16,6 @@ import { globalThemes } from '../themes/globalThemes';
 import { TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { CartScreen } from '../screens/CartScreen';
 import { AuthContext } from '../contexts/AuthContext';
 import { CustomLoading } from '../components/CustomLoading';
 import { Image } from 'react-native';
@@ -113,8 +112,6 @@ const Menu = ({ navigation }) => {
   }, []);
 
   const fallBackToDefaultAuth = () => {
-    //tendría que redireccionar a la pantalla de inicio de sesión
-    console.log('volver a autenticación por defecto');
   };
 
   const handleBiometricAuth = async () => {
