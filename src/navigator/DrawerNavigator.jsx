@@ -1,29 +1,30 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import * as LocalAuthentication from 'expo-local-authentication';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useContext, useEffect, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import * as LocalAuthentication from "expo-local-authentication";
+import { Ionicons } from "@expo/vector-icons";
 
-import { Dimensions, useWindowDimensions } from 'react-native';
+import { Dimensions, useWindowDimensions } from "react-native";
 import {
   DrawerContentScrollView,
   createDrawerNavigator,
-} from '@react-navigation/drawer';
-import { TabsNavigator } from './TabsNavigator';
-import { StackAuthNavigator } from './StackAuthNavigator';
-import { StatusBar } from 'react-native';
-import { View } from 'react-native';
-import { globalThemes } from '../themes/globalThemes';
-import { TouchableOpacity } from 'react-native';
-import { Text } from 'react-native';
-import { ThemeContext } from '../contexts/ThemeContext';
-import { CartScreen } from '../screens/CartScreen';
-import { AuthContext } from '../contexts/AuthContext';
-import { CustomLoading } from '../components/CustomLoading';
-import { Image } from 'react-native';
+} from "@react-navigation/drawer";
+import { TabsNavigator } from "./TabsNavigator";
+import { StackAuthNavigator } from "./StackAuthNavigator";
+import { StatusBar } from "react-native";
+import { View } from "react-native";
+import { globalThemes } from "../themes/globalThemes";
+import { TouchableOpacity } from "react-native";
+import { Text } from "react-native";
+import { ThemeContext } from "../contexts/ThemeContext";
+import { CartScreen } from "../screens/CartScreen";
+import { AuthContext } from "../contexts/AuthContext";
+import { CustomLoading } from "../components/CustomLoading";
+import { Image } from "react-native";
+import { ThemeSwitch } from "../components/ThemeSwitch";
 
 const Drawer = createDrawerNavigator();
 
-const screenHeight = Dimensions.get('window').height;
+const screenHeight = Dimensions.get("window").height;
 
 export const DrawerNavigator = () => {
   const { state } = useContext(ThemeContext);
@@ -46,8 +47,8 @@ export const DrawerNavigator = () => {
           <NavigationContainer theme={state}>
             <Drawer.Navigator
               screenOptions={{
-                drawerPosition: 'left',
-                drawerType: width >= 768 ? 'permanent' : 'front',
+                drawerPosition: "left",
+                drawerType: width >= 768 ? "permanent" : "front",
                 headerTintColor: state.colors.background,
                 headerStyle: {
                   backgroundColor: state.colors.primary,
@@ -57,7 +58,7 @@ export const DrawerNavigator = () => {
             >
               <Drawer.Screen
                 name="TabsNavigator"
-                options={{ title: 'Sportify' }}
+                options={{ title: "Sportify" }}
                 component={TabsNavigator}
               />
             </Drawer.Navigator>
@@ -73,8 +74,8 @@ export const DrawerNavigator = () => {
           <NavigationContainer theme={state}>
             <Drawer.Navigator
               screenOptions={{
-                drawerPosition: 'left',
-                drawerType: width >= 768 ? 'permanent' : 'front',
+                drawerPosition: "left",
+                drawerType: width >= 768 ? "permanent" : "front",
                 headerTintColor: state.colors.background,
                 headerStyle: {
                   backgroundColor: state.colors.primary,
@@ -84,7 +85,7 @@ export const DrawerNavigator = () => {
             >
               <Drawer.Screen
                 name="StackAuthNavigator"
-                options={{ title: 'Inicio de Sesión' }}
+                options={{ title: "Inicio de Sesión" }}
                 component={StackAuthNavigator}
               />
             </Drawer.Navigator>
@@ -114,7 +115,7 @@ const Menu = ({ navigation }) => {
 
   const fallBackToDefaultAuth = () => {
     //tendría que redireccionar a la pantalla de inicio de sesión
-    console.log('volver a autenticación por defecto');
+    console.log("volver a autenticación por defecto");
   };
 
   const handleBiometricAuth = async () => {
@@ -123,9 +124,9 @@ const Menu = ({ navigation }) => {
     //Volver a la autenticación por defecto si el dispositivo no soporta biometría
     if (!isBiometricAvailable) {
       <AlertComponent
-        title={'Por favor ingrese su contraseña'}
-        mess={'Su dispositivo no admite escaneo de huella'}
-        btnTxt={'Ok'}
+        title={"Por favor ingrese su contraseña"}
+        mess={"Su dispositivo no admite escaneo de huella"}
+        btnTxt={"Ok"}
         btnFun={() => fallBackToDefaultAuth()}
       />;
     }
@@ -139,23 +140,23 @@ const Menu = ({ navigation }) => {
     const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
     if (!savedBiometrics) {
       <AlertComponent
-        title={'Datos biometricos no encontrados'}
-        mess={'Por favor loguearse con su email y contraseña'}
-        btnTxt={'Ok'}
+        title={"Datos biometricos no encontrados"}
+        mess={"Por favor loguearse con su email y contraseña"}
+        btnTxt={"Ok"}
         btnFun={() => fallBackToDefaultAuth()}
       />;
     }
     //autenticarse con datos biométricos
     const biometricAuth = await LocalAuthentication.authenticateAsync({
-      promptMessage: 'Loguearse con datos Biométricos',
-      cancelLabel: 'Cancelar',
+      promptMessage: "Loguearse con datos Biométricos",
+      cancelLabel: "Cancelar",
       disableDeviceFallback: true,
     });
     // si la autenticación fue exitosa, mostrar mensaje de bienvenida
     if (biometricAuth) {
       biometricAuth.success
-        ? navigation.navigate('CartScreen')
-        : navigation.navigate('HomeScreen');
+        ? navigation.navigate("CartScreen")
+        : navigation.navigate("HomeScreen");
     }
   };
 
@@ -163,40 +164,51 @@ const Menu = ({ navigation }) => {
     <DrawerContentScrollView>
       <View
         style={{
-          height: screenHeight - 50,
+          height: screenHeight - 5,
         }}
       >
         {/* Opciones de Menú - Navegación Tabs */}
         <View
           style={
-            ([globalThemes.container], { backgroundColor: colors.background })
+            ([globalThemes.container],
+            { backgroundColor: colors.background, flex: 1 })
           }
         >
           {/* Contenedor del avatar */}
           <View style={globalThemes.avatarContainer}>
             <Image
               style={globalThemes.avatar}
-              source={require('../../assets/avatar_2.jpg')}
+              source={require("../../assets/avatar_2.jpg")}
             />
           </View>
+          {/* Contenedor de cambiar tema */}
+          <View
+            style={{
+              alignItems: "center",
+              backgroundColor: colors.background,
+            }}
+          >
+            <ThemeSwitch />
+          </View>
+
           {state.isLogged && (
             <>
               {/* Link a Inicio */}
               <TouchableOpacity
-                style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
-                onPress={() => navigation.navigate('HomeScreen')}
+                style={{ flexDirection: "row", justifyContent: "flex-start", paddingStart: "8%" }}
+                onPress={() => navigation.navigate("HomeScreen")}
               >
                 <Text style={{ ...globalThemes.text, color: colors.primary }}>
-                  - Inicio
+                  Inicio
                 </Text>
               </TouchableOpacity>
               {/* Link a Categorías */}
               <TouchableOpacity
-                style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
-                onPress={() => navigation.navigate('CategoriesScreen')}
+                style={{flexDirection: "row", justifyContent: "flex-start", paddingStart: "8%" }}
+                onPress={() => navigation.navigate("CategoriesScreen")}
               >
                 <Text style={{ ...globalThemes.text, color: colors.primary }}>
-                  - Categorías
+                  Categorías
                 </Text>
               </TouchableOpacity>
             </>
@@ -204,11 +216,11 @@ const Menu = ({ navigation }) => {
           {state.isLogged && (
             <>
               <TouchableOpacity
-                style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+                style={{flexDirection: "row", justifyContent: "flex-start", paddingStart: "8%" }}
                 onPress={() => logout()}
               >
                 <Text style={{ ...globalThemes.text, color: colors.primary }}>
-                  - Cerrar sesión
+                  Cerrar sesión
                 </Text>
               </TouchableOpacity>
             </>
@@ -216,54 +228,19 @@ const Menu = ({ navigation }) => {
           {!state.isLogged && (
             <>
               <TouchableOpacity
-                style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
+                style={{flexDirection: "row", justifyContent: "flex-start", paddingStart: "8%" }}
                 onPress={() =>
-                  navigation.navigate('StackAuthNavigator', {
-                    screen: 'StackAuthNavigator',
+                  navigation.navigate("StackAuthNavigator", {
+                    screen: "StackAuthNavigator",
                   })
                 }
               >
                 <Text style={{ ...globalThemes.text, color: colors.primary }}>
-                  - Login
+                  Login
                 </Text>
               </TouchableOpacity>
             </>
           )}
-        </View>
-        {/* Contenedor de los botones de cambiar tema */}
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            backgroundColor: colors.background,
-          }}
-        >
-          <TouchableOpacity
-            onPress={setLightTheme}
-            activeOpacity={0.8}
-            style={[
-              globalThemes.defaultBtn,
-              { borderColor: colors.primary, padding: 5 },
-            ]}
-          >
-            <Text style={[globalThemes.defaulTextBtn, { color: colors.text }]}>
-              Claro
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={setDarkTheme}
-            activeOpacity={0.8}
-            style={[
-              globalThemes.defaultBtn,
-              { borderColor: colors.primary, padding: 5 },
-            ]}
-          >
-            <Text style={[globalThemes.defaulTextBtn, { color: colors.text }]}>
-              Oscuro
-            </Text>
-          </TouchableOpacity>
         </View>
       </View>
     </DrawerContentScrollView>

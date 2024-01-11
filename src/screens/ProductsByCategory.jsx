@@ -34,11 +34,14 @@ const ProductsByCategory = ({ navigation, route }) => {
   };
 
   return (
-    <View style={{ height: "100%" }}>
-      <Text style={{ fontSize: 35, color: colors.titleColor }}>
+    <View style={{ flex:1 }}>
+      <View style={{alignItems: "center"}}>
+      <Text style={{ fontSize: 25, color: colors.titleColor }}>
         {" "}
         {categoryName}{" "}
       </Text>
+      </View>
+     
       <FlatList
         data={stateProducts.products}
         renderItem={({ item }) => (
