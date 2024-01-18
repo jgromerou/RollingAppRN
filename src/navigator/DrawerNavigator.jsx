@@ -35,7 +35,7 @@ export const DrawerNavigator = () => {
   }, []);
 
   if (stateAuth.isLoading) {
-    return <CustomLoading />;
+    return (<CustomLoading />);
   }
 
   if (stateAuth.isLogged) {
@@ -103,61 +103,6 @@ const Menu = ({ navigation }) => {
   } = useContext(ThemeContext);
 
   const { state, logout } = useContext(AuthContext);
-  const [isBiometricSupported, setIsBiometricSupported] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      const compatible = await LocalAuthentication.hasHardwareAsync();
-      setIsBiometricSupported(compatible);
-    })();
-  }, []);
-
-  const fallBackToDefaultAuth = () => {
-    //tendría que redireccionar a la pantalla de inicio de sesión
-    console.log('volver a autenticación por defecto');
-  };
-
-  const handleBiometricAuth = async () => {
-    //checkear si el dispositivo soporta biometría
-    const isBiometricAvailable = await LocalAuthentication.hasHardwareAsync();
-    //Volver a la autenticación por defecto si el dispositivo no soporta biometría
-    if (!isBiometricAvailable) {
-      <AlertComponent
-        title={'Por favor ingrese su contraseña'}
-        mess={'Su dispositivo no admite escaneo de huella'}
-        btnTxt={'Ok'}
-        btnFun={() => fallBackToDefaultAuth()}
-      />;
-    }
-    //chequea tipos de biometrics disponibles (huella, reconocimiento facial, reconocimiento de iris)
-    let supportedBiometrics;
-    if (isBiometricAvailable) {
-      supportedBiometrics =
-        await LocalAuthentication.supportedAuthenticationTypesAsync();
-    }
-    //chequea si el dispositivo tiene guardada los datos biométricos del usuario
-    const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
-    if (!savedBiometrics) {
-      <AlertComponent
-        title={'Datos biometricos no encontrados'}
-        mess={'Por favor loguearse con su email y contraseña'}
-        btnTxt={'Ok'}
-        btnFun={() => fallBackToDefaultAuth()}
-      />;
-    }
-    //autenticarse con datos biométricos
-    const biometricAuth = await LocalAuthentication.authenticateAsync({
-      promptMessage: 'Loguearse con datos Biométricos',
-      cancelLabel: 'Cancelar',
-      disableDeviceFallback: true,
-    });
-    // si la autenticación fue exitosa, mostrar mensaje de bienvenida
-    if (biometricAuth) {
-      biometricAuth.success
-        ? navigation.navigate('CartScreen')
-        : navigation.navigate('HomeScreen');
-    }
-  };
 
   return (
     <DrawerContentScrollView>
