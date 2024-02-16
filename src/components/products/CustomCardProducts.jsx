@@ -8,7 +8,6 @@ import { ProductsContext } from "../../contexts/ProductsContext";
 export const CustomCardProducts = ({ itemData }) => {
   const { resetProduct } = useContext(ProductsContext);
 
-  // console.log(itemData, 'itemData')
   const {
     state: { colors },
   } = useContext(ThemeContext);
@@ -21,98 +20,94 @@ export const CustomCardProducts = ({ itemData }) => {
   };
 
   return (
-    <Pressable
+    <View
       style={{
-        marginHorizontal: 5,
-        backgroundColor: colors.primary,
-        //backgroundColor: 'rgba(255,255,255,0.1)',
-        // borderColor: 'rgba(255,255,255,0.1)',
-        // borderWidth:2,
-        borderRadius: 15,
-      }}
-      onPress={() => {
-        navigate("ProductsScreen", {
-          productId: itemData._id,
-        });
-        resetProduct();
+        flexDirection: "column",
+        flex: 1,
+        alignContent: "center",
+        alignItems: "center",
       }}
     >
-      <View
+      <Pressable
         style={{
-          height: 258,
-          width: 185,
+          margin: 5,
           padding: 10,
+          backgroundColor: colors.primary,
+          borderRadius: 10,
+        }}
+        onPress={() => {
+          navigate("ProductsScreen", {
+            productId: itemData._id,
+          });
+          resetProduct();
         }}
       >
-        <View>
-          <Image
-            source={{ uri: `${itemData.image.secure_url}` }}
-            style={{
-              width: "100%",
-              height: 150,
-              marginBottom: 5,
-              borderRadius: 10,
-              resizeMode: "contain",
-            }}
-          />
-        </View>
-        <View
+        <Image
+          source={{ uri: `${itemData.image.secure_url}` }}
           style={{
-            paddingHorizontal: 3,
-            marginTop: 3,
+            width: 135,
+            height: 135,
+            marginBottom: 5,
+            borderRadius: 5,
+            resizeMode: "contain",
+          }}
+        />
+
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 15,
+            color: "black",
           }}
         >
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontSize: 16,
-              color: "black",
-            }}
-          >
-            {itemData.productName.length < 15
-              ? itemData.productName
-              : `${itemData.productName.slice(0, 15)}...`}
-          </Text>
-          <Text style={{ fontSize: 15, color: colors.title }}>
-            {itemData.category}
-          </Text>
-          <Text
-            style={{
-              fontSize: 15,
-              marginTop: 12,
-              color: colors.title,
-              fontWeight: "bold",
-            }}
-          >
-            ${itemData.price}.00
-          </Text>
-        </View>
+          {itemData.productName.length < 14
+            ? itemData.productName
+            : `${itemData.productName.slice(0, 14)}...`}
+        </Text>
+        <Text
+          style={{
+            fontSize: 14,
+            color: colors.title,
+          }}
+        >
+          {itemData.category}
+        </Text>
+        <Text
+          style={{
+            fontSize: 14,
+            marginTop: 12,
+            color: colors.title,
+            fontWeight: "bold",
+          }}
+        >
+          ${itemData.price}.00
+        </Text>
 
         <Pressable onPress={() => onPresFavorite(itemData._id)}>
           <View
             style={{
               backgroundColor: "rgba(255,255,255, 0.1)",
-              paddingHorizontal: 10,
-              paddingVertical: 20,
+              paddingHorizontal: 8,
+              paddingVertical: 15,
               justifyContent: "center",
               alignItems: "center",
               borderTopLeftRadius: 25,
               borderBottomRightRadius: 15,
               position: "absolute",
-              bottom: -30,
+              bottom: -12,
               right: -10,
             }}
           >
             <Text>
               <AntDesign
                 name={favorite == itemData._id ? "heart" : "hearto"}
-                size={27}
+                size={24}
                 color={favorite == itemData.id ? "#f2058b" : "#fff"}
               />
             </Text>
           </View>
         </Pressable>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 };

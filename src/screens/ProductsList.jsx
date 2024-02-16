@@ -80,40 +80,23 @@ export const ProductsList = () => {
           />
         </View>
 
-        <FlatList
-          data={productsFiltered}
-          keyExtractor={(item) => item._id}
-          numColumns={2}
-          //Header
-          ListHeaderComponent={
-            <Text
-              style={{
-                ...styles.title,
-                ...styles.marginHorizontal,
-                marginTop: 15,
-                paddingBottom: 10,
-                color: colors.text,
-              }}
-            >
-              {/* {term} */}
-            </Text>
-          }
-          renderItem={({ item }) => (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                marginVertical: 10,
-              }}
-            >
+        {/* Este view me sirve para poner la FlatList debajo del input de buscar productos */}
+        <View
+          style={{
+            marginTop: 60,
+          }}
+        >
+          <FlatList
+            data={productsFiltered}
+            keyExtractor={(item) => item._id}
+            numColumns={2}
+            renderItem={({ item }) => (
               <CustomCardProducts
-                style={{ paddingBottom: 100 }}
                 itemData={item}
               />
-            </View>
-          )}
-        />
+            )}
+          />
+        </View>
       </View>
     </View>
   );
