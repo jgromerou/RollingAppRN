@@ -90,11 +90,7 @@ export const ProductsList = () => {
             data={productsFiltered}
             keyExtractor={(item) => item._id}
             numColumns={2}
-            renderItem={({ item }) => (
-              <CustomCardProducts
-                itemData={item}
-              />
-            )}
+            renderItem={({ item }) => <CustomCardProducts itemData={item} />}
           />
         </View>
       </View>
