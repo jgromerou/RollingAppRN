@@ -19,6 +19,7 @@ import { ThemeContext } from '../contexts/ThemeContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { CustomLoading } from '../components/CustomLoading';
 import { Image } from 'react-native';
+import { ThemeSwitch } from "../components/ThemeSwitch";
 
 const Drawer = createDrawerNavigator();
 
