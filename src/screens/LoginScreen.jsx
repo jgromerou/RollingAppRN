@@ -13,7 +13,6 @@ import * as Yup from "yup";
 import { AuthContext } from "../contexts/AuthContext";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { ThemeContext } from "../contexts/ThemeContext";
-import PasswordInput from "../components/PasswordInput";
 
 export const LoginScreen = ({ navigation }) => {
   const {

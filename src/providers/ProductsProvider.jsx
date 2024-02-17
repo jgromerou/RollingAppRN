@@ -21,16 +21,6 @@ export const ProductProvider = ({ children }) => {
   const getProducts = async () => {
     try {
       const data = await dashAxios.get('/products');
-
-      // if(!products){
-      //     dispatch({
-      //         type: types.products.error,
-      //         payload: {
-      //             errorMessage: 'No existen Productos activos'
-      //         }
-      //     })
-      // }
-
       dispatch({
         type: types.products.getProducts,
         payload: {

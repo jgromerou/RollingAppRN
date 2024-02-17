@@ -7,10 +7,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import { Button, Card } from "react-native-paper";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { globalThemes } from "../themes/globalThemes";
-import { AntDesign } from "react-native-vector-icons";
 import { CustomCardProducts } from "../components/products/CustomCardProducts";
 import { ProductsContext } from "../contexts/ProductsContext";
 

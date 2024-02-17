@@ -5,7 +5,6 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 import { GoBack } from './GoBack';
 import { useNavigation } from '@react-navigation/native';
 import { RadioButton } from 'react-native-paper';
-import { Button } from 'react-native';
 import { CartContext } from '../../contexts/CartContext';
 import { CustomModal } from './CustomModal';
 import { dashAxios } from '../../config/dashAxios';
@@ -37,7 +36,6 @@ export const ConfirmPay = ({ navigation }) => {
         addTypePay(value);
         break;
       case 'Tarjeta de Crédito':
-        // Execute actions for Credit cart
         addTypePay(value);
         break;
       case 'Mercadopago':
@@ -84,7 +82,7 @@ export const ConfirmPay = ({ navigation }) => {
       let paymentType = state.paymentType;
       let status = 'Realizada';
       let totalPrice = state.totalPrice;
-      //console.log(cartProducts, 'cartProducts')
+
       const { data } = await dashAxios.post('/sales', {
         user,
         saleDate,
@@ -102,7 +100,6 @@ export const ConfirmPay = ({ navigation }) => {
       initCartShoping();
     } catch (error) {
       const msg = error.response.data.errores[0].msg;
-      console.log('ERROR', msg);
       setMessageModal(
         'En estos momentos no se puede Realizar la compra, espere unos minutos e intente, Gracias!'
       );
@@ -121,11 +118,6 @@ export const ConfirmPay = ({ navigation }) => {
       style={[
         colors.container,
         {
-          //globalThemes.container
-          //flex: 1,
-          //backgroundColor: colors.primary,
-
-          //backgroundColor: "yellow",
           padding: 10,
         },
       ]}
@@ -147,23 +139,15 @@ export const ConfirmPay = ({ navigation }) => {
       <View
         style={{
           flexDirection: 'col',
-          //flex: 1,
-          //justifyContent: 'space-evenly',
           marginTop: 5,
-          //marginBottom: 5,
-          //backgroundColor:'blue',
           alignItems: 'center',
         }}
       >
         <View
           style={{
-            //justifyContent:'center',
             alignContent: 'center',
-            //backgroundColor: "yellow",
-            //flex:1
           }}
         >
-          {/* <Text>Choose an option:</Text> */}
           <RadioButton.Group
             onValueChange={(value) => handleRadioButtonPress(value)}
             value={selectedValue}
@@ -179,12 +163,9 @@ export const ConfirmPay = ({ navigation }) => {
                 marginBottom: 5,
                 borderColor: colors.text,
                 borderWidth: 3,
-                // borderWidth:2,
-                // borderColor: 'red'
               }}
             >
               <RadioButton value="Efectivo" color="blue" />
-              {/* <Text>Option 1</Text> */}
               <TouchableOpacity
                 onPress={() => handleRadioButtonPress('Efectivo')}
               >
@@ -194,25 +175,11 @@ export const ConfirmPay = ({ navigation }) => {
                     width: 120,
                     height: 120,
                     marginLeft: 55,
-                    //verticalAlign: 'center',
                     objectFit: 'cover',
                   }}
                 />
               </TouchableOpacity>
             </View>
-            {/* <Text
-              style={{
-                color: 'black',
-                flex: 1,
-                position: 'absolute',
-                width: '100%',
-                top: 100,
-                left: 30,
-                alignItems: 'flex-end',
-              }}
-            >
-              Efectivo
-            </Text> */}
             <View
               style={{
                 flexDirection: 'row',
@@ -231,7 +198,6 @@ export const ConfirmPay = ({ navigation }) => {
                 color="black"
                 name="RadioButtoncard"
               />
-              {/* <Text>Option 2</Text> */}
               <TouchableOpacity
                 onPress={() => handleRadioButtonPress('Tarjeta de Crédito')}
               >
@@ -247,19 +213,6 @@ export const ConfirmPay = ({ navigation }) => {
                 />
               </TouchableOpacity>
             </View>
-            {/* <Text
-              style={{
-                color: 'black',
-                //flex: 1,
-                position: 'absolute',
-                width: '100%',
-                top: 237,
-                left: 30,
-                alignItems: 'flex-end',
-              }}
-            >
-              Tarjeta de Crédito
-            </Text> */}
             <View
               style={{
                 flexDirection: 'row',
@@ -274,7 +227,6 @@ export const ConfirmPay = ({ navigation }) => {
               }}
             >
               <RadioButton value="Mercadopago" color="skyblue" />
-              {/* <Text>Option 3</Text> */}
               <TouchableOpacity
                 onPress={() => handleRadioButtonPress('Mercadopago')}
               >
@@ -295,12 +247,10 @@ export const ConfirmPay = ({ navigation }) => {
         style={{
           flexDirection: 'row',
           marginTop: 10,
-          //backgroundColor:'red',
         }}
       >
         <Text
           style={{
-            //color: 'white',
             color: colors.text,
             width: 140,
             textAlign: 'right',
@@ -310,7 +260,6 @@ export const ConfirmPay = ({ navigation }) => {
         </Text>
         <Text
           style={{
-            //color: 'white',
             color: colors.text,
             marginLeft: 10,
           }}
@@ -325,7 +274,6 @@ export const ConfirmPay = ({ navigation }) => {
       >
         <Text
           style={{
-            //color: 'white',
             color: colors.text,
             width: 140,
             textAlign: 'right',
@@ -335,7 +283,6 @@ export const ConfirmPay = ({ navigation }) => {
         </Text>
         <Text
           style={{
-            //color: 'white',
             color: colors.text,
             marginLeft: 10,
           }}
@@ -347,28 +294,23 @@ export const ConfirmPay = ({ navigation }) => {
       <View
         style={{
           alignItems: 'flex-end',
-          //backgroundColor:'red',
           marginTop: 15,
         }}
       >
         <TouchableOpacity
           style={{
-            //backgroundColor: "#f2058b",
             backgroundColor: colors.primary,
             borderColor: colors.text,
             borderWidth: 3,
             alignItems: 'center',
-            fontSize: '17',
-            fontWeight: '600',
-            color: '#fff',
             paddingHorizontal: 20,
-            paddingVertical: 15,
+            paddingVertical: 10,
             borderRadius: 5,
             alignSelf: 'center',
           }}
           onPress={() => addShopping()}
         >
-          <Text style={globalThemes.defaulTextBtn}>PAGAR</Text>
+          <Text style={{...globalThemes.defaulTextBtn, paddingVertical: 6}}>PAGAR</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -6,10 +6,6 @@ import {
   TouchableOpacity,
   Text,
   useWindowDimensions,
-  SafeAreaView,
-  Button,
-  Alert,
-  TouchableHighlight,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {
@@ -82,8 +78,6 @@ const Menu = ({ navigation }) => {
   }, []);
 
   const fallBackToDefaultAuth = () => {
-    //tendría que redireccionar a la pantalla de inicio de sesión
-    console.log('volver a autenticación por defecto');
   };
 
   const handleBiometricAuth = async () => {
@@ -162,7 +156,6 @@ const Menu = ({ navigation }) => {
         {/* Link a Productos */}
         <TouchableOpacity
           style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
-          onPress={() => console.log('productos')}
         >
           <Text style={{ ...globalThemes.text, color: colors.primary }}>
             - Productos
@@ -171,7 +164,6 @@ const Menu = ({ navigation }) => {
         {/* Link a Categorías */}
         <TouchableOpacity
           style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
-          onPress={() => console.log('categorías')}
         >
           <Text style={{ ...globalThemes.text, color: colors.primary }}>
             - Categorías
@@ -182,7 +174,6 @@ const Menu = ({ navigation }) => {
             <TouchableOpacity
               style={{ ...globalThemes.menuButton, flexDirection: 'row' }}
               onPress={() => handleBiometricAuth()}
-              // navigation.navigate("CartScreen")
             >
               <Text style={{ ...globalThemes.text, color: colors.primary }}>
                 - Mi carrito

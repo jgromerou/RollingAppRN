@@ -8,7 +8,6 @@ import { ProductsContext } from "../../contexts/ProductsContext";
 export const CustomCardProducts = ({ itemData }) => {
   const { resetProduct } = useContext(ProductsContext);
 
-  // console.log(itemData, 'itemData')
   const {
     state: { colors },
   } = useContext(ThemeContext);
@@ -25,9 +24,6 @@ export const CustomCardProducts = ({ itemData }) => {
       style={{
         marginHorizontal: 5,
         backgroundColor: colors.primary,
-        //backgroundColor: 'rgba(255,255,255,0.1)',
-        // borderColor: 'rgba(255,255,255,0.1)',
-        // borderWidth:2,
         borderRadius: 15,
       }}
       onPress={() => {
