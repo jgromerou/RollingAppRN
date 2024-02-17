@@ -97,6 +97,18 @@ export const ProductsList = () => {
             
             </Text>
           }
+          ListEmptyComponent={() => (
+            <Text
+              style={{
+                textAlign: 'center',
+                marginTop: 20,
+                fontSize: 18,
+                color: colors.text,
+              }}
+            >
+              No se encontraron productos.
+            </Text>
+          )}
           renderItem={({ item }) => (
             <View
               style={{
