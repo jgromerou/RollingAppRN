@@ -9,7 +9,7 @@ export const globalThemes = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     alignSelf: "center",
-    BrginVertical: 15,
+    marginVertical: 15,
   },
   text: {
     fontSize: 20,
@@ -21,7 +21,7 @@ export const globalThemes = StyleSheet.create({
     fontSize: 15,
     fontWeight: 200,
     alignSelf: "center",
-    marginTop: -4,    
+    marginTop: -4,
   },
   defaultInputText: {
     borderWidth: 2,
