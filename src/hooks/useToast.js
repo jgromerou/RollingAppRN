@@ -4,7 +4,6 @@ import { Animated, Dimensions } from 'react-native';
 const windowHeight = Dimensions.get('window').height;
 
 export const useToast = () => {
-  // Toast
   const popAnim = useRef(new Animated.Value(windowHeight * -1)).current;
 
   const popIn = () => {

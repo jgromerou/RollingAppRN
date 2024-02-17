@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StackNavigator } from './StackNavigator';
-import { SearchProductsScreen } from '../screens/SearchProductsScreen';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { ProductsList } from '../screens/ProductsList';
 import { Text } from 'react-native';
@@ -28,10 +27,6 @@ export const TabsNavigator = () => {
         }
       }}
     >
-
-
-
-      
      <Tab.Screen
   name="StackNavigator"
   component={StackNavigator}

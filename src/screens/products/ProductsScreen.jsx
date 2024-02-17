@@ -24,8 +24,6 @@ import { CustomLoading } from '../../components/CustomLoading';
 
 export const ProductsScreen = ({ route, navigation }) => {
   const { productId } = route.params;
-  //console.log(productId,' productId')
-
   const [talle, setTalle] = useState(0);
   const { quantity, restQuantity, sumQuantity, initQuantity } = useQuantity();
   const { addCart, state, calculateCart, editCart, isLoading, addUserDate } =
@@ -63,16 +61,12 @@ export const ProductsScreen = ({ route, navigation }) => {
     }
     // busco si ya esta en el carrito el producto
     let cartExist = '';
-    //cartExist = state.cart.find((cart) => cart._id === productSelected?._id);
     cartExist = state.cart.find((cart) => cart._id === productId);
-    //console.log(cartExist, 'find cartExist')
 
     if (cartExist !== undefined) {
       let numindex = state.cart.findIndex(
         (cart) => cart._id === cartExist._id
       );
-      //console.log(numindex,'numindex')
-      //cart._id === productSelected?._id
       ActCart(cartExist, numindex);
       initQuantity();
       return;
@@ -92,10 +86,8 @@ export const ProductsScreen = ({ route, navigation }) => {
 
   // funcion para modificar solo cantidad cuando ingresa el mismo product
   const ActCart = (cartExist, numindex) => {
-    //console.log(cartExist,' cartExist')
     const CartModificada = {
       _id: cartExist._id,
-      //product: cartExist.product,
       productName: cartExist.productName,
       price: cartExist.price,
       waist: cartExist.waist,
@@ -118,7 +110,6 @@ export const ProductsScreen = ({ route, navigation }) => {
         colors.container,
         {
           flex: 1,
-          //backgroundColor: colors.primary,
           padding: 10,
         },
       ]}
@@ -131,7 +122,6 @@ export const ProductsScreen = ({ route, navigation }) => {
         style={{
           flex: 8,
           justifyContent: 'center',
-          //backgroundColor: colors.primary,
           alignItems: 'center',
         }}
       >
@@ -155,7 +145,6 @@ export const ProductsScreen = ({ route, navigation }) => {
       <View
         style={{
           flex: 1.5,
-          //backgroundColor: colors.primary,
           marginVertical: 20,
           justifyContent: 'center',
           alignItems: 'center',
@@ -179,7 +168,6 @@ export const ProductsScreen = ({ route, navigation }) => {
       <View
         style={{
           flex: 3,
-          //backgroundColor: colors.primary,
           backgroundColor: "rgba(0,0,0,0)",
           flexDirection: 'row',
           justifyContent: 'center',
@@ -266,7 +254,6 @@ export const ProductsScreen = ({ route, navigation }) => {
           <Text
             style={{
               fontSize: 15,
-              //color: "rgba(255,255,255, 0.5)",
               color: colors.titleColor,
               marginBottom: 5,
             }}
@@ -300,7 +287,6 @@ export const ProductsScreen = ({ route, navigation }) => {
               backgroundColor: colors.primary,
               borderColor: colors.text,
               borderWidth: 3,
-              //backgroundColor: "#f2058b",
               alignItems: 'center',
               fontSize: '17',
               fontWeight: '600',
@@ -328,7 +314,6 @@ export const ProductsScreen = ({ route, navigation }) => {
           style={{
             fontSize: 25,
             fontWeight: 'bold',
-            //color: "rgba(255,255,255,0.5)",
             color: colors.titleColor,
           }}
         >

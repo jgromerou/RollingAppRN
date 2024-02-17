@@ -17,7 +17,6 @@ export const StackNavigator = () => {
   } = useContext(ThemeContext);
   return (
     <Stack.Navigator
-      // initialRouteName='ProductsScreen'
       screenOptions={{
         headerShown: false,
         cardStyle: {

@@ -1,9 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Text } from 'react-native';
 import { View } from 'react-native';
 import { Pressable } from 'react-native';
 import { AntDesign } from 'react-native-vector-icons';
-import { useQuantity } from '../../hooks/useQuantity';
 import { CartContext } from '../../contexts/CartContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
@@ -58,21 +57,17 @@ export const CustomQuantity = ({
     <View
       style={{
         flexDirection: 'row',
-        // borderWidth: 1.2,
         borderColor: '#fff',
-        //borderColor:colors.primary,
         borderRadius: 5,
       }}
     >
       <Pressable
         style={{ alignItems: 'center', justifyContent: 'center' }}
-        //onPress={ restQuantity }
         onPress={() => RestContext()}
       >
         <AntDesign
           name="minuscircle"
           size={25}
-          //color="rgba(255, 255, 255, 0.5)"
           color={colors.titleColor}
         />
       </Pressable>
@@ -86,10 +81,8 @@ export const CustomQuantity = ({
         <Text
           style={{
             color: colors.titleColor,
-            //color: "#fff",
             fontSize: 19,
             fontWeight: 'bold',
-            // marginHorizontal: 12,
           }}
         >
           {quantity}
@@ -103,7 +96,6 @@ export const CustomQuantity = ({
         <AntDesign
           name="pluscircle"
           size={25}
-          //color="rgba(255, 255, 255, 0.5)"
           color={colors.titleColor}
         />
       </Pressable>
