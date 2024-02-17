@@ -25,16 +25,19 @@ const CategoriesScreen = ({ navigation }) => {
 
   return (
     <View style={{ backgroundColor: colors.background }}>
-      <Text style={{ color: colors.text, fontSize: 30 }}>
-        Selecciona una Categoría
+      <View style={{alignItems:"center", marginBottom: 5}}>
+      <Text style={{ color: colors.text, fontSize: 25 }}>
+        Selecciona una categoría
       </Text>
+      </View>
       <FlatList
         data={stateCategories}
+        keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => navigatetoProductos(item._id, item.categoryName)}
           >
-            <View style={{ height: 200 }}>
+            <View style={{ height: 150 }}>
               <Image
                 source={{ uri: item.image }}
                 style={{ width: '100%', height: '100%' }}

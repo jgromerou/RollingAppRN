@@ -33,7 +33,7 @@ export const TabsNavigator = () => {
   options={{
     tabBarLabel: <Text style={{fontSize: 18, paddingTop: 4, fontWeight: "bold"}}>Inicio</Text>,
     tabBarIcon: () => (
-      <MaterialCommunityIcons name="home-circle" size={30} />
+      <MaterialCommunityIcons name="home-circle" size={28} />
     ),
   }}
 />
@@ -44,7 +44,7 @@ export const TabsNavigator = () => {
         options={{
           tabBarLabel: <Text style={{fontSize: 18, paddingTop: 4, fontWeight: "bold"}}>Productos</Text>,
           tabBarIcon: () => (
-            <MaterialCommunityIcons name="shoe-sneaker" size={30} />
+            <MaterialCommunityIcons name="shoe-sneaker" size={28} />
           ),
         }}
       />

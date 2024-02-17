@@ -9,7 +9,7 @@ export const globalThemes = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     alignSelf: "center",
-    marginVertical: 15,
+    BrginVertical: 15,
   },
   text: {
     fontSize: 20,
