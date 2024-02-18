@@ -1,17 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Image, Pressable, Text } from 'react-native';
-import { FlatList } from 'react-native';
-import { View } from 'react-native';
-import { CartContext } from '../../contexts/CartContext';
-import { globalThemes } from '../../themes/globalThemes';
-import { AntDesign } from 'react-native-vector-icons';
-import { CustomQuantity } from '../../components/products/CustomQuantity';
-import { useQuantity } from '../../hooks/useQuantity';
-import { CartItem } from '../../components/products/CartItem';
-import { TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { ThemeContext } from '../../contexts/ThemeContext';
-import { GoBack } from '../../components/products/GoBack';
+import React, { useContext, useEffect, useState } from "react";
+import { Image, Pressable, Text } from "react-native";
+import { FlatList } from "react-native";
+import { View } from "react-native";
+import { CartContext } from "../../contexts/CartContext";
+import { globalThemes } from "../../themes/globalThemes";
+import { CartItem } from "../../components/products/CartItem";
+import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { GoBack } from "../../components/products/GoBack";
 
 export const CheckoutScreen = ({ navigation }) => {
   const { state, isLoading, calculateCart } = useContext(CartContext);
@@ -20,10 +17,8 @@ export const CheckoutScreen = ({ navigation }) => {
   const {
     state: { colors },
   } = useContext(ThemeContext);
-  //const { quantity, sumQuantity, restQuantity} = useQuantity(item.qty);
 
   const cartRender = (item, index) => {
-    //console.log(item, 'cartrender')
     return <CartItem item={item} index={index} />;
   };
 
@@ -36,9 +31,7 @@ export const CheckoutScreen = ({ navigation }) => {
       style={[
         colors.container,
         {
-          //globalThemes.container
           flex: 1,
-          //backgroundColor: colors.primary,
           padding: 10,
         },
       ]}
@@ -47,88 +40,140 @@ export const CheckoutScreen = ({ navigation }) => {
       <View
         style={{
           flex: 4,
-          // justifyContent: "center",
-          // marginTop: 10,
-          // marginBottom: 30,
         }}
       >
         <FlatList
-          //data={state.cart}
           data={state.cart}
           renderItem={({ item, index }) => cartRender(item, index)}
           keyExtractor={(item, index) => index}
+          ListEmptyComponent={() => (
+            <View
+              style={{
+                flex: 1,
+                alignContent: "center",
+                justifyContent: "center",
+              }}
+            >
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 20,
+                }}
+              >
+                <Image
+                  style={{
+                    height: 100,
+                    width: 100,
+                    tintColor: colors.primary,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../assets/carrito-vacio.png")}
+                />
+              </View>
+              <Text
+                style={{
+                  textAlign: "center",
+                  marginTop: 20,
+                  fontSize: 18,
+                  color: colors.text,
+                }}
+              >
+                !Empieza un carrito de compras!
+              </Text>
+              <Text
+                style={{
+                  textAlign: "center",
+                  marginTop: 20,
+                  marginBottom: 20,
+                  fontSize: 18,
+                  color: colors.text,
+                }}
+              >
+                Suma productos a tu carrito
+              </Text>
+              <Pressable
+                style={[
+                  globalThemes.defaultBtn,
+                  { backgroundColor: colors.primary, color: colors.text },
+                ]}
+                onPress={() => navigate("ProductsList")}
+              >
+                <Text>Descubrir productos</Text>
+              </Pressable>
+            </View>
+          )}
         />
       </View>
 
       <View
         style={{
-          flexDirection: 'col',
+          flexDirection: "col",
           flex: 1,
-          justifyContent: 'space-evenly',
+          justifyContent: "space-evenly",
           marginTop: 10,
           marginBottom: 5,
-          //backgroundColor:'white',
-          alignItems: 'center',
+          alignItems: "center",
         }}
       >
-        <View
-          style={{
-            flexDirection: 'row',
-            //flex: 1,
-            justifyContent: 'space-evenly',
-            marginTop: 2,
-            marginBottom: 2,
-            backgroundColor:'rgba(0,0,0, 0.5)',
-            alignItems: 'center',
-            width: '100%',
-            borderColor: colors.text,
-            borderWidth: 2,
-            borderRadius: 6
-          }}
-        >
-          <Text
+        {state.cart.length > 0.0 ? (
+          <View
             style={{
-              fontSize: 18,
-              color: 'white',
-              //color: colors.text,
-              fontWeight: '500',
-            }}
-          >
-            Pagaras: {' '}
-          </Text>
-          <Text
-            style={{
-              fontSize: 25,
-              color: 'white',
-              //color: colors.text,
-              fontWeight: '500',
-            }}
-          >
-            $ {state.totalPrice}
-          </Text>
-        </View>
-        <View>
-          {state.cart.length > 0.00 ?
-          <TouchableOpacity
-            style={{
-              backgroundColor: colors.primary,
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              marginTop: 2,
+              marginBottom: 2,
+              backgroundColor: "rgba(0,0,0, 0.5)",
+              alignItems: "center",
+              width: "100%",
               borderColor: colors.text,
-              borderWidth: 3,
-              //backgroundColor: "#f2058b",
-              alignItems: 'center',
-              fontSize: '17',
-              fontWeight: '600',
-              color: '#fff',
-              paddingHorizontal: 20,
-              paddingVertical: 15,
-              borderRadius: 5,
-              alignSelf: 'center',
+              borderWidth: 2,
+              borderRadius: 6,
             }}
-            onPress={() => navigate('ConfirmCart')}
           >
-            <Text style={globalThemes.defaulTextBtn}>CONFIRMAR</Text>
-          </TouchableOpacity>
-          : null }
+            <Text
+              style={{
+                fontSize: 18,
+                color: "white",
+                fontWeight: "500",
+              }}
+            >
+              Pagarás:{" "}
+            </Text>
+            <Text
+              style={{
+                fontSize: 25,
+                color: "white",
+                fontWeight: "500",
+              }}
+            >
+              $ {state.totalPrice}
+            </Text>
+          </View>
+        ) : null}
+
+        <View>
+          {state.cart.length > 0.0 ? (
+            <TouchableOpacity
+              style={{
+                backgroundColor: colors.primary,
+                borderColor: colors.text,
+                borderWidth: 3,
+                alignItems: "center",
+                fontSize: "17",
+                fontWeight: "600",
+                color: "#fff",
+                paddingHorizontal: 20,
+                paddingVertical: 15,
+                borderRadius: 5,
+                alignSelf: "center",
+              }}
+              onPress={() => navigate("ConfirmCart")}
+            >
+              <Text style={globalThemes.defaulTextBtn}>CONFIRMAR</Text>
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
     </View>

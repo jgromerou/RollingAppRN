@@ -3,11 +3,9 @@ import { TouchableOpacity } from 'react-native';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Badge } from 'react-native-paper';
-import { Ionicons } from 'react-native-vector-icons';
 import { AntDesign } from 'react-native-vector-icons';
 import { CartContext } from '../../contexts/CartContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import { CheckoutScreen } from '../../screens/carts/CheckoutScreen';
 import { useNavigation } from '@react-navigation/native';
 
 export const CartShop = () => {
@@ -21,11 +19,9 @@ export const CartShop = () => {
       <View
         style={{
           backgroundColor: colors.primary,
-          //backgroundColor: colors.container,
           marginHorizontal: 5,
           borderRadius: 50,
           borderColor: 'green',
-          //borderWidth:2,
           padding: 10,
           zIndex: 999,
           alignSelf: 'center',
@@ -33,11 +29,9 @@ export const CartShop = () => {
         }}
       >
         <TouchableOpacity onPress={() => navigate('CheckoutScreen')}>
-          {/* <Ionicons name='filter-sharp'  size={28} color='#ccc'/> */}
           <AntDesign
             name="shoppingcart"
             color={'rgba(255,255,255,1)'}
-            //color={colors.text}
             size={28}
           />
           <View style={styles.BadgeCS}>
@@ -76,7 +70,6 @@ const styles = StyleSheet.create({
   },
 
   menuContainer: {
-    //backgroundColor: '#f2058b',
     marginHorizontal: 10,
     borderRadius: 10,
     padding: 10,

@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Dimensions, FlatList } from "react-native";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { globalThemes } from "../themes/globalThemes";
-// import { searchData } from '../data/searchData'
 import { CustomCardProducts } from "../components/products/CustomCardProducts";
 import { CartShop } from "../components/products/CartShop";
 import { ProductsContext } from "../contexts/ProductsContext";
@@ -33,7 +32,7 @@ export const ProductsList = () => {
     if (term.length === 0 || term === "") {
       return setProductsFiltered(products);
     }
-    //Aplicar filtro
+    
     setProductsFiltered(
       products.filter(
         (prod) =>
@@ -84,7 +83,7 @@ export const ProductsList = () => {
           data={productsFiltered}
           keyExtractor={(item) => item._id}
           numColumns={2}
-          //Header
+          
           ListHeaderComponent={
             <Text
               style={{
@@ -95,9 +94,21 @@ export const ProductsList = () => {
                 color: colors.text,
               }}
             >
-              {/* {term} */}
+            
             </Text>
           }
+          ListEmptyComponent={() => (
+            <Text
+              style={{
+                textAlign: 'center',
+                marginTop: 20,
+                fontSize: 18,
+                color: colors.text,
+              }}
+            >
+              No se encontraron productos.
+            </Text>
+          )}
           renderItem={({ item }) => (
             <View
               style={{

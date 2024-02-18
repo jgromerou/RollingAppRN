@@ -1,4 +1,3 @@
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Image, Pressable, StyleSheet, Text } from 'react-native';
 import { Modal } from 'react-native';
@@ -24,13 +23,11 @@ export const CustomModal = ({ closeAlert, visible, messageModal }) => {
             flex: 1,
             justifyContent: 'center',
             backgroundColor: 'rgba(0,0,0,0.6)',
-            //marginTop: 20,
           }}
         >
           <View
             style={{
               backgroundColor: '#fff',
-              //backgroundColor: colors.container,
               alignItems: 'center',
               margin: 30,
               padding: 40,
@@ -42,14 +39,12 @@ export const CustomModal = ({ closeAlert, visible, messageModal }) => {
               },
             }}
           >
-            {/* <Feather name='x-octagon' size={35} color={colors.primary} /> */}
+
             <Image
               source={require('../../assets/thoto/banners/rc-logo.jpg')}
               style={{
                 width: 70,
                 height: 70,
-                //marginLeft: 30,
-                //verticalAlign: 'center',
                 objectFit: 'cover',
               }}
             />
@@ -58,7 +53,6 @@ export const CustomModal = ({ closeAlert, visible, messageModal }) => {
                 fontSize: 20,
                 fontWeight: 'bold',
                 marginVertical: 10,
-                //color: 'white'
               }}
             >
               Mensaje
@@ -90,8 +84,6 @@ export const CustomModal = ({ closeAlert, visible, messageModal }) => {
 
 const styles = StyleSheet.create({
   touchableBtn: {
-    //backgroundColor: '#f2058b',
-
     fontSize: 16,
     paddingVertical: 10,
     paddingHorizontal: 30,

@@ -1,8 +1,6 @@
 import React, { useContext, useReducer } from 'react';
 import { CartReducer } from '../reducers/CartReducer';
 import { CartContext } from '../contexts/CartContext';
-//import { AuthContext } from '../contexts/AuthContext';
-//import AsyncStorage from '@react-native-async-storage/async-storage';
 import { types } from '../types/types';
 import { dashAxios } from '../config/dashAxios';
 
@@ -19,7 +17,6 @@ const initialState = {
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CartReducer, initialState);
-  //const { state: userData } = useContext(AuthContext);
 
   const addCart = async (productData) => {
     const addProduct = [
@@ -35,11 +32,6 @@ export const CartProvider = ({ children }) => {
       },
     ];
 
-    // await AsyncStorage.setItem('cart', JSON.stringify({
-    //     userId: 4,
-    //     products: addProduct
-    // }));
-
     dispatch({
       type: types.cart.addCart,
       payload: {
@@ -53,7 +45,6 @@ export const CartProvider = ({ children }) => {
     dispatch({
       type: types.cart.editCart,
       payload: { CartModificada, index },
-      //payload: index
     });
   };
   //agregar tipo de pago
@@ -136,26 +127,8 @@ export const CartProvider = ({ children }) => {
         status: 'Realizada',
         totalPrice: 25000,
       });
-
-      //   dispatch({
-      //     type: types.users.createUser,
-      //     payload: {
-      //       ...state,
-      //       errorMessage: '',
-
-      //     },
-
-      //   });
     } catch (error) {
-      //   console.log(error);
       const msg = error.response.data.errores[0].msg;
-      console.log('ERROR', msg);
-      //   dispatch({
-      //     type: types.users.createUser,
-      //     payload: {
-      //       errorMessage: msg,
-      //     },
-      //   });
     }
   };
 

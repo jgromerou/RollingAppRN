@@ -8,7 +8,7 @@ import { CartContext } from '../../contexts/CartContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
 export const CartItem = ({ item, index }) => {
-  //console.log(item, 'itemcategory')
+ 
   const {
     state: { colors },
   } = useContext(ThemeContext);
@@ -30,11 +30,9 @@ export const CartItem = ({ item, index }) => {
         backgroundColor: colors.primary,
         borderColor: colors.text,
         borderWidth: 1,
-        //backgroundColor: '#ccc',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        //backgroundColor: 'rgba(255, 255, 255, 0.1)',
         borderTopEndRadius: 10,
         borderBottomEndRadius: 10,
         padding: 5,
@@ -47,7 +45,6 @@ export const CartItem = ({ item, index }) => {
         }}
       >
         <Image
-          //   source={{ uri: `${item?.image}` }}
           source={{ uri: `${item?.image}` }}
           style={{
             width: 50,

@@ -7,10 +7,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import { Button, Card } from "react-native-paper";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { globalThemes } from "../themes/globalThemes";
-import { AntDesign } from "react-native-vector-icons";
 import { CustomCardProducts } from "../components/products/CustomCardProducts";
 import { ProductsContext } from "../contexts/ProductsContext";
 
@@ -34,11 +31,14 @@ const ProductsByCategory = ({ navigation, route }) => {
   };
 
   return (
-    <View style={{ height: "100%" }}>
-      <Text style={{ fontSize: 35, color: colors.titleColor }}>
+    <View style={{ flex:1 }}>
+      <View style={{alignItems: "center"}}>
+      <Text style={{ fontSize: 25, color: colors.titleColor }}>
         {" "}
         {categoryName}{" "}
       </Text>
+      </View>
+     
       <FlatList
         data={stateProducts.products}
         renderItem={({ item }) => (
